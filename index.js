@@ -107,7 +107,10 @@ var contentStyle = {
 
 const Main = (props) => 
 	<div style={mainStyle}>
-    	<div style={sidebarStyle}>Sidebar Widgets</div>
+    	<div style={sidebarStyle}>
+			<SidebarPlace sidebartitle='About Font Squirrel' sidebarcontent='Font Squirrel is your best resource for FREE, hand-picked, high-quality, commercial-use fonts. Even if that means we send you elsewhere to get them... more info' />
+			<SidebarPlace sidebartitle='New To Fonts?' sidebarcontent='Download our free beginners guide to fonts. Now that you have your guide, its time to use fonts on your website.' />
+		</div>
     	<div style={contentStyle}>
 		<Switch>
 			<Route exact path='/' component={Home}/>
@@ -121,12 +124,65 @@ const Main = (props) =>
 		</div>
 	</div>;
 
-const Home = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Almost Free Fonts</h1>Its mid-afternoon on a Friday at SpaceX headquarters in Hawthorne, California, and three of Elon Musks children are gathered around him – one of his triplets, both of his twins.Musk is wearing a gray T-shirt and sitting in a swivel chair at his desk, which is not in a private office behind a closed door, but in an accessible corner cubicle festooned with outer-space novelty items, photos of his rockets, and mementos from Tesla and his other companies.Elon Musk photographed in Hawthorne, California, on October 5th. Mark Seliger for Rolling Stone. Most tellingly, theres a framed poster of a shooting star with a caption underneath it that reads, When you wish upon a falling star, your dreams can come true. Unless its really a meteor hurtling to the Earth which will destroy all life. Then youre pretty much hosed, no matter what you wish for. Unless its death by meteorite." To most people, this would be mere dark humor, but in this setting, its also a reminder of Musks master plan: to create habitats for humanity on other planets and moons. If we dont send our civilization into another Dark Ages before Musk or one of his dreams inheritors pull it off, then Musk will likely be remembered as one of the most seminal figures of this millennium. Kids on all the terra</div>;
+const Home = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Andromeda OS</h1>Details of Microsofts goal to mould Windows into a modular operating system to work across all manner of gadgets have surfaced, under the name Andromeda OS. Workers at Redmond familiar with Microsofts internal projects spilled the information to Windows Central, and explained that Andromeda OS has the goal of making Windows more flexible so that it can run on devices not normally suited for an operating system thats based on old and demanding code, architecture and features some 30-years-old.Instead of simply trying to scale Windows to run on say smart watches or low-powered tablets, Andromeda OS will turn Windows 10 into a modular system suitable for different architectures rather than the x86 architecture used by desktops, laptops, and tablets running Intel or AMD chips. And functions can be added or taken away from Andromeda OS to suit the system or device its required to run on, essentially offering an easy way for developers to use a Windows OS without being hampered by performance-sapping features their device might not need.</div>;
 const Service = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Elephant Trophy Import Ban</h1>The U.S. Fish and Wildlife Service announced Thursday that it had lifted an Obama-era ban on importing sport-hunted trophies of elephants from Zimbabwe and Zambia. But Friday evening, President Trump seemed to say that decision was being reconsidered, tweeting that he would review all conservation facts and issue an update soon with Interior Secretary Ryan Zinke.Zinke later issued a statement, saying: President Trump and I have talked and both believe that conservation and healthy herds are critical. As a result, in a manner compliant with all applicable laws, rules, and regulations, the issuing of permits is being put on hold as the decision is being reviewed.The Washington Post has reported on big-game hunting by the presidents sons.The Fish and Wildlife Service said it had found that allowing trophy imports would help the conservation of elephants in those countries, a finding that allows it to authorize the import of the African elephant under the terms of the Endangered Species Act, which lists the African elephant as threatened.Legal, well-regulated sport hunting as part of a sound management program can benefit certain species by providing incentives to local communities to conserve those species </div>;
 const Delivery = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Bitcoin Is Hot in Zimbabwe</h1>As the simabe are becoming more popular in countries like Zimbabwe as people lose faith.</div>;
 const Contacts = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Mugabe</h1>Zimbabwe's ruling party has dismissed President Robert Mugabe as its leader, appointing former vice-president Emmerson Mnangagwa in his place, the head of the countrys influential liberation war veterans said.</div>;
 const Partners = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Elections</h1>A special Zanu-PF Central Committee meeting is currently underway  in Harare to recall the revolutionary party’s First Secretary Cde Robert Mugabe from his position.</div>;
 const Information = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Butter</h1>The meeting is being chaired by Cde Obert Mpofu who is Zanu-PFs Secretary for Finance. Cde Mpofu is the most senior member present according to the party hierarchy.</div>;
+
+
+
+
+
+
+
+
+
+/**
+ * Sidebar
+ */
+
+var sidebarPlaceStyle = {
+	padding: '0px 0px 20px 0px',
+	boxSizing: 'border-box',
+	color: '#e3e3e1'
+};
+
+var sidebarTitle = {
+	backgroundColor: "#999999",
+	color: "#fff",
+	height: '40px',
+	lineHeight: '40px',
+	padding: '0px 7px',
+	boxSizing: 'border-box',
+	fontSize: '22px',
+	fontFamily: 'fjalla'
+};
+
+var sidebarContent = {
+	color: "#222",
+	minHeight: '50px',
+	padding: '12px 0px',
+	boxSizing: 'border-box',
+	fontSize: '13px',
+	fontFamily: 'Roboto',
+	lineHeight: '20px'
+};
+
+const SidebarPlace = (props) => 
+<div style={sidebarPlaceStyle}>
+	<div style={sidebarTitle}>{props.sidebartitle}</div>
+	<div style={sidebarContent}>{props.sidebarcontent}</div>
+</div>;
+
+
+
+
+
+
+
+
 
 
 

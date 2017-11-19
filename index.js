@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {HashRouter, Route, Switch, Link} from 'react-router-dom';
+import {HashRouter, Route, Switch, Link, NavLink} from 'react-router-dom';
 import './index.css';
 import logoUrl from './logo.png';
 
@@ -45,6 +45,7 @@ var vStyle = {
 	textDecoration: 'none',
 	fontSize: '22px',
 	fontFamily: 'fjalla',
+	outline:'none'
 };
 
 var navigationStyle = {
@@ -66,7 +67,7 @@ class Menu extends React.Component {
 		return (
 			<ul style={ulStyle}>
 				{
-				menus.map((item, index) => <li style={linkStyle} key={index}><Link style={vStyle} to={'/' + item.toLowerCase()}>{item}</Link></li>)
+				menus.map((item, index) => <li style={linkStyle} key={index}><NavLink activeStyle={{outline:'none', color: '#32a7e0'}} style={vStyle} to={'/' + item.toLowerCase()}>{item}</NavLink></li>)
 				}
 			</ul>
 		);
@@ -74,7 +75,6 @@ class Menu extends React.Component {
 }
 
 const Navigation = (props) => <div style={navigationStyle}><Menu/></div>;
-
 
 /**
  * Main part of website

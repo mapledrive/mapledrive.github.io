@@ -15,3 +15,8 @@ body {
     font-style: normal;
 	src: local('pt_sansregular'), url('./PTS55F-webfont.woff') format('woff');
 }
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), url('./roboto-v18-latin-regular.woff') format('woff');       
+}

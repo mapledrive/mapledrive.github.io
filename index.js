@@ -4,6 +4,46 @@ import {HashRouter, Route, Switch, Link, NavLink} from 'react-router-dom';
 import './index.css';
 import logoUrl from './logo.png';
 
+
+
+const Home = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Andromeda OS</h1>Details of Microsofts goal to mould Windows into a modular operating system to work across all manner of gadgets have surfaced, under the name Andromeda OS. Workers at Redmond familiar with Microsofts internal projects spilled the information to Windows Central, and explained that Andromeda OS has the goal of making Windows more flexible so that it can run on devices not normally suited for an operating system thats based on old and demanding code, architecture and features some 30-years-old.Instead of simply trying to scale Windows to run on say smart watches or low-powered tablets, Andromeda OS will turn Windows 10 into a modular system suitable for different architectures rather than the x86 architecture used by desktops, laptops, and tablets running Intel or AMD chips. And functions can be added or taken away from Andromeda OS to suit the system or device its required to run on, essentially offering an easy way for developers to use a Windows OS without being hampered by performance-sapping features their device might not need.</div>;
+const Service = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Elephant Trophy Import Ban</h1>The U.S. Fish and Wildlife Service announced Thursday that it had lifted an Obama-era ban on importing sport-hunted trophies of elephants from Zimbabwe and Zambia. But Friday evening, President Trump seemed to say that decision was being reconsidered, tweeting that he would review all conservation facts and issue an update soon with Interior Secretary Ryan Zinke.Zinke later issued a statement, saying: President Trump and I have talked and both believe that conservation and healthy herds are critical. As a result, in a manner compliant with all applicable laws, rules, and regulations, the issuing of permits is being put on hold as the decision is being reviewed.The Washington Post has reported on big-game hunting by the presidents sons.The Fish and Wildlife Service said it had found that allowing trophy imports would help the conservation of elephants in those countries, a finding that allows it to authorize the import of the African elephant under the terms of the Endangered Species Act, which lists the African elephant as threatened.Legal, well-regulated sport hunting as part of a sound management program can benefit certain species by providing incentives to local communities to conserve those species </div>;
+const Delivery = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Bitcoin Is Hot in Zimbabwe</h1>As the simabe are becoming more popular in countries like Zimbabwe as people lose faith.</div>;
+const Contacts = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Mugabe</h1>Zimbabwe's ruling party has dismissed President Robert Mugabe as its leader, appointing former vice-president Emmerson Mnangagwa in his place, the head of the countrys influential liberation war veterans said.</div>;
+const Partners = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Elections</h1>A special Zanu-PF Central Committee meeting is currently underway  in Harare to recall the revolutionary party’s First Secretary Cde Robert Mugabe from his position.</div>;
+const Information = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Butter</h1>The meeting is being chaired by Cde Obert Mpofu who is Zanu-PFs Secretary for Finance. Cde Mpofu is the most senior member present according to the party hierarchy.</div>;
+
+
+const Recently = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Recently Added Fonts</h1>Recently Added Fonts</div>;
+const Most = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Most Downloaded Fonts</h1>Most downloaded fonts here</div>;
+const Almost = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Almost Free Fonts</h1>Almost free but quality guaranteed</div>;
+const Languages = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Languages</h1>Many languages</div>;
+const Tags = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Tags</h1>Please check these tags</div>;
+
+
+const Proxima = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Proxima Nova</h1>One of the latest fonts here</div>;
+const Museo = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Museo Sans</h1>This is my favourit font so far</div>;
+const Bombshell = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Bombshell</h1>Not for everyday use</div>;
+const Brandon = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Brandon</h1>Please read about this font in the magazine</div>;
+const Franklin = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Franklin</h1>By no means it is old</div>;
+
+
+const Frequently = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Frequently Asked Questions</h1>How many questions are here</div>;
+const Help = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Help installing fonts</h1>You should choose modern format</div>;
+const Contactus = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Contact us</h1>Our phone is 9872344</div>;
+const Privacy = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Privacy Policy</h1>The privacy policy can be loaded on the link below</div>;
+const Advertising = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Advertising</h1>Advertising on this website</div>;
+
+
+const Twitter = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Twitter</h1>Our twitter is general. We are happy to tweet</div>;
+const Facebook = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Facebook</h1>You can get in touch with us with facebook</div>;
+const Rss = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>RSS</h1>RSS feeds are available</div>;
+const Newsletter = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Newsletter</h1>Subscribe to get letters and read them</div>;
+const Blog = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Blog</h1>There are articles here about technology</div>;
+const Login = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Login</h1>Login to your page and check your updates</div>;
+
+
+
 /**
  * Header
  */
@@ -61,20 +101,59 @@ var menuStyle = {
 
 
 
-class Menu extends React.Component {
-	render(){
-		var menus = ["Home","Service","Delivery","Contacts","Partners", "Information"]
-		return (
-			<ul style={ulStyle}>
-				{
-				menus.map((item, index) => <li style={linkStyle} key={index}><NavLink activeStyle={{outline:'none', color: '#32a7e0'}} style={vStyle} to={'/' + item.toLowerCase()}>{item}</NavLink></li>)
-				}
-			</ul>
-		);
-	}
+const menus = [
+	{path: '/', component: Home, name: 'Home' }, 
+	{path: '/service', component: Service, name: 'Service' }, 
+	{path: '/delivery', component: Delivery, name: 'Delivery' },
+	{path: '/contacts', component: Contacts, name: 'Contacts' }, 
+	{path: '/partners', component: Partners, name: 'Partners' },
+	{path: '/information', component: Information, name: 'Information' }
+];
+
+
+const routes = [
+	{path: '/recently', component: Recently, name: 'Recently Added Fonts' }, 
+	{path: '/most', component: Most, name: 'Most Downloaded Fonts' }, 
+	{path: '/almost', component: Almost, name: 'Almost Free Fonts' },
+	{path: '/languages', component: Languages, name: 'Languages' }, 
+	{path: '/tags', component: Tags, name: 'Tags' }
+];
+
+const routes2 = [
+	{path: '/proxima', component: Proxima, name: 'Proxima Nova' },
+	{path: '/museo', component: Museo, name: 'Museo Sans' },
+	{path: '/bombshell', component: Bombshell, name: 'Bombshell' },
+	{path: '/brandon', component: Brandon, name: 'Brandon' },
+	{path: '/franklin', component: Franklin, name: 'Franklin' }
+];
+	
+const routes3 = [	
+	{path: '/frequently', component: Frequently , name: 'Frequently Asked Questions' },
+	{path: '/help', component: Help, name: 'Help Installing Fonts' },
+	{path: '/contactus', component: Contactus, name: 'Contact Us' },
+	{path: '/privacy', component: Privacy, name: 'Privacy Policy' },
+	{path: '/advertising', component: Advertising, name: 'Advertising' }
+];
+	
+const routes4 = [	
+	{path: '/twitter', component: Twitter, name: 'Twitter' },
+	{path: '/facebook', component: Facebook, name: 'Facebook' },
+	{path: '/rss', component: Rss, name: 'RSS' },
+	{path: '/newsletter', component: Newsletter, name: 'Newsletter' },
+	{path: '/blog', component: Blog, name: 'Blog' },
+	{path: '/login', component: Login, name: 'Login' }
+];
+
+function Navigation() {
+  const listItems = menus.map(({path, component, name}, key) => <li style={linkStyle} key={key}><NavLink activeStyle={{outline:'none', color: '#32a7e0'}} style={vStyle} exact to={path}>{name}</NavLink></li> );
+  return (
+    <div style={navigationStyle}><ul style={ulStyle}>{listItems}</ul></div>
+  );
 }
 
-const Navigation = (props) => <div style={navigationStyle}><Menu/></div>;
+
+
+
 
 /**
  * Main part of website
@@ -112,30 +191,15 @@ const Main = (props) =>
 			<SidebarPlace sidebartitle='New To Fonts?' sidebarcontent='Download our free beginners guide to fonts. Now that you have your guide, its time to use fonts on your website.' />
 		</div>
     	<div style={contentStyle}>
-		<Switch>
-			<Route exact path='/' component={Home}/>
-			<Route exact path='/home' component={Home}/>
-			<Route path='/service' component={Service}/>
-			<Route path='/delivery' component={Delivery}/>
-			<Route path='/contacts' component={Contacts}/>
-			<Route path='/partners' component={Partners}/>
-			<Route path='/information' component={Information}/>
-		</Switch>
+			<RoutingGroupContent />
 		</div>
 	</div>;
 
-const Home = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Andromeda OS</h1>Details of Microsofts goal to mould Windows into a modular operating system to work across all manner of gadgets have surfaced, under the name Andromeda OS. Workers at Redmond familiar with Microsofts internal projects spilled the information to Windows Central, and explained that Andromeda OS has the goal of making Windows more flexible so that it can run on devices not normally suited for an operating system thats based on old and demanding code, architecture and features some 30-years-old.Instead of simply trying to scale Windows to run on say smart watches or low-powered tablets, Andromeda OS will turn Windows 10 into a modular system suitable for different architectures rather than the x86 architecture used by desktops, laptops, and tablets running Intel or AMD chips. And functions can be added or taken away from Andromeda OS to suit the system or device its required to run on, essentially offering an easy way for developers to use a Windows OS without being hampered by performance-sapping features their device might not need.</div>;
-const Service = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Elephant Trophy Import Ban</h1>The U.S. Fish and Wildlife Service announced Thursday that it had lifted an Obama-era ban on importing sport-hunted trophies of elephants from Zimbabwe and Zambia. But Friday evening, President Trump seemed to say that decision was being reconsidered, tweeting that he would review all conservation facts and issue an update soon with Interior Secretary Ryan Zinke.Zinke later issued a statement, saying: President Trump and I have talked and both believe that conservation and healthy herds are critical. As a result, in a manner compliant with all applicable laws, rules, and regulations, the issuing of permits is being put on hold as the decision is being reviewed.The Washington Post has reported on big-game hunting by the presidents sons.The Fish and Wildlife Service said it had found that allowing trophy imports would help the conservation of elephants in those countries, a finding that allows it to authorize the import of the African elephant under the terms of the Endangered Species Act, which lists the African elephant as threatened.Legal, well-regulated sport hunting as part of a sound management program can benefit certain species by providing incentives to local communities to conserve those species </div>;
-const Delivery = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Bitcoin Is Hot in Zimbabwe</h1>As the simabe are becoming more popular in countries like Zimbabwe as people lose faith.</div>;
-const Contacts = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Mugabe</h1>Zimbabwe's ruling party has dismissed President Robert Mugabe as its leader, appointing former vice-president Emmerson Mnangagwa in his place, the head of the countrys influential liberation war veterans said.</div>;
-const Partners = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Elections</h1>A special Zanu-PF Central Committee meeting is currently underway  in Harare to recall the revolutionary party’s First Secretary Cde Robert Mugabe from his position.</div>;
-const Information = () => <div style={{ fontFamily: 'Roboto', fontSize: '14px', lineHeight: '20px', color:'#222'}}><h1 style={{fontFamily: 'fjalla', fontSize: '45px', color:'#aaa'}}>Butter</h1>The meeting is being chaired by Cde Obert Mpofu who is Zanu-PFs Secretary for Finance. Cde Mpofu is the most senior member present according to the party hierarchy.</div>;
-
-
-
-
-
-
+function RoutingGroupContent()  {
+	const routeComponents = ( menus.concat(routes, routes2, routes3, routes4) ).map( ({ path, component }, key ) => 
+	<Route exact path={path} component={component} key={key} />);
+	return <Switch>{routeComponents}</Switch>;
+}
 
 
 
@@ -175,13 +239,6 @@ const SidebarPlace = (props) =>
 	<div style={sidebarTitle}>{props.sidebartitle}</div>
 	<div style={sidebarContent}>{props.sidebarcontent}</div>
 </div>;
-
-
-
-
-
-
-
 
 
 
@@ -228,6 +285,12 @@ var widgettitle = {
 	marginTop: '0px'
 };
 
+var widgetul = {
+	listStyleType: 'none',
+	padding: '0px',
+	margin: '0px'
+}
+
 var widgetli = {
 	fontSize: '14px',
 	fontFamily: 'pt_sansregular',
@@ -242,7 +305,7 @@ var CopyrightStyle = {
 	fontFamily: 'pt_sansregular'
 };
 
-const titles =  ['Reecently Added Fonts', 'Most Downloaded Fonts', 'Almost Free Fonts', 'Languages', 'Tags'];
+const titles =  ['Recently Added Fonts', 'Most Downloaded Fonts', 'Almost Free Fonts', 'Languages', 'Tags'];
 const titles2 = ['Proxima Nova', 'Museo Sans', 'Bombshell Pro', 'Brandon Grotesque', 'Franklin Gothic FS'];
 const titles3 = ['Frequently Asked Questions', 'Help Installing Fonts', 'Contact Us', 'Privacy Policy', 'Advertising'];
 const titles4 = ['Twitter', 'Facebook', 'RSS', 'Newsletter', 'Blog', 'Login'];
@@ -270,10 +333,10 @@ class Directory extends React.Component {
   render() {
     return (
     <div>
-	<Widget prozvishe={prozvishes}  titles={titles} />
-	<Widget prozvishe={prozvishes2} titles={titles2} />
-	<Widget prozvishe={prozvishes3} titles={titles3} />
-	<Widget prozvishe={prozvishes4} titles={titles4} />
+	<Widget prozvishe={prozvishes}  routes={routes} />
+	<Widget prozvishe={prozvishes2} routes={routes2} />
+	<Widget prozvishe={prozvishes3} routes={routes3} />
+	<Widget prozvishe={prozvishes4} routes={routes4} />
     </div> 
     );
   }
@@ -285,26 +348,35 @@ function Copyright(props) {
 
 
 function Widget(props) {
-  const titles = props.titles;
   const prozvishe = props.prozvishe;
+  const routes = props.routes;
   return (
   		<div style={widget}>
 			<WidgetName prozvishe={prozvishe} />
-			{titles.map((value, index)=>{ return <div key={index}><WidgetRow label={value} /></div> })}
+			<FooterList routes={routes} />
 		</div>
 	);
 }
-
 
 function WidgetName (props) {
 	return <div style={widgettitle}>{props.prozvishe}</div>
 }
 
-
-function WidgetRow (props) {
-	const url = "/" + props.label.toLowerCase().trim().replace(" ", "-");
-	return  <a href={url} style={widgetli}>{props.label}</a>		
+function FooterList(props) {
+  const routes = props.routes;
+  const listItems = routes.map(({path, component, name}, key) => <li key={key}><NavLink style={widgetli} activeStyle={{outline:'none', color: '#32a7e0'}}  to={path}>{name}</NavLink></li> );
+  return (
+    <ul style={widgetul}>{listItems}</ul>
+  );
 }
+
+
+
+
+
+
+
+
 
 
 

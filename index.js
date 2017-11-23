@@ -364,7 +364,7 @@ function WidgetName (props) {
 
 function FooterList(props) {
   const routes = props.routes;
-  const listItems = routes.map(({path, component, name}, key) => <li key={key}><NavLink style={widgetli} activeStyle={{outline:'none', color: '#32a7e0'}}  to={path}>{name}</NavLink></li> );
+  const listItems = routes.map(({path, component, name}, key) => <li key={key}><NavLink onClick={scrollToTop(1000)} style={widgetli} activeStyle={{outline:'none', color: '#32a7e0'}}  to={path}>{name}</NavLink></li> );
   return (
     <ul style={widgetul}>{listItems}</ul>
   );
@@ -374,7 +374,20 @@ function FooterList(props) {
 
 
 
-
+function scrollToTop(scrollDuration) {
+    var cosParameter = window.scrollY / 2,
+        scrollCount = 0,
+        oldTimestamp = performance.now();
+    function step (newTimestamp) {
+        scrollCount += Math.PI / (scrollDuration / (newTimestamp - oldTimestamp));
+        if (scrollCount >= Math.PI) window.scrollTo(0, 0);
+        if (window.scrollY === 0) return;
+        window.scrollTo(0, Math.round(cosParameter + cosParameter * Math.cos(scrollCount)));
+        oldTimestamp = newTimestamp;
+        window.requestAnimationFrame(step);
+    }
+    window.requestAnimationFrame(step);
+}
 
 
 

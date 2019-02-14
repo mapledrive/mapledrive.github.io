@@ -29,7 +29,7 @@ body {
 
 @media (max-width: 800px) {
   .wrapper {
-    padding: 20px 20px;
+    padding: 10px 10px;
   }
 }
 
@@ -54,7 +54,7 @@ body {
 @media (max-width: 800px) {
   .header {
     height: 200px;
-    padding: 20px 30px;
+    padding: 20px 20px;
   }
 }
 
@@ -88,7 +88,7 @@ body {
 
 @media (max-width: 800px) {
 	.navigation {
-		padding: 0px 30px;
+		padding: 0px 20px;
 	}
 	.cell {
 		height:35px;
@@ -171,6 +171,7 @@ body {
   .content {
     flex: 100%;
     max-width: 100%;
+	padding: 20px;
   }
   
   .contain {
@@ -184,6 +185,7 @@ body {
   .sidebar {
     flex: 100%;
     max-width: 100%;
+	padding: 20px;
   }
 }
 
@@ -293,6 +295,7 @@ body {
   .footerwidget {
     flex: 100%;
     max-width: 100%;
+	padding: 20px;
   }
 }
 
@@ -309,5 +312,11 @@ body {
 	font-family: pt_sansregular;
 	padding: 30px 30px 30px 30px;
 	color: #fff;
+}
+
+@media (max-width: 800px) {
+  .bottom {
+	padding: 20px;
+  }
 }
 

@@ -1,15 +1,18 @@
 import {Recently, Most, Almost, Languages, Tags, Proxima, Museo, Bombshell,Brandon, Franklin, Frequently, Help, Contactus, Privacy, Advertising, Twitter, Facebook, Rss, Newsletter, Blog, Login} from '../components/Footer';
-import {Service, Delivery, Contacts, Information} from '../components/Common';
+import DeliveryContainer from '../containers/DeliveryContainer';
 import Home from '../components/Home';
 import Partners from '../components/Partners';
+import ServiceContainer from '../containers/ServiceContainer';
+import ContactsContainer from '../containers/ContactsContainer';
+import InformationContainer from '../containers/InformationContainer';
 
 export const menus = [
 	{path: '/', component: Home, name: 'Home' }, 
-	{path: '/service', component: Service, name: 'Service' }, 
-	{path: '/delivery', component: Delivery, name: 'Delivery' },
-	{path: '/contacts', component: Contacts, name: 'Contacts' }, 
+	{path: '/service', component: ServiceContainer, name: 'Service' }, 
+	{path: '/delivery', component: DeliveryContainer, name: 'Delivery' },
+	{path: '/contacts', component: ContactsContainer, name: 'Contacts' }, 
 	{path: '/partners', component: Partners, name: 'Partners' },
-	{path: '/information', component: Information, name: 'Information' }
+	{path: '/information', component: InformationContainer, name: 'Information' }
 ];
 
 

@@ -41,20 +41,20 @@ body {
 .header {
   display: flex;
   box-sizing: border-box;
-  height: 200px;
   background-color: #61456a;
-  padding: 20px 30px;
+  padding: 20px 20px;
 }
 
-.logoStyle {
-	background-color: #61456A;
-	max-width: 296px;
+.logotype {
+	height:150px;
 }
 
 @media (max-width: 800px) {
   .header {
-    height: 200px;
     padding: 20px 20px;
+  }
+  .logotype {
+	height:50px;
   }
 }
 

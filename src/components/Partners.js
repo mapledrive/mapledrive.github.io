@@ -1,22 +1,22 @@
 import React from "react";
 
-export default class Partners extends React.Component {
+class Partners extends React.Component {
   rawMarkup() {
-    var rawMarkup = this.props.swim.content;
+    var rawMarkup = this.props.repos.content;
     return { __html: rawMarkup };
   }
   render() {
     return (
       <div className="contenttext">
-        <h1 className="contentheadline">{this.props.swim.title}</h1>
+        <h1 className="contentheadline">{this.props.repos.title}</h1>
         <span dangerouslySetInnerHTML={this.rawMarkup()} />
-        {this.props.swim.contentSnippet}
+        {this.props.repos.contentSnippet}
       </div>
     );
   }
 }
 
-
+export default Partners
 // https://www.valentinog.com/blog/how-async-await-in-react/
 // export default class Partners extends React.Component {
 	// constructor(props) {

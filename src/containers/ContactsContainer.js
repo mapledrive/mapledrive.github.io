@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import {Service} from '../components/Service'
+import Contacts from '../components/Contacts'
 
-const mapStateToProps = state => ({ swim: state[1] });
-const ServiceContainer = connect(mapStateToProps)(Service);
+const mapStateToProps = state => ({ repos: state[3] });
+const ContactsContainer = connect(mapStateToProps)(Contacts);
 
-export default ServiceContainer;
+export default ContactsContainer;

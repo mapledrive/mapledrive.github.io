@@ -1,6 +1,6 @@
 import {Recently, Most, Almost, Languages, Tags, Proxima, Museo, Bombshell,Brandon, Franklin, Frequently, Help, Contactus, Privacy, Advertising, Twitter, Facebook, Rss, Newsletter, Blog, Login} from '../components/Footer';
 import DeliveryContainer from '../containers/DeliveryContainer';
-import {Home} from '../components/Home';
+import Home from '../components/Home';
 import Partners from '../components/Partners';
 import ServiceContainer from '../containers/ServiceContainer';
 import ContactsContainer from '../containers/ContactsContainer';

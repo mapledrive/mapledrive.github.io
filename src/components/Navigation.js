@@ -1,11 +1,15 @@
 import React from 'react'
-import {menus} from '../routes/normal';
 import {NavLink} from 'react-router-dom';
 
-
 export function Navigation() {
-  const listItems = menus.map(({path, component, name}, key) => <li className="cell" key={key}><NavLink activeStyle={{outline:'none', color: '#32a7e0'}} className="v" exact to={path}>{name}</NavLink></li> );
-  return (
-    <ul className="navigation">{listItems}</ul>
+    return (
+			<ul className="navigation">
+				<li className="cell"><NavLink className="v" activeStyle={{outline:'none', color: '#32a7e0'}} exact to='/'>Home</NavLink></li>
+				<li className="cell"><NavLink className="v" activeStyle={{outline:'none', color: '#32a7e0'}} exact to='/service'>Service</NavLink></li>
+				<li className="cell"><NavLink className="v" activeStyle={{outline:'none', color: '#32a7e0'}} exact to='/delivery'>Delivery</NavLink></li>
+				<li className="cell"><NavLink className="v" activeStyle={{outline:'none', color: '#32a7e0'}} exact to='/contacts'>Contacts</NavLink></li>
+				<li className="cell"><NavLink className="v" activeStyle={{outline:'none', color: '#32a7e0'}} exact to='/partners'>Partners</NavLink></li>
+				<li className="cell"><NavLink className="v" activeStyle={{outline:'none', color: '#32a7e0'}} exact to='/information'>Information</NavLink></li>
+			</ul>
   );
 }

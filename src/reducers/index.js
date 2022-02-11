@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import abonents from './abonents';
-//import docflows from './docflows';
+import news from './news';
+//import authors from './authors';
 
 const rootReducer = combineReducers({
-  abonents,
-  //docflows,
+  news,
+  //authors,
 });
 
 export default rootReducer;

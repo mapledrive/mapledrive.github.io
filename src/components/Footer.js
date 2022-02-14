@@ -1,29 +1,55 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { routes } from '../routes/normal';
 
-function Widget(props) {
-  const routes = props.routes;
-  return (
-    <div className='footerwidget'>
-      <WidgetName />
-      <FooterList routes={routes} />
-    </div>
-  );
+function Recently() {
+  return <div>yes</div>;
 }
 
-function WidgetName() {
-  return <div className='footertitle'>Recently Added Fonts</div>;
-}
+export const routes = [
+  { path: '/recently', component: Recently, name: 'Recently Added Fonts' },
+  { path: '/most', component: Recently, name: 'Most Downloaded Fonts' },
+  { path: '/almost', component: Recently, name: 'Almost Free Fonts' },
+  { path: '/languages', component: Recently, name: 'Languages' },
+  { path: '/tags', component: Recently, name: 'Tags' },
+];
 
-function FooterList(props) {
-  const routes = props.routes;
+export const routes2 = [
+  { path: '/proxima', component: Recently, name: 'Proxima Nova' },
+  { path: '/museo', component: Recently, name: 'Museo Sans' },
+  { path: '/bombshell', component: Recently, name: 'Bombshell' },
+  { path: '/brandon', component: Recently, name: 'Brandon' },
+  { path: '/franklin', component: Recently, name: 'Franklin' },
+];
+
+export const routes3 = [
+  {
+    path: '/frequently',
+    component: Recently,
+    name: 'Frequently Asked Questions',
+  },
+  { path: '/help', component: Recently, name: 'Help Installing Fonts' },
+  { path: '/contactus', component: Recently, name: 'Contact Us' },
+  { path: '/privacy', component: Recently, name: 'Privacy Policy' },
+  { path: '/advertising', component: Recently, name: 'Advertising' },
+];
+
+export const routes4 = [
+  { path: '/twitter', component: Recently, name: 'Twitter' },
+  { path: '/facebook', component: Recently, name: 'Facebook' },
+  { path: '/rss', component: Recently, name: 'RSS' },
+  { path: '/newsletter', component: Recently, name: 'Newsletter' },
+  { path: '/blog', component: Recently, name: 'Blog' },
+  { path: '/login', component: Recently, name: 'Login' },
+];
+
+const FooterList = ({ routes }) => {
   const listItems = routes.map(({ path, component, name }, key) => (
     <li key={key}>
       <NavLink
         onClick={() => {}}
-        className='footerli'
-        activeStyle={{ outline: 'none', color: '#32a7e0' }}
+        // className='footerli'
+        className={navData => (navData.isActive ? 'footerli' : 'footerli')}
+        // activeStyle={{ outline: 'none', color: '#32a7e0' }}
         to={path}
       >
         {name}
@@ -31,17 +57,25 @@ function FooterList(props) {
     </li>
   ));
   return <ul className='footerul'>{listItems}</ul>;
-}
+};
 
-export class Footer extends React.Component {
-  render() {
-    return (
-      <div className='rooter'>
-        <Widget routes={routes} />
-        <Widget routes={routes} />
-        <Widget routes={routes} />
-        <Widget routes={routes} />
-      </div>
-    );
-  }
-}
+export const Footer = () => (
+  <div className='rooter'>
+    <div className='footerwidget'>
+      <div className='footertitle'>Font Lists</div>
+      <FooterList routes={routes} />
+    </div>
+    <div className='footerwidget'>
+      <div className='footertitle'>Commercial Favorites</div>
+      <FooterList routes={routes2} />
+    </div>
+    <div className='footerwidget'>
+      <div className='footertitle'>Need Help?</div>
+      <FooterList routes={routes3} />
+    </div>
+    <div className='footerwidget'>
+      <div className='footertitle'>Connect</div>
+      <FooterList routes={routes4} />
+    </div>
+  </div>
+);

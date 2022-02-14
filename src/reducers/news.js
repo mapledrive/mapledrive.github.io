@@ -1,116 +1,27 @@
-let initialState = [
-  {
-    title: '',
-    link: '',
-    pubDate: '',
-    author: '',
-    content: '',
-    contentSnippet: '',
-    id: '',
-    isoDate: '',
-  },
-  {
-    title: '',
-    link: '',
-    pubDate: '',
-    author: '',
-    content: '',
-    contentSnippet: '',
-    id: '',
-    isoDate: '',
-  },
-  {
-    title: '',
-    link: '',
-    pubDate: '',
-    author: '',
-    content: '',
-    contentSnippet: '',
-    id: '',
-    isoDate: '',
-  },
-  {
-    title: '',
-    link: '',
-    pubDate: '',
-    author: '',
-    content: '',
-    contentSnippet: '',
-    id: '',
-    isoDate: '',
-  },
-  {
-    title: '',
-    link: '',
-    pubDate: '',
-    author: '',
-    content: '',
-    contentSnippet: '',
-    id: '',
-    isoDate: '',
-  },
-  {
-    title: '',
-    link: '',
-    pubDate: '',
-    author: '',
-    content: '',
-    contentSnippet: '',
-    id: '',
-    isoDate: '',
-  },
-  {
-    title: '',
-    link: '',
-    pubDate: '',
-    author: '',
-    content: '',
-    contentSnippet: '',
-    id: '',
-    isoDate: '',
-  },
-  {
-    title: '',
-    link: '',
-    pubDate: '',
-    author: '',
-    content: '',
-    contentSnippet: '',
-    id: '',
-    isoDate: '',
-  },
-  {
-    title: '',
-    link: '',
-    pubDate: '',
-    author: '',
-    content: '',
-    contentSnippet: '',
-    id: '',
-    isoDate: '',
-  },
-  {
-    title: '',
-    link: '',
-    pubDate: '',
-    author: '',
-    content: '',
-    contentSnippet: '',
-    id: '',
-    isoDate: '',
-  },
-];
+import { fetchNews, fetchNewsSuccess, fetchNewsError } from 'actions';
+import { createReducer } from '@reduxjs/toolkit';
 
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'ADD_REPOS':
-      return action.repos;
-    case 'CLEAR_REPOS':
-      return [];
-    default:
-      return state;
-  }
+const initialState = {
+  list: [],
+  isLoading: false,
 };
 
-export default reducer;
+const newsReducer = createReducer(initialState, {
+  [fetchNews]: (state, action) => ({
+    ...state,
+    isLoading: true,
+  }),
+  [fetchNewsSuccess]: (state, action) => {
+    return {
+      ...state,
+      list: action.payload,
+      isLoading: false,
+    };
+  },
+  [fetchNewsError]: (state, action) => ({
+    ...state,
+    isLoading: false,
+  }),
+});
+
+export default newsReducer;

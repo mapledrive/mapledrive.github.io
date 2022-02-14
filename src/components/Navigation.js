@@ -6,9 +6,7 @@ export function Navigation() {
     <ul className='navigation'>
       <li className='cell'>
         <NavLink
-          className='v'
-          activeStyle={{ outline: 'none', color: '#32a7e0' }}
-          exact
+          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
           to='/'
         >
           Home
@@ -16,9 +14,7 @@ export function Navigation() {
       </li>
       <li className='cell'>
         <NavLink
-          className='v'
-          activeStyle={{ outline: 'none', color: '#32a7e0' }}
-          exact
+          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
           to='/service'
         >
           Service
@@ -26,9 +22,7 @@ export function Navigation() {
       </li>
       <li className='cell'>
         <NavLink
-          className='v'
-          activeStyle={{ outline: 'none', color: '#32a7e0' }}
-          exact
+          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
           to='/delivery'
         >
           Delivery
@@ -36,9 +30,7 @@ export function Navigation() {
       </li>
       <li className='cell'>
         <NavLink
-          className='v'
-          activeStyle={{ outline: 'none', color: '#32a7e0' }}
-          exact
+          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
           to='/contacts'
         >
           Contacts
@@ -46,9 +38,7 @@ export function Navigation() {
       </li>
       <li className='cell'>
         <NavLink
-          className='v'
-          activeStyle={{ outline: 'none', color: '#32a7e0' }}
-          exact
+          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
           to='/partners'
         >
           Partners
@@ -56,9 +46,7 @@ export function Navigation() {
       </li>
       <li className='cell'>
         <NavLink
-          className='v'
-          activeStyle={{ outline: 'none', color: '#32a7e0' }}
-          exact
+          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
           to='/information'
         >
           Information

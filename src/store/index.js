@@ -9,6 +9,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
   reducer: { newsReducer, authors },
   middleware: [sagaMiddleware],
+  devTools: true,
 });
 
 sagaMiddleware.run(rootSaga);

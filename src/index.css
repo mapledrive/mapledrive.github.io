@@ -220,6 +220,7 @@ aside {
   box-sizing: border-box;
   font-size: 22px;
   font-family: fjalla;
+  overflow: hidden;
 }
 
 .sidebarContent {

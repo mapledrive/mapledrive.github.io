@@ -10,7 +10,7 @@ const Deliverypage = () => {
   useEffect(() => dispatch(fetchNews()), []);
 
   return (
-    <div>
+    <>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
@@ -23,7 +23,7 @@ const Deliverypage = () => {
           <div className='sectionContent'>{list[2]?.content}</div>
         </section>
       )}
-    </div>
+    </>
   );
 };
 

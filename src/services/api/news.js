@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const fetchNews = async () => {
+export const fetchNewsApi = async () => {
   const response = await axios.get(
-    `https://inshortsapi.vercel.app/news?category=science`,
+    `https://inshortsapi.vercel.app/news?category=technology`,
   );
   return response.data.data;
 };

@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import newsReducer from 'reducers/news';
-import sidebar from 'reducers/sidebar';
-import authors from 'reducers/authors';
+import news from 'features/news/newsSlice';
+import sidebar from 'features/sidebar/sidebarSlice';
+import authors from 'features/authors/authorsSlice';
 import rootSaga from 'sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: { newsReducer, authors, sidebar },
+  reducer: { news, authors, sidebar },
   middleware: [sagaMiddleware],
   devTools: true,
 });

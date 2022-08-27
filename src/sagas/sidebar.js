@@ -1,7 +1,10 @@
-import { call, put, takeLatest, throttle, delay } from 'redux-saga/effects';
+import { call, put, takeLatest } from "redux-saga/effects";
 
-import { fetchSidebarNewsSuccess, fetchSidebarNewsError } from 'actions';
-import * as api from 'services/api/sidebar';
+import {
+  fetchSidebarNewsSuccess,
+  fetchSidebarNewsError,
+} from "features/sidebar/sidebarSlice";
+import * as api from "services/api/sidebar";
 
 function* fetchSidebarNews(action) {
   try {
@@ -13,5 +16,5 @@ function* fetchSidebarNews(action) {
 }
 
 export function* watchSidebarNews() {
-  yield takeLatest('FETCH_SIDEBAR_REQUEST', fetchSidebarNews);
+  yield takeLatest("sidebar/fetchSidebarNews", fetchSidebarNews);
 }

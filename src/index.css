@@ -45,7 +45,7 @@ header {
   background-color: #61456a;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   box-sizing: border-box;
   padding: 20px;
 }

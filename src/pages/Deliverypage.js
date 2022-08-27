@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchNews } from 'actions';
+import { fetchNews } from 'features/news/newsSlice';
 
 const Deliverypage = () => {
-  const list = useSelector(state => state.newsReducer.list);
-  const isLoading = useSelector(state => state.newsReducer.isLoading);
+  const list = useSelector(state => state.news.list);
+  const isLoading = useSelector(state => state.news.isLoading);
 
   const dispatch = useDispatch();
-  useEffect(() => dispatch(fetchNews()), []);
+
+  useEffect(() => {
+    dispatch(fetchNews()); // Safe to add dispatch to the dependencies array
+  }, [dispatch]);
 
   return (
     <>

@@ -1,12 +1,12 @@
-import { call, put, takeLatest, delay } from "redux-saga/effects";
+import { call, put, takeLatest, delay } from 'redux-saga/effects';
 
-import { fetchNewsSuccess, fetchNewsError } from "features/news/newsSlice";
-import * as api from "services/api/news";
+import { fetchNewsSuccess, fetchNewsError } from 'features/news/newsSlice';
+import { fetchNewsApi } from 'features/news/newsAPI';
 
 function* fetchNews(action) {
   try {
     const data = action.payload;
-    const response = yield call(api.fetchNewsApi, data);
+    const response = yield call(fetchNewsApi, data);
     yield delay(200);
     yield put(fetchNewsSuccess(response));
   } catch (error) {
@@ -15,5 +15,5 @@ function* fetchNews(action) {
 }
 
 export function* watchNews() {
-  yield takeLatest("news/fetchNews", fetchNews);
+  yield takeLatest('news/fetchNews', fetchNews);
 }

@@ -7,12 +7,10 @@ import rootSaga from 'sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = configureStore({
+export const store = configureStore({
   reducer: { news, authors, sidebar },
   middleware: [sagaMiddleware],
   devTools: process.env.NODE_ENV !== 'production',
 });
 
 sagaMiddleware.run(rootSaga);
-
-export default store;

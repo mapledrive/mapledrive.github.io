@@ -9,7 +9,7 @@ export function Navigation() {
           className={navData => (navData.isActive ? 'activeBlue' : 'v')}
           to='/'
         >
-          Home
+          Hrome
         </NavLink>
       </li>
       <li className='cell'>

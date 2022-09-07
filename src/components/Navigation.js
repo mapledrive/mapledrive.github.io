@@ -39,9 +39,9 @@ export function Navigation() {
       <li className='cell'>
         <NavLink
           className={navData => (navData.isActive ? 'activeBlue' : 'v')}
-          to='/partners'
+          to='/currency'
         >
-          Partners
+          Currency
         </NavLink>
       </li>
       <li className='cell'>

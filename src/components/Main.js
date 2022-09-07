@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Homepage } from 'pages/Homepage';
 import { Servicepage } from 'pages/Servicepage';
 import { Deliverypage } from 'pages/Deliverypage';
-import { Contactspage } from 'pages/Contactspage';
+import { Contactspage } from 'pages/contactspage';
 import { Partnerspage } from 'pages/Partnerspage';
 import { Informationpage } from 'pages/Informationpage';
 

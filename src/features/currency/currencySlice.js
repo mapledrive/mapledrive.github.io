@@ -16,7 +16,6 @@ export const currencySlice = createSlice({
       isLoading: true,
     }),
     fetchCurrencySuccess: (state, action) => {
-      console.log(action, 'action');
       const cadValue = action.payload.cad;
       const usdValue = action.payload.usd;
       const rubValue = action.payload.rub;

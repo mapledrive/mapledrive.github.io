@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import './styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrency } from 'features/currency/currencySlice';

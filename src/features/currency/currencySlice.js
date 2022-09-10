@@ -32,15 +32,6 @@ export const currencySlice = createSlice({
       ...state,
       isLoading: false,
     }),
-    // changeCad: (state, action) => {
-    //   console.log(action.payload, 'we');
-    //   return {
-    //     ...state,
-    //     cad: action.payload,
-    //     usd: usdValue,
-    //     rub: rubValue,
-    //   };
-    // },
   },
 });
 

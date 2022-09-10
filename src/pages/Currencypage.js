@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import './styles.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrency, changeCad } from 'features/currency/currencySlice';
+import { fetchCurrency } from 'features/currency/currencySlice';
 
 // https://codesandbox.io/s/5tgjw?file=/src/App.js:380-3665
 // https://api.coingecko.com/api/v3/exchange_rates
@@ -16,9 +16,6 @@ function Currencypage() {
   const [cadValue, setCadValue] = useState(1);
   const [usdValue, setUsdValue] = useState(1);
   const [rubValue, setRubValue] = useState(1);
-
-  const [inputValue, setInputValue] = useState(1);
-
   const [result, setResult] = useState(1);
   const [unit, setUnit] = useState('BTC');
 
@@ -67,151 +64,78 @@ function Currencypage() {
 
   return (
     <section>
-      <div className='sectionTitle'>Currency Converter</div>
+      <div className='sectionTitle'>
+        Currency Converter
+        {` ${Number(result.toFixed()).toLocaleString('en')} ${unit}`}
+      </div>
       <div className='calcwrapper'>
         <div className='calccolumn'>
-          <label className='labelContent' htmlFor='cadyear'>
-            CAD year before tax
-          </label>
-          <input
-            id='cadyear'
-            className='currency-input'
-            type='number'
-            onChange={handleCad}
-            value={cadValue}
+          <CurrencyInput
+            label={'CAD year before tax'}
+            handler={handleCad}
+            currencyvalue={cadValue}
           />
-          <label className='labelContent' htmlFor='cadyearaftertax'>
-            CAD year after tax
-          </label>
-          <input
-            id='cadyearaftertax'
-            className='currency-input'
-            type='number'
-            onChange={handleCad}
-            value={cadValue}
+          <CurrencyInput
+            label={'CAD year after tax'}
+            handler={handleCad}
+            currencyvalue={cadValue}
           />
-          <label className='labelContent' htmlFor='cadyearaftertax'>
-            CAD month before tax
-          </label>
-          <input
-            id='cadyearaftertax'
-            className='currency-input'
-            type='number'
-            onChange={handleCad}
-            value={cadValue}
+          <CurrencyInput
+            label={'CAD month before tax'}
+            handler={handleCad}
+            currencyvalue={cadValue}
           />
-          <label className='labelContent' htmlFor='cadyearaftertax'>
-            CAD month after tax
-          </label>
-          <input
-            id='cadyearaftertax'
-            className='currency-input'
-            type='number'
-            onChange={handleCad}
-            value={cadValue}
+          <CurrencyInput
+            label={'CAD month after tax'}
+            handler={handleCad}
+            currencyvalue={cadValue}
           />
         </div>
         <div className='calccolumn'>
-          <label className='labelContent' htmlFor='usdyear'>
-            USD year before tax
-          </label>
-          <input
-            id='usdyear'
-            className='currency-input'
-            type='number'
-            onChange={handleUsd}
-            value={usdValue}
+          <CurrencyInput
+            label={'USD year before tax'}
+            handler={handleUsd}
+            currencyvalue={usdValue}
           />
-          <label className='labelContent' htmlFor='btcyearaftertax'>
-            USD year after tax
-          </label>
-          <input
-            id='btcyearaftertax'
-            className='currency-input'
-            type='number'
-            onChange={handleUsd}
-            value={usdValue}
+          <CurrencyInput
+            label={'USD year after tax'}
+            handler={handleUsd}
+            currencyvalue={usdValue}
           />
-          <label className='labelContent' htmlFor='btcyearaftertax'>
-            USD month before tax
-          </label>
-          <input
-            id='btcmonthaftertax'
-            className='currency-input'
-            type='number'
-            onChange={handleUsd}
-            value={usdValue}
+          <CurrencyInput
+            label={'USD month before tax'}
+            handler={handleUsd}
+            currencyvalue={usdValue}
           />
-          <label className='labelContent' htmlFor='btcyearaftertax'>
-            USD month after tax
-          </label>
-          <input
-            id='btcmonthaftertax'
-            className='currency-input'
-            type='number'
-            onChange={handleUsd}
-            value={usdValue}
+          <CurrencyInput
+            label={'USD month after tax'}
+            handler={handleUsd}
+            currencyvalue={usdValue}
           />
         </div>
         <div className='calccolumn'>
-          <label className='labelContent' htmlFor='rubyear'>
-            RUB year before tax
-          </label>
-          <input
-            id='rubyear'
-            className='currency-input'
-            type='number'
-            onChange={handleRub}
-            value={rubValue}
+          <CurrencyInput
+            label={'RUB year before tax'}
+            handler={handleRub}
+            currencyvalue={rubValue}
           />
-          <label className='labelContent' htmlFor='btcyearaftertax'>
-            RUB year after tax
-          </label>
-          <input
-            id='btcyearaftertax'
-            className='currency-input'
-            type='number'
-            onChange={handleRub}
-            value={rubValue}
+          <CurrencyInput
+            label={'RUB year after tax'}
+            handler={handleRub}
+            currencyvalue={rubValue}
           />
-          <label className='labelContent' htmlFor='btcyearaftertax'>
-            RUB month before tax
-          </label>
-          <input
-            id='btcmonthaftertax'
-            className='currency-input'
-            type='number'
-            onChange={handleRub}
-            value={rubValue}
+          <CurrencyInput
+            label={'RUB month before tax'}
+            handler={handleRub}
+            currencyvalue={rubValue}
           />
-          <label className='labelContent' htmlFor='btcyearaftertax'>
-            RUB month after tax
-          </label>
-          <input
-            id='btcmonthaftertax'
-            className='currency-input'
-            type='number'
-            onChange={handleRub}
-            value={rubValue}
+          <CurrencyInput
+            label={'RUB month after tax'}
+            handler={handleRub}
+            currencyvalue={rubValue}
           />
         </div>
         <div className='calccolumn'>1</div>
-      </div>
-      <div className='calculator'>
-        <div className='sectionTitle'>
-          {`${Number(result.toFixed()).toLocaleString('en')} ${unit}`}
-        </div>
-        <div className='container'>
-          <label htmlFor='value__input'>
-            <input
-              className='input'
-              id='value__input'
-              type='number'
-              onChange={e => setInputValue(e.target.value)}
-              value={rub}
-            />
-          </label>
-        </div>
       </div>
     </section>
   );
@@ -220,5 +144,26 @@ function Currencypage() {
 export { Currencypage };
 
 function financial(x) {
-  return Number.parseFloat(x).toFixed(2);
+  return Number.parseFloat(x).toFixed();
 }
+
+const CurrencyInput = ({ label, handler, currencyvalue }) => {
+  return (
+    <div className='slider-input-root-4-0-5'>
+      <div className='dc-input-6-1-2'>
+        <div className='dc-input__input-container-6-1-2'>
+          <input
+            className='dc-input__input-6-1-2'
+            step='1'
+            onChange={handler}
+            value={currencyvalue}
+          />
+          <label className='dc-input__label-6-1-2'>{label}</label>
+        </div>
+      </div>
+      <div className='slider-root-4-0-5'>
+        <div className='slider-axis-4-0-5'></div>
+      </div>
+    </div>
+  );
+};

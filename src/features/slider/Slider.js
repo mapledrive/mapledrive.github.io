@@ -1,5 +1,5 @@
 import { useState } from 'react';
-//import 'features/slider/slider.css';
+import 'features/slider/slider.css';
 
 const MAX = 100;
 

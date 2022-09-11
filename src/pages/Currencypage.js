@@ -19,6 +19,9 @@ function Currencypage() {
   const [cadValue, setCadValue] = useState(0);
   const [usdValue, setUsdValue] = useState(0);
   const [rubValue, setRubValue] = useState(0);
+  const [rubNetValue, setRubNetValue] = useState(0);
+  const [rubMonthValue, setRubMonthValue] = useState(0);
+  const [rubNetMonthValue, setRubNetMonthValue] = useState(0);
   const [result, setResult] = useState(1);
   const [unit, setUnit] = useState('BTC');
 
@@ -46,6 +49,9 @@ function Currencypage() {
     let unit = cad.unit;
     setUsdValue(usdr);
     setRubValue(rubr);
+    setRubNetValue(financial(rubr * 0.87));
+    setRubMonthValue(financial(rubr / 12));
+    setRubNetMonthValue(financial((rubr / 12) * 0.87));
     setUnit(unit);
   };
 
@@ -54,9 +60,12 @@ function Currencypage() {
     setUsdValue(received);
     let cadr = financial((cad.value / usd.value) * received);
     let rubr = financial((rub.value / usd.value) * received);
+    setRubMonthValue(financial(rubr / 12));
+    setRubNetMonthValue(financial((rubr / 12) * 0.87));
     let unit = usd.unit;
     setCadValue(cadr);
     setRubValue(rubr);
+    setRubNetValue(financial(rubr * 0.87));
     setUnit(unit);
   };
 
@@ -140,19 +149,19 @@ function Currencypage() {
           <CurrencyInput
             label={'RUB year after tax'}
             handler={handleRub}
-            currencyvalue={rubValue}
+            currencyvalue={rubNetValue}
             max={6100000}
           />
           <CurrencyInput
             label={'RUB month before tax'}
             handler={handleRub}
-            currencyvalue={rubValue}
+            currencyvalue={rubMonthValue}
             max={6100000}
           />
           <CurrencyInput
             label={'RUB month after tax'}
             handler={handleRub}
-            currencyvalue={rubValue}
+            currencyvalue={rubNetMonthValue}
             max={6100000}
           />
         </div>

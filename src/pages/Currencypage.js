@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './styles.css';
+import 'features/currency/currency.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrency } from 'features/currency/currencySlice';
 

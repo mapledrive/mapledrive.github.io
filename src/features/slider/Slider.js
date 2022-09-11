@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import 'features/slider/slider.css';
+//import 'features/slider/slider.css';
 
 const MAX = 100;
 
@@ -11,7 +11,7 @@ function Slider() {
   };
 
   return (
-    <div className='slider'>
+    <>
       <input
         type='range'
         min='0'
@@ -20,7 +20,7 @@ function Slider() {
         style={getBackgroundSize()}
         value={value}
       />
-    </div>
+    </>
   );
 }
 

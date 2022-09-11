@@ -1,23 +1,32 @@
 import { useEffect, useState } from 'react';
-import 'features/currency/currency.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrency } from 'features/currency/currencySlice';
+import 'features/currency/currency.css';
 
 // https://codesandbox.io/s/5tgjw?file=/src/App.js:380-3665
-// https://api.coingecko.com/api/v3/exchange_rates
 
 // exchange rate calculator
-// 1. As a user, I should be able to type in a number
-// 2. As a user I should be able to pick a "from" currency from a dropdown
-// 3. I should be able to pick a "to" currency
-// 4. I should see the converted result!!
+// 1. As a user, I should be able to type in salary to any field
+// The app will calculate equivalent in other currencies
+// 2. When the year gross salary is entered to the input
+// the net salary is calculated both for the year and month
+// 3. The app uses latest conversion rates from API.
+// 4. The equivalents are calculated on the fly as you type
+
+const MAX = 100;
 
 function Currencypage() {
-  const [cadValue, setCadValue] = useState(1);
-  const [usdValue, setUsdValue] = useState(1);
-  const [rubValue, setRubValue] = useState(1);
+  const [cadValue, setCadValue] = useState(0);
+  const [usdValue, setUsdValue] = useState(0);
+  const [rubValue, setRubValue] = useState(0);
   const [result, setResult] = useState(1);
   const [unit, setUnit] = useState('BTC');
+
+  const [value, setValue] = useState(0);
+
+  const getBackgroundSize = () => {
+    return { backgroundSize: `${(value * 100) / MAX}% 100%` };
+  };
 
   const cad = useSelector(state => state.currency.cad);
   const usd = useSelector(state => state.currency.usd);
@@ -74,21 +83,25 @@ function Currencypage() {
             label={'CAD year before tax'}
             handler={handleCad}
             currencyvalue={cadValue}
+            max={100000}
           />
           <CurrencyInput
             label={'CAD year after tax'}
             handler={handleCad}
             currencyvalue={cadValue}
+            max={100000}
           />
           <CurrencyInput
             label={'CAD month before tax'}
             handler={handleCad}
             currencyvalue={cadValue}
+            max={100000}
           />
           <CurrencyInput
             label={'CAD month after tax'}
             handler={handleCad}
             currencyvalue={cadValue}
+            max={100000}
           />
         </div>
         <div className='calccolumn'>
@@ -96,21 +109,25 @@ function Currencypage() {
             label={'USD year before tax'}
             handler={handleUsd}
             currencyvalue={usdValue}
+            max={100000}
           />
           <CurrencyInput
             label={'USD year after tax'}
             handler={handleUsd}
             currencyvalue={usdValue}
+            max={100000}
           />
           <CurrencyInput
             label={'USD month before tax'}
             handler={handleUsd}
             currencyvalue={usdValue}
+            max={100000}
           />
           <CurrencyInput
             label={'USD month after tax'}
             handler={handleUsd}
             currencyvalue={usdValue}
+            max={100000}
           />
         </div>
         <div className='calccolumn'>
@@ -118,24 +135,28 @@ function Currencypage() {
             label={'RUB year before tax'}
             handler={handleRub}
             currencyvalue={rubValue}
+            max={6100000}
           />
           <CurrencyInput
             label={'RUB year after tax'}
             handler={handleRub}
             currencyvalue={rubValue}
+            max={6100000}
           />
           <CurrencyInput
             label={'RUB month before tax'}
             handler={handleRub}
             currencyvalue={rubValue}
+            max={6100000}
           />
           <CurrencyInput
             label={'RUB month after tax'}
             handler={handleRub}
             currencyvalue={rubValue}
+            max={6100000}
           />
         </div>
-        <div className='calccolumn'>1</div>
+        <div className='calccolumn'></div>
       </div>
     </section>
   );
@@ -147,7 +168,13 @@ function financial(x) {
   return Number.parseFloat(x).toFixed();
 }
 
-const CurrencyInput = ({ label, handler, currencyvalue }) => {
+const CurrencyInput = ({ label, handler, currencyvalue, max = 100 }) => {
+  const [value, setValue] = useState(0);
+
+  const getBackgroundSize = () => {
+    return { backgroundSize: `${(value * 100) / max}% 100%` };
+  };
+
   return (
     <div className='slider-input-root-4-0-5'>
       <div className='dc-input-6-1-2'>
@@ -162,7 +189,16 @@ const CurrencyInput = ({ label, handler, currencyvalue }) => {
         </div>
       </div>
       <div className='slider-root-4-0-5'>
-        <div className='slider-axis-4-0-5'></div>
+        <div className='slider-axis-4-0-5'>
+          <input
+            type='range'
+            min='0'
+            max={max}
+            onChange={handler}
+            style={getBackgroundSize()}
+            value={currencyvalue}
+          />
+        </div>
       </div>
     </div>
   );

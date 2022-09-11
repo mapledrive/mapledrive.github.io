@@ -161,10 +161,10 @@ label:last-child {
 
 .slider-root-4-0-5 {
   position: absolute;
-  bottom: -12px;
+  bottom: -9px;
   display: flex;
   width: 100%;
-  height: 24px;
+  height: 20px;
   min-width: 180px;
   box-sizing: border-box;
   outline: none;
@@ -193,9 +193,9 @@ label:last-child {
 .slider-axis-4-0-5 {
   height: 8px;
   position: absolute;
-  width: calc(100% + 20px);
+  width: 100%;
   top: 10px;
-  left: -10px;
+  left: 0px;
   box-sizing: border-box;
   outline: none;
   box-shadow: none;
@@ -203,7 +203,7 @@ label:last-child {
   line-height: 0;
 }
 
-.slider-axis-4-0-5:before {
+/* .slider-axis-4-0-5:before {
   border-radius: 0 0 5px 5px;
   content: '';
   position: absolute;
@@ -211,11 +211,11 @@ label:last-child {
   top: 0;
   width: calc(100% - 20px);
   height: 100%;
-  background-color: var(--dc-color-grey-200, #d3d4d4);
+
   transition: background-color 0.2s linear;
   font-size: 0;
   line-height: 0;
-}
+} */
 
 .slider-axis--fill-4-0-5 {
   width: 151px;
@@ -291,4 +291,86 @@ label:last-child {
   font-family: SeroPro, sans-serif;
   font-style: normal;
   font-stretch: normal;
+}
+
+/* Толщина палки и цвет справа, закругление, цвет слева */
+input[type='range'] {
+  -webkit-appearance: none;
+  height: 8px;
+  background: #bdbdbd;
+  /* border-radius: 5px; */
+  background-image: linear-gradient(#61456a, #61456a);
+  background-repeat: no-repeat;
+  margin: 0;
+  width: 100%;
+  /* а то короткая по умолчанию */
+  border-radius: 0 0 5px 5px;
+}
+
+/* сам кружок - его цвет высота ширина форма */
+/* transition непонятно для чего */
+/* на firefox есть бордюр его надо занулить */
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #61456a;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    bottom 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+input[type='range']::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #61456a;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    bottom 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+/* полоска через центр ползунка - разная в firefox и chrome */
+input[type='range']::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+input[type='range']::-moz-range-track {
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+/* pseudo-classes тень при наведении на шарик */
+input[type='range']::-webkit-slider-thumb:hover {
+  box-shadow: 0px 0px 0px 8px rgba(97, 69, 106, 0.16);
+}
+
+input[type='range']::-moz-range-thumb:hover {
+  box-shadow: 0px 0px 0px 8px rgba(97, 69, 106, 0.16);
+}
+
+/* тень при нажатии на шарик становится еще больше */
+input[type='range']::-webkit-slider-thumb:active {
+  box-shadow: 0px 0px 0px 14px rgba(97, 69, 106, 0.16);
+  transition: box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    bottom 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+input[type='range']::-moz-range-thumb:active {
+  box-shadow: 0px 0px 0px 14px rgba(97, 69, 106, 0.16);
+  transition: box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    bottom 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }

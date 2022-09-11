@@ -13,8 +13,6 @@ import 'features/currency/currency.css';
 // 3. The app uses latest conversion rates from API.
 // 4. The equivalents are calculated on the fly as you type
 
-const MAX = 100;
-
 function Currencypage() {
   const [cadValue, setCadValue] = useState(0);
   const [cadNetValue, setCadNetValue] = useState(0);
@@ -30,12 +28,6 @@ function Currencypage() {
   const [rubNetMonthValue, setRubNetMonthValue] = useState(0);
   const [result, setResult] = useState(1);
   const [unit, setUnit] = useState('BTC');
-
-  const [value, setValue] = useState(0);
-
-  const getBackgroundSize = () => {
-    return { backgroundSize: `${(value * 100) / MAX}% 100%` };
-  };
 
   const cad = useSelector(state => state.currency.cad);
   const usd = useSelector(state => state.currency.usd);
@@ -63,8 +55,7 @@ function Currencypage() {
     setRubNetValue(financial(rubr * 0.87));
     setRubMonthValue(financial(rubr / 12));
     setRubNetMonthValue(financial((rubr / 12) * 0.87));
-    let unit = cad.unit;
-    setUnit(unit);
+    setUnit(received + ' ' + cad.unit);
   };
 
   const handleUsd = e => {
@@ -83,8 +74,7 @@ function Currencypage() {
     setRubNetValue(financial(rubr * 0.87));
     setRubMonthValue(financial(rubr / 12));
     setRubNetMonthValue(financial((rubr / 12) * 0.87));
-    let unit = usd.unit;
-    setUnit(unit);
+    setUnit(received + ' ' + usd.unit);
   };
 
   const handleRub = e => {
@@ -103,16 +93,12 @@ function Currencypage() {
     setUsdNetValue(financial(usdr * 0.75));
     setUsdMonthValue(financial(usdr / 12));
     setUsdNetMonthValue(financial((usdr / 12) * 0.75));
-    let unit = rub.unit;
-    setUnit(unit);
+    setUnit(received + ' ' + rub.unit);
   };
 
   return (
     <section>
-      <div className='sectionTitle'>
-        Currency Converter
-        {` ${Number(result.toFixed()).toLocaleString('en')} ${unit}`}
-      </div>
+      <div className='sectionTitle'>Currency Converter {unit}</div>
       <div className='calcwrapper'>
         <div className='calccolumn'>
           <CurrencyInput
@@ -204,7 +190,7 @@ function financial(x) {
   return Number.parseFloat(x).toFixed();
 }
 
-const CurrencyInput = ({ label, handler, currencyvalue, max = 100 }) => {
+const CurrencyInput = ({ label, handler, currencyvalue, max }) => {
   const [value, setValue] = useState(0);
 
   const getBackgroundSize = () => {
@@ -238,4 +224,9 @@ const CurrencyInput = ({ label, handler, currencyvalue, max = 100 }) => {
       </div>
     </div>
   );
+};
+
+CurrencyInput.defaultProps = {
+  max: 100000,
+  handler: () => {},
 };

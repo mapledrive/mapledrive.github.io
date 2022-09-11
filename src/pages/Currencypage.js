@@ -72,12 +72,18 @@ function Currencypage() {
     setUsdValue(received);
     let cadr = financial((cad.value / usd.value) * received);
     let rubr = financial((rub.value / usd.value) * received);
+    setUsdNetValue(financial(received * 0.75));
+    setUsdMonthValue(financial(received / 12));
+    setUsdNetMonthValue(financial((received / 12) * 0.75));
+    setCadValue(cadr);
+    setCadNetValue(financial(cadr * 0.75));
+    setCadMonthValue(financial(cadr / 12));
+    setCadNetMonthValue(financial((cadr / 12) * 0.75));
+    setRubValue(rubr);
+    setRubNetValue(financial(rubr * 0.87));
     setRubMonthValue(financial(rubr / 12));
     setRubNetMonthValue(financial((rubr / 12) * 0.87));
     let unit = usd.unit;
-    setCadValue(cadr);
-    setRubValue(rubr);
-    setRubNetValue(financial(rubr * 0.87));
     setUnit(unit);
   };
 
@@ -86,9 +92,18 @@ function Currencypage() {
     setRubValue(received);
     let usdr = financial((usd.value / rub.value) * received);
     let cadr = financial((cad.value / rub.value) * received);
-    let unit = rub.unit;
-    setUsdValue(usdr);
+    setRubNetValue(financial(received * 0.87));
+    setRubMonthValue(financial(received / 12));
+    setRubNetMonthValue(financial((received / 12) * 0.87));
     setCadValue(cadr);
+    setCadNetValue(financial(cadr * 0.75));
+    setCadMonthValue(financial(cadr / 12));
+    setCadNetMonthValue(financial((cadr / 12) * 0.75));
+    setUsdValue(usdr);
+    setUsdNetValue(financial(usdr * 0.75));
+    setUsdMonthValue(financial(usdr / 12));
+    setUsdNetMonthValue(financial((usdr / 12) * 0.75));
+    let unit = rub.unit;
     setUnit(unit);
   };
 

@@ -17,7 +17,13 @@ const MAX = 100;
 
 function Currencypage() {
   const [cadValue, setCadValue] = useState(0);
+  const [cadNetValue, setCadNetValue] = useState(0);
+  const [cadMonthValue, setCadMonthValue] = useState(0);
+  const [cadNetMonthValue, setCadNetMonthValue] = useState(0);
   const [usdValue, setUsdValue] = useState(0);
+  const [usdNetValue, setUsdNetValue] = useState(0);
+  const [usdMonthValue, setUsdMonthValue] = useState(0);
+  const [usdNetMonthValue, setUsdNetMonthValue] = useState(0);
   const [rubValue, setRubValue] = useState(0);
   const [rubNetValue, setRubNetValue] = useState(0);
   const [rubMonthValue, setRubMonthValue] = useState(0);
@@ -46,12 +52,18 @@ function Currencypage() {
     setCadValue(received);
     let usdr = financial((usd.value / cad.value) * received);
     let rubr = financial((rub.value / cad.value) * received);
-    let unit = cad.unit;
+    setCadNetValue(financial(received * 0.7455)); // Ontario 80000-59640
+    setCadMonthValue(financial(received / 12));
+    setCadNetMonthValue(financial((received / 12) * 0.7455));
     setUsdValue(usdr);
+    setUsdNetValue(financial(usdr * 0.75));
+    setUsdMonthValue(financial(usdr / 12));
+    setUsdNetMonthValue(financial((usdr / 12) * 0.75));
     setRubValue(rubr);
     setRubNetValue(financial(rubr * 0.87));
     setRubMonthValue(financial(rubr / 12));
     setRubNetMonthValue(financial((rubr / 12) * 0.87));
+    let unit = cad.unit;
     setUnit(unit);
   };
 
@@ -97,19 +109,19 @@ function Currencypage() {
           <CurrencyInput
             label={'CAD year after tax'}
             handler={handleCad}
-            currencyvalue={cadValue}
+            currencyvalue={cadNetValue}
             max={100000}
           />
           <CurrencyInput
             label={'CAD month before tax'}
             handler={handleCad}
-            currencyvalue={cadValue}
+            currencyvalue={cadMonthValue}
             max={100000}
           />
           <CurrencyInput
             label={'CAD month after tax'}
             handler={handleCad}
-            currencyvalue={cadValue}
+            currencyvalue={cadNetMonthValue}
             max={100000}
           />
         </div>
@@ -123,19 +135,19 @@ function Currencypage() {
           <CurrencyInput
             label={'USD year after tax'}
             handler={handleUsd}
-            currencyvalue={usdValue}
+            currencyvalue={usdNetValue}
             max={100000}
           />
           <CurrencyInput
             label={'USD month before tax'}
             handler={handleUsd}
-            currencyvalue={usdValue}
+            currencyvalue={usdMonthValue}
             max={100000}
           />
           <CurrencyInput
             label={'USD month after tax'}
             handler={handleUsd}
-            currencyvalue={usdValue}
+            currencyvalue={usdNetMonthValue}
             max={100000}
           />
         </div>

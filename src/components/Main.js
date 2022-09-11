@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Homepage } from 'pages/Homepage';
 import { Servicepage } from 'pages/Servicepage';
 import { Deliverypage } from 'pages/Deliverypage';
-import { Contactspage } from 'pages/Contactspage';
+import { Sliderpage } from 'pages/Sliderpage';
 import { Currencypage } from 'pages/Currencypage';
 import { Informationpage } from 'pages/Informationpage';
 
@@ -14,7 +14,7 @@ export const Main = () => (
       <Route path='/home' element={<Homepage />} />
       <Route path='/service' element={<Servicepage />} />
       <Route path='/delivery' element={<Deliverypage />} />
-      <Route path='/contacts' element={<Contactspage />} />
+      <Route path='/slider' element={<Sliderpage />} />
       <Route path='/currency' element={<Currencypage />} />
       <Route path='/information' element={<Informationpage />} />
     </Routes>

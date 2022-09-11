@@ -31,9 +31,9 @@ export function Navigation() {
       <li className='cell'>
         <NavLink
           className={navData => (navData.isActive ? 'activeBlue' : 'v')}
-          to='/contacts'
+          to='/slider'
         >
-          Contacts
+          Slider
         </NavLink>
       </li>
       <li className='cell'>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrency } from 'features/currency/currencySlice';
+import { financial } from 'utils/financial';
 import 'features/currency/currency.css';
 
 // https://codesandbox.io/s/5tgjw?file=/src/App.js:380-3665
@@ -185,10 +186,6 @@ function Currencypage() {
 }
 
 export { Currencypage };
-
-function financial(x) {
-  return Number.parseFloat(x).toFixed();
-}
 
 const CurrencyInput = ({ label, handler, currencyvalue, max }) => {
   const getBackgroundSize = () => {

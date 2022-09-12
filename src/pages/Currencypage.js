@@ -191,10 +191,8 @@ function financial(x) {
 }
 
 const CurrencyInput = ({ label, handler, currencyvalue, max }) => {
-  const [value, setValue] = useState(0);
-
   const getBackgroundSize = () => {
-    return { backgroundSize: `${(value * 100) / max}% 100%` };
+    return { backgroundSize: `${(currencyvalue * 100) / max}% 100%` };
   };
 
   return (

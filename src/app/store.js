@@ -11,7 +11,7 @@ const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
   reducer: { news, authors, currency, sidebar },
   middleware: [sagaMiddleware],
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: true,
 });
 
 sagaMiddleware.run(rootSaga);

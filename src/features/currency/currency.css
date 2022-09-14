@@ -44,21 +44,20 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 3;
 }
 
-.imagen {
-  height: 50px;
+.gearwrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
   pointer-events: none;
+  animation: rotation infinite 10s linear;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .imagen {
-    animation: imagen infinite 10s linear;
-  }
-}
-
-@keyframes imagen {
+@keyframes rotation {
   from {
     transform: rotate(0deg);
   }

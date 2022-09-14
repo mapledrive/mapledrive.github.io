@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSidebarNews } from 'features/sidebar/sidebarSlice';
+import Spinner from 'components/Spinner';
 
 export const Aside = () => {
   const list = useSelector(state => state.sidebar.list);
@@ -14,7 +15,7 @@ export const Aside = () => {
   return (
     <aside>
       {isLoading ? (
-        <LoadingSpinner />
+        <Spinner />
       ) : (
         list.map((post, index) => (
           <Pack key={index} title={post.title} content={post.content} />
@@ -30,5 +31,3 @@ const Pack = ({ title, content }) => (
     <div className='sidebarContent'>{content}</div>
   </div>
 );
-
-const LoadingSpinner = () => 'Loading...';

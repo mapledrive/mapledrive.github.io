@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrency } from 'features/currency/currencySlice';
 import { financial } from 'utils/financial';
 import 'features/currency/currency.css';
-import gear from 'gear.svg';
+import Spinner from 'components/Spinner';
 
 const initialState = {
   rub: 0,
@@ -428,15 +428,9 @@ function Currencypage() {
               max={100000}
             />
           </div>
-
           <div className='calccolumn'></div>
         </div>
-        <div
-          style={{ display: isLoading ? 'flex' : 'none' }}
-          className='overlay'
-        >
-          <img className='imagen' src={gear} alt='logo' />
-        </div>
+        {isLoading && <Spinner />}
       </div>
     </section>
   );

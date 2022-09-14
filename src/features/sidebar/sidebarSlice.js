@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   list: [],
@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export const sidebarSlice = createSlice({
-  name: "sidebar",
+  name: 'sidebar',
   initialState,
   reducers: {
     fetchSidebarNews: (state, action) => ({
@@ -22,6 +22,7 @@ export const sidebarSlice = createSlice({
     },
     fetchSidebarNewsError: (state, action) => ({
       ...state,
+      list: action.payload,
       isLoading: false,
     }),
   },

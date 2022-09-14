@@ -10,7 +10,7 @@ function Informationpage() {
 
     async function fetchData() {
       const result = await axios(
-        'https://hn.algolia.com/api/v1/search?query=' + query,
+        'https://hn.algolia.com/api/v1/search?query=' + query
       );
       if (!ignore) setData(result.data);
     }
@@ -36,16 +36,3 @@ function Informationpage() {
 }
 
 export { Informationpage };
-
-// const Informationpage = () => {
-//   return (
-//     <section>
-//       <div className='sectionTitle'>Information page</div>
-//       <div className='sectionContent'>
-//         This is a Information page. The main page of the app
-//       </div>
-//     </section>
-//   );
-// };
-
-// export { Informationpage };

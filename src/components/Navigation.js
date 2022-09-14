@@ -8,6 +8,7 @@ export function Navigation() {
         <NavLink
           className={navData => (navData.isActive ? 'activeBlue' : 'v')}
           to='/'
+          end
         >
           Home
         </NavLink>

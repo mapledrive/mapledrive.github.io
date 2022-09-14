@@ -1,13 +1,70 @@
-.calcwrapper {
+.holder {
+  position: relative;
   width: 100%;
-  height: 300px;
-  margin-bottom: 20px;
+  height: 318px;
+  box-sizing: border-box;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calcwrapper {
+  position: relative;
+  width: 100%;
+  height: 318px;
   box-sizing: border-box;
   color: #e3e3e1;
   padding: 0;
   background-color: whitesmoke;
   display: flex;
   justify-content: space-between;
+  opacity: 1;
+}
+
+.loadingcalcwrapper {
+  position: relative;
+  width: 100%;
+  height: 318px;
+  box-sizing: border-box;
+  color: #e3e3e1;
+  padding: 0;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.5;
+}
+
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.imagen {
+  height: 50px;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .imagen {
+    animation: imagen infinite 10s linear;
+  }
+}
+
+@keyframes imagen {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .calccolumn {
@@ -58,7 +115,11 @@ label:last-child {
   font-size: 0;
   line-height: 0;
   font-family: SeroPro, sans-serif;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
+}
+
+.slider-input-root-4-0-5:not(:last-child) {
+  margin-bottom: 25px;
 }
 
 .slider-input-root-4-0-5:before {

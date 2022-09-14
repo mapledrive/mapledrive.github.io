@@ -10,7 +10,7 @@ function* fetchCurrency(action) {
   try {
     const data = action.payload;
     const response = yield call(fetchCurrencyApi, data);
-    yield delay(200);
+    yield delay(2000);
     yield put(fetchCurrencySuccess(response));
   } catch (error) {
     yield put(fetchCurrencyError());

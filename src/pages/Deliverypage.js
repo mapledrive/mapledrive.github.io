@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNews } from 'features/news/newsSlice';
+import Spinner from 'components/Spinner';
 
 const Deliverypage = () => {
   const list = useSelector(state => state.news.list);
@@ -13,23 +14,21 @@ const Deliverypage = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <section>
       {isLoading ? (
-        <LoadingSpinner />
+        <Spinner />
       ) : (
-        <section>
+        <>
           <div className='sectionTitle'>{list[0]?.title}</div>
           <div className='sectionContent'>{list[0]?.content}</div>
           <div className='sectionTitle'>{list[1]?.title}</div>
           <div className='sectionContent'>{list[1]?.content}</div>
           <div className='sectionTitle'>{list[2]?.title}</div>
           <div className='sectionContent'>{list[2]?.content}</div>
-        </section>
+        </>
       )}
-    </>
+    </section>
   );
 };
 
 export { Deliverypage };
-
-const LoadingSpinner = () => 'Loading...';

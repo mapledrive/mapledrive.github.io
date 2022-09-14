@@ -137,9 +137,11 @@ main {
   box-sizing: border-box;
   font-size: 22px;
   font-family: fjalla;
+  min-height: 800px;
 }
 
 section {
+  position: relative;
   width: 100%;
   min-height: 50px;
   margin-bottom: 20px;

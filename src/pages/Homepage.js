@@ -1,9 +1,12 @@
 const Homepage = () => {
   return (
     <section>
-      <div className='sectionTitle'>Welcome to my website!</div>
+      <div className='sectionTitle'>Hello, this is Sait Sharifullin</div>
       <div className='sectionContent'>
-        Here you will find interesting features that I developed
+        I am working as a Frontend Developer. I love to code and make new web
+        experience for the people.
+        <br />
+        That is my personal website, where you will find some of my works
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 {
-  "name": "grid",
-  "version": "0.1.0",
+  "name": "mapledrive",
+  "version": "2.1.2",
   "private": true,
   "homepage": "https://mapledrive.github.io/",
   "dependencies": {

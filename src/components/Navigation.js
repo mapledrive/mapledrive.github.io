@@ -6,7 +6,7 @@ export function Navigation() {
     <ul className='navigation'>
       <li className='cell'>
         <NavLink
-          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
+          className={navData => (navData.isActive ? 'activeBlue' : 'baseColor')}
           to='/'
           end
         >
@@ -15,7 +15,7 @@ export function Navigation() {
       </li>
       <li className='cell'>
         <NavLink
-          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
+          className={navData => (navData.isActive ? 'activeBlue' : 'baseColor')}
           to='/service'
         >
           Service
@@ -23,7 +23,7 @@ export function Navigation() {
       </li>
       <li className='cell'>
         <NavLink
-          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
+          className={navData => (navData.isActive ? 'activeBlue' : 'baseColor')}
           to='/delivery'
         >
           Delivery
@@ -31,7 +31,7 @@ export function Navigation() {
       </li>
       <li className='cell'>
         <NavLink
-          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
+          className={navData => (navData.isActive ? 'activeBlue' : 'baseColor')}
           to='/slider'
         >
           Slider
@@ -39,7 +39,7 @@ export function Navigation() {
       </li>
       <li className='cell'>
         <NavLink
-          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
+          className={navData => (navData.isActive ? 'activeBlue' : 'baseColor')}
           to='/currency'
         >
           Currency
@@ -47,7 +47,7 @@ export function Navigation() {
       </li>
       <li className='cell'>
         <NavLink
-          className={navData => (navData.isActive ? 'activeBlue' : 'v')}
+          className={navData => (navData.isActive ? 'activeBlue' : 'baseColor')}
           to='/information'
         >
           Information

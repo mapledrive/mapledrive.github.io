@@ -330,106 +330,106 @@ function Currencypage() {
     }
   };
 
-  var className = isLoading ? 'loadingcalcwrapper' : 'calcwrapper';
-
   return (
     <section>
-      <div className='sectionTitle'>Currency Converter</div>
+      <div className='sectionTitle'>Income Tax Converter</div>
       <div className='holder'>
-        <div className={className}>
-          <div className='calccolumn'>
-            <CurrencyInput
-              id={1}
-              label={'RUB year before tax'}
-              handler={handleGeneric}
-              currencyvalue={state.rub}
-              max={6000000}
-            />
-            <CurrencyInput
-              id={2}
-              label={'RUB year after tax'}
-              handler={handleGeneric}
-              currencyvalue={state.rubtaxed}
-              max={6000000}
-            />
-            <CurrencyInput
-              id={3}
-              label={'RUB month before tax'}
-              handler={handleGeneric}
-              currencyvalue={state.rubmonth}
-              max={6000000}
-            />
-            <CurrencyInput
-              id={4}
-              label={'RUB month after tax'}
-              handler={handleGeneric}
-              currencyvalue={state.rubmonthtaxed}
-              max={6000000}
-            />
+        <div className={isLoading ? 'loadingcalcwrapper' : 'calcwrapper'}>
+          <div className='sectionContent'>
+            Find out how much your salary is after tax in Russia
           </div>
-
-          <div className='calccolumn'>
-            <CurrencyInput
-              id={5}
-              label={'USD year before tax'}
-              handler={handleGeneric}
-              currencyvalue={state.usd}
-              max={100000}
-            />
-            <CurrencyInput
-              id={6}
-              label={'USD year after tax'}
-              handler={handleGeneric}
-              currencyvalue={state.usdtaxed}
-              max={100000}
-            />
-            <CurrencyInput
-              id={7}
-              label={'USD month before tax'}
-              handler={handleGeneric}
-              currencyvalue={state.usdmonth}
-              max={100000}
-            />
-            <CurrencyInput
-              id={8}
-              label={'USD month after tax'}
-              handler={handleGeneric}
-              currencyvalue={state.usdmonthtaxed}
-              max={100000}
-            />
+          <CurrencyInput
+            id={1}
+            label={'RUB year before tax'}
+            handler={handleGeneric}
+            currencyvalue={state.rub}
+            max={6000000}
+          />
+          <CurrencyInput
+            id={2}
+            label={'RUB year after tax'}
+            handler={handleGeneric}
+            currencyvalue={state.rubtaxed}
+            max={6000000}
+          />
+          <CurrencyInput
+            id={3}
+            label={'RUB month before tax'}
+            handler={handleGeneric}
+            currencyvalue={state.rubmonth}
+            max={6000000}
+          />
+          <CurrencyInput
+            id={4}
+            label={'RUB month after tax'}
+            handler={handleGeneric}
+            currencyvalue={state.rubmonthtaxed}
+            max={6000000}
+          />
+          <div className='sectionContent'>
+            Find out how much your salary is in USA
           </div>
-          <div className='calccolumn'>
-            <CurrencyInput
-              id={9}
-              label={'CAD year before tax'}
-              handler={handleGeneric}
-              currencyvalue={state.cad}
-              max={100000}
-            />
-            <CurrencyInput
-              id={10}
-              label={'CAD year after tax'}
-              handler={handleGeneric}
-              currencyvalue={state.cadtaxed}
-              max={100000}
-            />
-            <CurrencyInput
-              id={11}
-              label={'CAD month before tax'}
-              handler={handleGeneric}
-              currencyvalue={state.cadmonth}
-              max={100000}
-            />
-            <CurrencyInput
-              id={12}
-              label={'CAD month after tax'}
-              handler={handleGeneric}
-              currencyvalue={state.cadmonthtaxed}
-              max={100000}
-            />
+          <CurrencyInput
+            id={5}
+            label={'USD year before tax'}
+            handler={handleGeneric}
+            currencyvalue={state.usd}
+            max={100000}
+          />
+          <CurrencyInput
+            id={6}
+            label={'USD year after tax'}
+            handler={handleGeneric}
+            currencyvalue={state.usdtaxed}
+            max={100000}
+          />
+          <CurrencyInput
+            id={7}
+            label={'USD month before tax'}
+            handler={handleGeneric}
+            currencyvalue={state.usdmonth}
+            max={100000}
+          />
+          <CurrencyInput
+            id={8}
+            label={'USD month after tax'}
+            handler={handleGeneric}
+            currencyvalue={state.usdmonthtaxed}
+            max={100000}
+          />
+          <div className='sectionContent'>
+            Find out how much your salary is in Canada
           </div>
-          <div className='calccolumn'></div>
+          <CurrencyInput
+            id={9}
+            label={'CAD year before tax'}
+            handler={handleGeneric}
+            currencyvalue={state.cad}
+            max={100000}
+          />
+          <CurrencyInput
+            id={10}
+            label={'CAD year after tax'}
+            handler={handleGeneric}
+            currencyvalue={state.cadtaxed}
+            max={100000}
+          />
+          <CurrencyInput
+            id={11}
+            label={'CAD month before tax'}
+            handler={handleGeneric}
+            currencyvalue={state.cadmonth}
+            max={100000}
+          />
+          <CurrencyInput
+            id={12}
+            label={'CAD month after tax'}
+            handler={handleGeneric}
+            currencyvalue={state.cadmonthtaxed}
+            max={100000}
+          />
         </div>
+        <div className='sidecalc'></div>
         {isLoading && <Spinner />}
       </div>
     </section>

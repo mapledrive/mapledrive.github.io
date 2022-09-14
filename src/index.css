@@ -179,6 +179,7 @@ aside {
   margin: 0;
   padding: 30px;
   box-sizing: border-box;
+  min-height: 800px;
 }
 
 @media (max-width: 800px) {

@@ -16,9 +16,9 @@ export function Navigation() {
       <li className='cell'>
         <NavLink
           className={navData => (navData.isActive ? 'activeBlue' : 'baseColor')}
-          to='/service'
+          to='/pdf'
         >
-          Service
+          Pdf
         </NavLink>
       </li>
       <li className='cell'>

@@ -2,7 +2,7 @@
   "name": "mapledrive",
   "version": "2.1.2",
   "private": true,
-  "homepage": "https://mapledrive.github.io/",
+  "homepage": "https://mapledrive.github.io",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.26.0",

@@ -1,127 +1,34 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-let initialState = [
-  {
-    title: "",
-    link: "",
-    pubDate: "",
-    author: "",
-    content: "",
-    contentSnippet: "",
-    id: "",
-    isoDate: "",
-  },
-  {
-    title: "",
-    link: "",
-    pubDate: "",
-    author: "",
-    content: "",
-    contentSnippet: "",
-    id: "",
-    isoDate: "",
-  },
-  {
-    title: "",
-    link: "",
-    pubDate: "",
-    author: "",
-    content: "",
-    contentSnippet: "",
-    id: "",
-    isoDate: "",
-  },
-  {
-    title: "",
-    link: "",
-    pubDate: "",
-    author: "",
-    content: "",
-    contentSnippet: "",
-    id: "",
-    isoDate: "",
-  },
-  {
-    title: "",
-    link: "",
-    pubDate: "",
-    author: "",
-    content: "",
-    contentSnippet: "",
-    id: "",
-    isoDate: "",
-  },
-  {
-    title: "",
-    link: "",
-    pubDate: "",
-    author: "",
-    content: "",
-    contentSnippet: "",
-    id: "",
-    isoDate: "",
-  },
-  {
-    title: "",
-    link: "",
-    pubDate: "",
-    author: "",
-    content: "",
-    contentSnippet: "",
-    id: "",
-    isoDate: "",
-  },
-  {
-    title: "",
-    link: "",
-    pubDate: "",
-    author: "",
-    content: "",
-    contentSnippet: "",
-    id: "",
-    isoDate: "",
-  },
-  {
-    title: "",
-    link: "",
-    pubDate: "",
-    author: "",
-    content: "",
-    contentSnippet: "",
-    id: "",
-    isoDate: "",
-  },
-  {
-    title: "",
-    link: "",
-    pubDate: "",
-    author: "",
-    content: "",
-    contentSnippet: "",
-    id: "",
-    isoDate: "",
-  },
-];
+const initialState = {
+  list: [],
+  isLoading: false,
+};
 
-export const authorsSlice = createSlice({
-  name: "authors",
+export const githubSlice = createSlice({
+  name: 'github',
   initialState,
   reducers: {
-    fetchAuthors: (state, action) => ({
+    fetchGithub: (state, action) => ({
       ...state,
+      isLoading: true,
     }),
-    fetchAuthorsSuccess: (state, action) => {
+    fetchGithubSuccess: (state, action) => {
       return {
         ...state,
+        list: action.payload,
+        isLoading: false,
       };
     },
-    fetchAuthorsError: (state, action) => ({
+    fetchGithubError: (state, action) => ({
       ...state,
+      list: action.payload,
+      isLoading: false,
     }),
   },
 });
 
-export const { fetchAuthors, fetchAuthorsSuccess, fetchAuthorsError } =
-  authorsSlice.actions;
+export const { fetchGithub, fetchGithubSuccess, fetchGithubError } =
+  githubSlice.actions;
 
-export default authorsSlice.reducer;
+export default githubSlice.reducer;

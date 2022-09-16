@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGithub } from 'features/github/githubSlice';
@@ -52,9 +52,6 @@ const Githubpage = () => {
     dispatch(fetchGithub()); // Safe to add dispatch to the dependencies array
   }, [dispatch]);
 
-  const handleChange = e => {
-    ///
-  };
   return (
     <div>
       {isLoading ? (

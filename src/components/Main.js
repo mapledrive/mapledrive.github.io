@@ -7,6 +7,7 @@ import { Sliderpage } from 'pages/Sliderpage';
 import { Currencypage } from 'pages/Currencypage';
 import { Converterpage } from 'pages/Converterpage';
 import { Informationpage } from 'pages/Informationpage';
+import { Githubpage } from 'pages/Githubpage';
 
 export const Main = () => (
   <main>
@@ -18,6 +19,7 @@ export const Main = () => (
       <Route path='/currency' element={<Currencypage />} />
       <Route path='/information' element={<Informationpage />} />
       <Route path='/converter' element={<Converterpage />} />
+      <Route path='/github' element={<Githubpage />} />
       <Route path='*' element={<Homepage />} />
     </Routes>
   </main>

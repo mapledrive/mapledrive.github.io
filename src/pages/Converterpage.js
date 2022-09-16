@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { financial } from 'utils/financial';
 import {
   StyledForm,
   StyledNumeric,
@@ -21,21 +22,21 @@ function reducer(state, action) {
       return {
         ...state,
         rub: value,
-        usd: value / USDRUB,
-        eur: value / EURRUB,
+        usd: financial(value / USDRUB),
+        eur: financial(value / EURRUB),
       };
     case 'onusdchange':
       return {
         ...state,
         rub: value * USDRUB,
         usd: value,
-        eur: (value / USDRUB) * EURRUB,
+        eur: financial((value / USDRUB) * EURRUB),
       };
     case 'oneurchange':
       return {
         ...state,
         rub: value * EURRUB,
-        usd: (value / EURRUB) * USDRUB,
+        usd: financial((value / EURRUB) * USDRUB),
         eur: value,
       };
     default:

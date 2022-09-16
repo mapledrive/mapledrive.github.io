@@ -6,7 +6,7 @@ function Recently() {
 }
 
 export const routes = [
-  { path: '/recently', component: Recently, name: 'Recently Added Fonts' },
+  { path: '/converter', component: Recently, name: 'Converter' },
   { path: '/most', component: Recently, name: 'Most Downloaded Fonts' },
   { path: '/almost', component: Recently, name: 'Almost Free Fonts' },
   { path: '/languages', component: Recently, name: 'Languages' },

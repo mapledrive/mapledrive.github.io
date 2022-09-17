@@ -42,17 +42,3 @@
   font-size: 0;
   line-height: 0;
 }
-
-.slider-circle-inner-4-0-5 {
-  position: absolute;
-  border-radius: 50%;
-  box-shadow: 0 1px 4px rgba(36, 38, 41, 0.24);
-  transition: 0.2s;
-  top: 5px;
-  bottom: 5px;
-  left: 5px;
-  right: 5px;
-  background-color: #fff;
-  font-size: 0;
-  line-height: 0;
-}

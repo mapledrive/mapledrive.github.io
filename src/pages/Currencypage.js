@@ -551,6 +551,17 @@ export const SliderRoot405 = styled.div`
 `;
 
 export const LowerInput = styled.input.attrs({ type: 'range' })`
+  // Толщина палки и цвет справа, закругление, цвет слева
+  -webkit-appearance: none;
+  height: 8px;
+  background: #bdbdbd;
+  background-image: linear-gradient(#61456a, #61456a);
+  background-repeat: no-repeat;
+  margin: 0;
+  width: 100%;
+  //  а то короткая по умолчанию
+  border-radius: 0 0 5px 5px;
+
   /* сам кружок - его цвет высота ширина форма */
   /* transition непонятно для чего */
   /* на firefox есть бордюр его надо занулить */

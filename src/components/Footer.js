@@ -14,7 +14,7 @@ function Recently() {
 export const routes = [
   { path: '/converter', component: Recently, name: 'Converter' },
   { path: '/slider', component: Recently, name: 'Slider' },
-  { path: '/almost', component: Recently, name: 'Almost Free Fonts' },
+  { path: '/usecallbackpage', component: Recently, name: 'useCallback' },
   { path: '/languages', component: Recently, name: 'Languages' },
   { path: '/tags', component: Recently, name: 'Tags' },
 ];

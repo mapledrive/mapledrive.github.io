@@ -20,7 +20,7 @@ See CRA standard project scripts.
 
 ### `npm run analyze`
 
-Builds the app for production to the `build` folder.
+Builds the app for production to the `build` folder.\
 Run the analyze script to analyze the bundle with source-map-explorer.
 
 ## Documentation

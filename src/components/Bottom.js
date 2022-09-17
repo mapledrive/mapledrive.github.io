@@ -1,5 +1,6 @@
 import React from 'react';
+import { StyledBottom } from 'style';
 
 export const Bottom = () => (
-  <div className='bottom'>©2019-2022 Maple Drive. All rights reserved.</div>
+  <StyledBottom>©2019-2022 Maple Drive. All rights reserved.</StyledBottom>
 );

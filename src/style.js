@@ -142,3 +142,23 @@ export const StyledSection = styled.section`
   color: #e3e3e1;
   padding: 0;
 `;
+
+/**
+ * Bottom
+ */
+
+export const StyledBottom = styled.div`
+  grid-column: 1 / span 2;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #3d2d43;
+  font-size: 14px;
+  font-family: pt_sansregular;
+  padding: 0px 30px;
+  color: #fff;
+  height: 50px;
+  @media (max-width: 800px) {
+    padding: 20px;
+  }
+`;

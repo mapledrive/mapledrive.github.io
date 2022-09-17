@@ -131,6 +131,11 @@ export const StyledMain = styled.main`
   font-size: 22px;
   font-family: fjalla;
   min-height: 800px;
+
+  @media (max-width: 800px) {
+    grid-column: 1 / span 2;
+    padding: 20px;
+  }
 `;
 
 export const StyledSection = styled.section`
@@ -268,9 +273,14 @@ export const StyledAside = styled.aside`
   padding: 30px;
   box-sizing: border-box;
   min-height: 800px;
+
+  @media (max-width: 800px) {
+    grid-column: 1 / span 2;
+    padding: 20px;
+  }
 `;
 
-export const SectionTitle = styled.aside`
+export const SectionTitle = styled.div`
   color: #aaa;
   line-height: 50px;
   padding: 0px;
@@ -280,9 +290,13 @@ export const SectionTitle = styled.aside`
   font-weight: 900;
   font-style: normal;
   white-space: wrap;
+  @media (max-width: 800px) {
+    line-height: 30px;
+    font-size: 25px;
+  }
 `;
 
-export const SectionContent = styled.aside`
+export const SectionContent = styled.div`
   color: #222;
   padding: 12px 0px;
   box-sizing: border-box;

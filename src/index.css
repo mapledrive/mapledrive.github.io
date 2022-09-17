@@ -1,16 +1,1 @@
-@media (max-width: 800px) {
-  main {
-    grid-column: 1 / span 2;
-    padding: 20px;
-  }
 
-  aside {
-    grid-column: 1 / span 2;
-    padding: 20px;
-  }
-
-  .sectionTitle {
-    line-height: 30px;
-    font-size: 25px;
-  }
-}

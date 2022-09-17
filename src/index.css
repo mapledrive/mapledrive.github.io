@@ -88,14 +88,6 @@ aside {
  * Footer part of website
  */
 
-.footerwidget {
-  flex: 25%;
-  max-width: 25%;
-  margin: 0;
-  padding: 30px;
-  box-sizing: border-box;
-}
-
 .footertitle {
   font-size: 22px;
   font-family: fjalla, Charcoal, sans-serif;

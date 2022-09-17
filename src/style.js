@@ -176,3 +176,11 @@ export const Rooter = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const FooterWidget = styled.div`
+  flex: 25%;
+  max-width: 25%;
+  margin: 0;
+  padding: 30px;
+  box-sizing: border-box;
+`;

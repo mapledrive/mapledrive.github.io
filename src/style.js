@@ -269,3 +269,26 @@ export const StyledAside = styled.aside`
   box-sizing: border-box;
   min-height: 800px;
 `;
+
+export const SectionTitle = styled.aside`
+  color: #aaa;
+  line-height: 50px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: fjalla;
+  font-size: 45px;
+  font-weight: 900;
+  font-style: normal;
+  white-space: wrap;
+`;
+
+export const SectionContent = styled.aside`
+  color: #222;
+  padding: 12px 0px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-family: Roboto;
+  line-height: 22px;
+  font-weight: 400;
+  font-style: normal;
+`;

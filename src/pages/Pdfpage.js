@@ -1,13 +1,13 @@
-import { StyledSection } from 'style';
+import { StyledSection, SectionTitle, SectionContent } from 'style';
 
 const Pdfpage = () => {
   return (
     <StyledSection>
-      <div className='sectionTitle'>PDF Reader</div>
-      <div className='sectionContent'>
+      <SectionTitle>PDF Reader</SectionTitle>
+      <SectionContent>
         Drag and Drop interface for creating pdf files on the fly in the browser
         <br />
-      </div>
+      </SectionContent>
     </StyledSection>
   );
 };
@@ -39,8 +39,8 @@ export { Pdfpage };
 
 //   return (
 //     <StyledSection>
-//       <div className='sectionTitle'>{postId[0].title}</div>
-//       <div className='sectionContent'>{postId[0].content}</div>
+//       <SectionTitle>{postId[0].title}</SectionTitle>
+//       <SectionContent>{postId[0].content}</SectionContent>
 //     </StyledSection>
 //   );
 // };

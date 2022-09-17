@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNews } from 'features/news/newsSlice';
-import { StyledSection } from 'style';
+import { StyledSection, SectionTitle, SectionContent } from 'style';
 import Spinner from 'components/Spinner';
 
 const Newspage = () => {
@@ -20,22 +20,21 @@ const Newspage = () => {
         <Spinner />
       ) : (
         <>
-          <div
+          <SectionTitle
             style={{
               textAlign: 'center',
               color: '#5a5a5a',
               marginBottom: '30px',
             }}
-            className='sectionTitle'
           >
             Technology news
-          </div>
-          <div className='sectionTitle'>{list[0]?.title}</div>
-          <div className='sectionContent'>{list[0]?.content}</div>
-          <div className='sectionTitle'>{list[1]?.title}</div>
-          <div className='sectionContent'>{list[1]?.content}</div>
-          <div className='sectionTitle'>{list[2]?.title}</div>
-          <div className='sectionContent'>{list[2]?.content}</div>
+          </SectionTitle>
+          <SectionTitle>{list[0]?.title}</SectionTitle>
+          <SectionContent>{list[0]?.content}</SectionContent>
+          <SectionTitle>{list[1]?.title}</SectionTitle>
+          <SectionContent>{list[1]?.content}</SectionContent>
+          <SectionTitle>{list[2]?.title}</SectionTitle>
+          <SectionContent>{list[2]?.content}</SectionContent>
         </>
       )}
     </StyledSection>

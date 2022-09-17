@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyledSection } from 'style';
+import { StyledSection, SectionContent } from 'style';
 import axios from 'axios';
 
 function Informationpage() {
@@ -27,9 +27,9 @@ function Informationpage() {
       <input value={query} onChange={e => setQuery(e.target.value)} />
       <ul>
         {data.hits.map(item => (
-          <li className='sectionContent' key={item.objectID}>
+          <SectionContent key={item.objectID}>
             <a href={item.url}>{item.title}</a>
-          </li>
+          </SectionContent>
         ))}
       </ul>
     </StyledSection>

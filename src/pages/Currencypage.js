@@ -4,7 +4,7 @@ import { fetchCurrency } from 'features/currency/currencySlice';
 import { financial } from 'utils/financial';
 import 'features/currency/currency.css';
 import Spinner from 'components/Spinner';
-import { StyledSection } from 'style';
+import { StyledSection, SectionTitle, SectionContent } from 'style';
 
 const initialState = {
   rub: 0,
@@ -333,12 +333,12 @@ function Currencypage() {
 
   return (
     <StyledSection>
-      <div className='sectionTitle'>Income Tax Converter</div>
+      <SectionTitle>Income Tax Converter</SectionTitle>
       <div className='holder'>
         <div className={isLoading ? 'loadingcalcwrapper' : 'calcwrapper'}>
-          <div className='sectionContent'>
+          <SectionContent>
             Find out how much your salary is after tax in Russia
-          </div>
+          </SectionContent>
           <CurrencyInput
             id={1}
             label={'RUB year before tax'}
@@ -367,9 +367,9 @@ function Currencypage() {
             currencyvalue={state.rubmonthtaxed}
             max={6000000}
           />
-          <div className='sectionContent'>
+          <SectionContent>
             Find out how much your salary is in USA
-          </div>
+          </SectionContent>
           <CurrencyInput
             id={5}
             label={'USD year before tax'}
@@ -398,9 +398,9 @@ function Currencypage() {
             currencyvalue={state.usdmonthtaxed}
             max={100000}
           />
-          <div className='sectionContent'>
+          <SectionContent>
             Find out how much your salary is in Canada
-          </div>
+          </SectionContent>
           <CurrencyInput
             id={9}
             label={'CAD year before tax'}

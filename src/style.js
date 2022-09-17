@@ -236,3 +236,24 @@ export const SidebarWidget = styled.div`
   color: #e3e3e1;
   padding: 0;
 `;
+
+export const SidebarTitle = styled.div`
+  background-color: #999999;
+  color: #fff;
+  height: 40px;
+  line-height: 40px;
+  padding: 0px 7px;
+  box-sizing: border-box;
+  font-size: 22px;
+  font-family: fjalla;
+  overflow: hidden;
+`;
+
+export const SidebarContent = styled.div`
+  color: #222;
+  padding: 12px 0px;
+  box-sizing: border-box;
+  font-size: 13px;
+  font-family: Roboto;
+  line-height: 20px;
+`;

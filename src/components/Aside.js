@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSidebarNews } from 'features/sidebar/sidebarSlice';
 import Spinner from 'components/Spinner';
-import { SidebarWidget } from 'style';
+import { SidebarWidget, SidebarTitle, SidebarContent } from 'style';
 
 export const Aside = () => {
   const list = useSelector(state => state.sidebar.list);
@@ -28,7 +28,7 @@ export const Aside = () => {
 
 const Pack = ({ title, content }) => (
   <SidebarWidget>
-    <div className='sidebarTitle'>{title}</div>
-    <div className='sidebarContent'>{content}</div>
+    <SidebarTitle>{title}</SidebarTitle>
+    <SidebarContent>{content}</SidebarContent>
   </SidebarWidget>
 );

@@ -333,3 +333,15 @@ export const StyledCalcWrapper = styled.div`
   flex-direction: column;
   opacity: ${props => (props.isLoading ? 0.4 : 1)};
 `;
+
+export const Overlay = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+`;

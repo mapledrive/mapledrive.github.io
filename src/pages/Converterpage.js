@@ -82,12 +82,7 @@ const Input = ({ data, onChange }) => {
       <StyledLabel htmlFor={data.id}>
         <b>{data.name}</b>
       </StyledLabel>
-      <StyledNumeric
-        className='numeric'
-        id={data.id}
-        onChange={onChange}
-        value={data.currency}
-      />
+      <StyledNumeric id={data.id} onChange={onChange} value={data.currency} />
     </>
   );
 };

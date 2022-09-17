@@ -459,3 +459,164 @@ export const SliderInputRoot405 = styled.div`
     font-stretch: normal;
   }
 `;
+
+export const DcInput612 = styled.div`
+  width: 100%;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dc-color-white, #fff);
+  border: 1px solid var(--dc-color-grey-200, #d3d4d4);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  outline: none;
+  box-shadow: none;
+  height: 52px !important;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+`;
+
+export const DcInputInputContainer612 = styled.div`
+  height: 52px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: inherit;
+`;
+
+export const Input612 = styled.input`
+  padding-top: 29px;
+  width: 100%;
+  height: calc(100% - 2px);
+  margin: 1px 0;
+  padding: 29px 11px 12px 11px;
+  border: 0;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  text-overflow: ellipsis;
+  background-color: transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: var(--dc-color-afro, #242629);
+  letter-spacing: normal;
+  text-decoration: none;
+  text-transform: none;
+  text-shadow: none;
+  text-indent: 0;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0;
+`;
+
+export const SliderRoot405 = styled.div`
+  position: absolute;
+  bottom: -9px;
+  display: flex;
+  width: 100%;
+  height: 20px;
+  min-width: 180px;
+  box-sizing: border-box;
+  outline: none;
+  box-shadow: none;
+`;
+
+export const LowerInput = styled.input.attrs({ type: 'range' })`
+  // Толщина палки и цвет справа, закругление, цвет слева
+  -webkit-appearance: none;
+  height: 8px;
+  background: #bdbdbd;
+  background-image: linear-gradient(#61456a, #61456a);
+  background-repeat: no-repeat;
+  margin: 0;
+  width: 100%;
+  //  а то короткая по умолчанию
+  border-radius: 0 0 5px 5px;
+
+  /* сам кружок - его цвет высота ширина форма */
+  /* transition непонятно для чего */
+  /* на firefox есть бордюр его надо занулить */
+  ::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #61456a;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      bottom 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+
+  ::-moz-range-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #61456a;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      bottom 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+
+  /* полоска через центр ползунка - разная в firefox и chrome */
+  ::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
+  ::-moz-range-track {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
+  /* pseudo-classes тень при наведении на шарик */
+  ::-webkit-slider-thumb:hover {
+    box-shadow: 0px 0px 0px 8px rgba(97, 69, 106, 0.16);
+  }
+
+  ::-moz-range-thumb:hover {
+    box-shadow: 0px 0px 0px 8px rgba(97, 69, 106, 0.16);
+  }
+
+  /* тень при нажатии на шарик становится еще больше */
+  ::-webkit-slider-thumb:active {
+    box-shadow: 0px 0px 0px 14px rgba(97, 69, 106, 0.16);
+    transition: box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      bottom 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+
+  ::-moz-range-thumb:active {
+    box-shadow: 0px 0px 0px 14px rgba(97, 69, 106, 0.16);
+    transition: box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      bottom 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+`;
+
+export const SliderAxis405 = styled.div`
+  height: 8px;
+  position: absolute;
+  width: 100%;
+  top: 10px;
+  left: 0px;
+  box-sizing: border-box;
+  outline: none;
+  box-shadow: none;
+  font-size: 0;
+  line-height: 0;
+`;

@@ -1,32 +1,4 @@
 /**
- * Header
- */
-
-header {
-  grid-column: 1 / span 2;
-  background-color: #61456a;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  box-sizing: border-box;
-  padding: 20px;
-}
-
-.logotype {
-  height: 150px;
-}
-
-@media (max-width: 800px) {
-  header {
-    padding: 20px;
-  }
-
-  .logotype {
-    height: 50px;
-  }
-}
-
-/**
  * Navigation
  */
 

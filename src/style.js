@@ -37,3 +37,27 @@ export const Wrapper = styled.div`
     padding: 10px;
   }
 `;
+
+/**
+ * Header
+ */
+export const StyledHeader = styled.div`
+  grid-column: 1 / span 2;
+  background-color: #61456a;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 20px;
+
+  @media (max-width: 800px) {
+    padding: 20px;
+  }
+`;
+
+export const Logo = styled.img`
+  height: 150px;
+  @media (max-width: 800px) {
+    height: 50px;
+  }
+`;

@@ -183,6 +183,11 @@ export const FooterWidget = styled.div`
   margin: 0;
   padding: 30px;
   box-sizing: border-box;
+  @media (max-width: 800px) {
+    flex: 100%;
+    max-width: 100%;
+    padding: 20px;
+  }
 `;
 
 export const FooterTitle = styled.div`
@@ -196,15 +201,25 @@ export const FooterTitle = styled.div`
   margin-top: 0px;
 `;
 
-// export const FooterItemNew = styled.div`
-//   font-family: Roboto;
-//   font-size: 14px;
-//   line-height: 20px;
-//   color: #222;
-// `;
-
 export const FooterUl = styled.ul`
   list-style-type: none;
   padding: 0px;
   margin: 0px;
+`;
+
+export const StyledFooterNavLink = styled(NavLink)`
+  font-size: 14px;
+  font-family: pt_sansregular;
+  line-height: 21px;
+  color: #fff;
+  padding: 0 0 5px;
+  text-decoration: none;
+
+  &:hover {
+    color: #999999;
+  }
+
+  &[class*='active'] {
+    color: #32a7e0;
+  }
 `;

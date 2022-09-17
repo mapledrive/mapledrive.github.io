@@ -1,6 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Rooter, FooterWidget, FooterTitle, FooterUl } from 'style';
+import {
+  Rooter,
+  FooterWidget,
+  FooterTitle,
+  FooterUl,
+  StyledFooterNavLink,
+} from 'style';
 
 function Recently() {
   return <div>yes</div>;
@@ -44,17 +49,9 @@ export const routes4 = [
 ];
 
 const FooterList = ({ routes }) => {
-  const listItems = routes.map(({ path, component, name }, key) => (
+  const listItems = routes.map(({ path, name }, key) => (
     <li key={key}>
-      <NavLink
-        onClick={() => {}}
-        // className='footerli'
-        className={navData => (navData.isActive ? 'footerli' : 'footerli')}
-        // activeStyle={{ outline: 'none', color: '#32a7e0' }}
-        to={path}
-      >
-        {name}
-      </NavLink>
+      <StyledFooterNavLink to={path}>{name}</StyledFooterNavLink>
     </li>
   ));
   return <FooterUl>{listItems}</FooterUl>;

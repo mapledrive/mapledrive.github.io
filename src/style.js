@@ -364,3 +364,13 @@ export const GearWrap = styled.div`
     }
   }
 `;
+
+export const SideCalc = styled.div`
+  display: flex;
+  flex: 1; /* grow */
+  height: 100%;
+  width: 100%;
+  @media (max-width: 800px) {
+    display: none;
+  }
+`;

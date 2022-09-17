@@ -10,6 +10,7 @@ import {
   SectionContent,
   Holder,
   StyledCalcWrapper,
+  SideCalc,
 } from 'style';
 import styled from 'styled-components';
 
@@ -437,7 +438,7 @@ function Currencypage() {
             max={100000}
           />
         </StyledCalcWrapper>
-        <div className='sidecalc'></div>
+        <SideCalc></SideCalc>
         {isLoading && <Spinner />}
       </Holder>
     </StyledSection>

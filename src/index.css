@@ -88,17 +88,6 @@ aside {
  * Footer part of website
  */
 
-.footertitle {
-  font-size: 22px;
-  font-family: fjalla, Charcoal, sans-serif;
-  font-weight: normal;
-  line-height: 30px;
-  text-transform: uppercase;
-  color: #a27eaf;
-  margin-bottom: 8px;
-  margin-top: 0px;
-}
-
 .footeritemnew {
   font-family: Roboto;
   font-size: 14px;

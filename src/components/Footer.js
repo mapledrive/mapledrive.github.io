@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Rooter, FooterWidget } from 'style';
+import { Rooter, FooterWidget, FooterTitle } from 'style';
 
 function Recently() {
   return <div>yes</div>;
@@ -63,19 +63,19 @@ const FooterList = ({ routes }) => {
 export const Footer = () => (
   <Rooter>
     <FooterWidget>
-      <div className='footertitle'>Font Lists</div>
+      <FooterTitle>Font Lists</FooterTitle>
       <FooterList routes={routes} />
     </FooterWidget>
     <FooterWidget>
-      <div className='footertitle'>Commercial Favorites</div>
+      <FooterTitle>Commercial Favorites</FooterTitle>
       <FooterList routes={routes2} />
     </FooterWidget>
     <FooterWidget>
-      <div className='footertitle'>Need Help?</div>
+      <FooterTitle>Need Help?</FooterTitle>
       <FooterList routes={routes3} />
     </FooterWidget>
     <FooterWidget>
-      <div className='footertitle'>Connect</div>
+      <FooterTitle>Connect</FooterTitle>
       <FooterList routes={routes4} />
     </FooterWidget>
   </Rooter>

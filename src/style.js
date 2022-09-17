@@ -184,3 +184,14 @@ export const FooterWidget = styled.div`
   padding: 30px;
   box-sizing: border-box;
 `;
+
+export const FooterTitle = styled.div`
+  font-size: 22px;
+  font-family: fjalla, Charcoal, sans-serif;
+  font-weight: normal;
+  line-height: 30px;
+  text-transform: uppercase;
+  color: #a27eaf;
+  margin-bottom: 8px;
+  margin-top: 0px;
+`;

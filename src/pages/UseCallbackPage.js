@@ -115,7 +115,7 @@ export const App = styled.div`
   font-family: 'roboto', sans-serif;
   text-align: center;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 

@@ -4,7 +4,13 @@ import { fetchCurrency } from 'features/currency/currencySlice';
 import { financial } from 'utils/financial';
 import 'features/currency/currency.css';
 import Spinner from 'components/Spinner';
-import { StyledSection, SectionTitle, SectionContent } from 'style';
+import {
+  StyledSection,
+  SectionTitle,
+  SectionContent,
+  Holder,
+  StyledCalcWrapper,
+} from 'style';
 import styled from 'styled-components';
 
 const initialState = {
@@ -336,7 +342,7 @@ function Currencypage() {
     <StyledSection>
       <SectionTitle>Income Tax Converter</SectionTitle>
       <Holder>
-        <div className={isLoading ? 'loadingcalcwrapper' : 'calcwrapper'}>
+        <StyledCalcWrapper isLoading={isLoading}>
           <SectionContent>
             Find out how much your salary is after tax in Russia
           </SectionContent>
@@ -430,7 +436,7 @@ function Currencypage() {
             currencyvalue={state.cadmonthtaxed}
             max={100000}
           />
-        </div>
+        </StyledCalcWrapper>
         <div className='sidecalc'></div>
         {isLoading && <Spinner />}
       </Holder>
@@ -480,15 +486,3 @@ CurrencyInput.defaultProps = {
   max: 100000,
   handler: () => {},
 };
-
-export const Holder = styled.div`
-  position: relative;
-  width: 100%;
-  height: 1065px;
-  box-sizing: border-box;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-`;

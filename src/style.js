@@ -306,3 +306,30 @@ export const SidebarContent = styled.div`
   font-family: Roboto;
   line-height: 20px;
 `;
+
+export const Holder = styled.div`
+  position: relative;
+  width: 100%;
+  height: 1065px;
+  box-sizing: border-box;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+
+export const StyledCalcWrapper = styled.div`
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  height: 1065px;
+  box-sizing: border-box;
+  color: #e3e3e1;
+  padding: 0;
+  background-color: whitesmoke;
+  display: flex;
+  flex: 0 2 700px; /* do not grow, do not shrink, start at 700px */
+  flex-direction: column;
+  opacity: ${props => (props.isLoading ? 0.4 : 1)};
+`;

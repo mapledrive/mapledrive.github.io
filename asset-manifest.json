@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.13c00da3.css",
-    "main.js": "/static/js/main.1ba47e4f.js",
+    "main.css": "/static/css/main.c1098429.css",
+    "main.js": "/static/js/main.6f4624f2.js",
     "static/media/logo.png": "/static/media/logo.11b58aa4bfb08fe8cfb5.png",
     "static/media/PTS55F-webfont.woff": "/static/media/PTS55F-webfont.05ff52cc891195932dc3.woff",
     "static/media/roboto-v18-latin-regular.woff": "/static/media/roboto-v18-latin-regular.fbebe70817c0f48eb4ee.woff",
     "static/media/fjalla-one-v4-latin-regular.woff": "/static/media/fjalla-one-v4-latin-regular.fb7d7e8c5230f156c2f9.woff",
     "index.html": "/index.html",
-    "main.13c00da3.css.map": "/static/css/main.13c00da3.css.map",
-    "main.1ba47e4f.js.map": "/static/js/main.1ba47e4f.js.map"
+    "main.c1098429.css.map": "/static/css/main.c1098429.css.map",
+    "main.6f4624f2.js.map": "/static/js/main.6f4624f2.js.map"
   },
   "entrypoints": [
-    "static/css/main.13c00da3.css",
-    "static/js/main.1ba47e4f.js"
+    "static/css/main.c1098429.css",
+    "static/js/main.6f4624f2.js"
   ]
 }

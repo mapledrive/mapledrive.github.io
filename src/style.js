@@ -148,6 +148,50 @@ export const StyledSection = styled.section`
   padding: 0;
 `;
 
+export const SectionTitle = styled.div`
+  color: #aaa;
+  line-height: 50px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: fjalla;
+  font-size: 45px;
+  font-weight: 900;
+  font-style: normal;
+  white-space: wrap;
+  @media (max-width: 800px) {
+    line-height: 30px;
+    font-size: 25px;
+  }
+`;
+
+export const SectionContent = styled.div`
+  color: #222;
+  padding: 12px 0px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-family: Roboto;
+  line-height: 22px;
+  font-weight: 400;
+  font-style: normal;
+`;
+
+export const StyledAside = styled.aside`
+  position: relative;
+  background-color: #e4e4e2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 30px;
+  box-sizing: border-box;
+  min-height: 800px;
+
+  @media (max-width: 800px) {
+    grid-column: 1 / span 2;
+    padding: 20px;
+  }
+`;
+
 /**
  * Bottom
  */
@@ -261,48 +305,4 @@ export const SidebarContent = styled.div`
   font-size: 13px;
   font-family: Roboto;
   line-height: 20px;
-`;
-
-export const StyledAside = styled.aside`
-  position: relative;
-  background-color: #e4e4e2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  padding: 30px;
-  box-sizing: border-box;
-  min-height: 800px;
-
-  @media (max-width: 800px) {
-    grid-column: 1 / span 2;
-    padding: 20px;
-  }
-`;
-
-export const SectionTitle = styled.div`
-  color: #aaa;
-  line-height: 50px;
-  padding: 0px;
-  box-sizing: border-box;
-  font-family: fjalla;
-  font-size: 45px;
-  font-weight: 900;
-  font-style: normal;
-  white-space: wrap;
-  @media (max-width: 800px) {
-    line-height: 30px;
-    font-size: 25px;
-  }
-`;
-
-export const SectionContent = styled.div`
-  color: #222;
-  padding: 12px 0px;
-  box-sizing: border-box;
-  font-size: 15px;
-  font-family: Roboto;
-  line-height: 22px;
-  font-weight: 400;
-  font-style: normal;
 `;

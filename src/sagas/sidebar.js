@@ -12,7 +12,7 @@ function* fetchSidebarNews(action) {
     yield delay(2000);
     yield put(fetchSidebarNewsSuccess(response));
   } catch (error) {
-    yield delay(2000);
+    // yield delay(2000);
     yield put(fetchSidebarNewsError(response_failure));
   }
 }

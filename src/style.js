@@ -345,3 +345,22 @@ export const Overlay = styled.div`
   left: 0;
   z-index: 3;
 `;
+
+export const GearWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  pointer-events: none;
+  animation: rotation infinite 10s linear;
+
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;

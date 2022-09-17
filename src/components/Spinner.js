@@ -1,11 +1,11 @@
 import Gear from 'Gear';
-import { Overlay } from 'style';
+import { Overlay, GearWrap } from 'style';
 
 const LoadingSpinner = () => (
   <Overlay>
-    <div className='gearwrap'>
+    <GearWrap>
       <Gear />
-    </div>
+    </GearWrap>
   </Overlay>
 );
 

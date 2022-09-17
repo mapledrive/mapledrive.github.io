@@ -5,17 +5,21 @@ import { Footer } from 'components/Footer';
 import { Bottom } from 'components/Bottom';
 import { Main } from 'components/Main';
 import { Aside } from 'components/Aside';
+import { GlobalStyle, Wrapper } from 'style';
 
 const App = () => {
   return (
-    <div className='wrapper'>
-      <Header />
-      <Navigation />
-      <Main />
-      <Aside />
-      <Footer />
-      <Bottom />
-    </div>
+    <>
+      <GlobalStyle />
+      <Wrapper>
+        <Header />
+        <Navigation />
+        <Main />
+        <Aside />
+        <Footer />
+        <Bottom />
+      </Wrapper>
+    </>
   );
 };
 

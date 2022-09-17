@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGithub } from 'features/github/githubSlice';
 import Spinner from 'components/Spinner';
-import 'pages/bootstrap.css';
+//import 'pages/bootstrap.css';
 
 // https://codesandbox.io/s/279iz
 

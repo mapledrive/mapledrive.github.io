@@ -195,3 +195,16 @@ export const FooterTitle = styled.div`
   margin-bottom: 8px;
   margin-top: 0px;
 `;
+
+// export const FooterItemNew = styled.div`
+//   font-family: Roboto;
+//   font-size: 14px;
+//   line-height: 20px;
+//   color: #222;
+// `;
+
+export const FooterUl = styled.ul`
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+`;

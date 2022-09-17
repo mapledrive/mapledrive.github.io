@@ -88,19 +88,6 @@ aside {
  * Footer part of website
  */
 
-.footeritemnew {
-  font-family: Roboto;
-  font-size: 14px;
-  line-height: 20px;
-  color: #222;
-}
-
-.footerul {
-  list-style-type: none;
-  padding: 0px;
-  margin: 0px;
-}
-
 .footerli {
   font-size: 14px;
   font-family: pt_sansregular;

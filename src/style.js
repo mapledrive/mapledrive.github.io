@@ -257,3 +257,15 @@ export const SidebarContent = styled.div`
   font-family: Roboto;
   line-height: 20px;
 `;
+
+export const StyledAside = styled.aside`
+  position: relative;
+  background-color: #e4e4e2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 30px;
+  box-sizing: border-box;
+  min-height: 800px;
+`;

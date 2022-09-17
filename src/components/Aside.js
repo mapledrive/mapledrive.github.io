@@ -3,7 +3,12 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSidebarNews } from 'features/sidebar/sidebarSlice';
 import Spinner from 'components/Spinner';
-import { SidebarWidget, SidebarTitle, SidebarContent } from 'style';
+import {
+  SidebarWidget,
+  SidebarTitle,
+  SidebarContent,
+  StyledAside,
+} from 'style';
 
 export const Aside = () => {
   const list = useSelector(state => state.sidebar.list);
@@ -14,7 +19,7 @@ export const Aside = () => {
     dispatch(fetchSidebarNews()); // Safe to add dispatch to the dependencies array
   }, [dispatch]);
   return (
-    <aside>
+    <StyledAside>
       {isLoading ? (
         <Spinner />
       ) : (
@@ -22,7 +27,7 @@ export const Aside = () => {
           <Pack key={index} title={post.title} content={post.content} />
         ))
       )}
-    </aside>
+    </StyledAside>
   );
 };
 

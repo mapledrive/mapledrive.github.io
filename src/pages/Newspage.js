@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNews } from 'features/news/newsSlice';
+import { StyledSection } from 'style';
 import Spinner from 'components/Spinner';
 
 const Newspage = () => {
@@ -14,7 +15,7 @@ const Newspage = () => {
   }, [dispatch]);
 
   return (
-    <section>
+    <StyledSection>
       {isLoading ? (
         <Spinner />
       ) : (
@@ -37,7 +38,7 @@ const Newspage = () => {
           <div className='sectionContent'>{list[2]?.content}</div>
         </>
       )}
-    </section>
+    </StyledSection>
   );
 };
 

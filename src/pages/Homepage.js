@@ -1,6 +1,8 @@
+import { StyledSection } from 'style';
+
 const Homepage = () => {
   return (
-    <section>
+    <StyledSection>
       <div className='sectionTitle'>Hello, this is Sait Sharifullin</div>
       <div className='sectionContent'>
         I am working as a Frontend Developer. I love to code and make new web
@@ -8,7 +10,7 @@ const Homepage = () => {
         <br />
         That is my personal website, where you will find some of my works
       </div>
-    </section>
+    </StyledSection>
   );
 };
 

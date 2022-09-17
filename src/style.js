@@ -115,3 +115,30 @@ export const StyledNavLink = styled(NavLink)`
     outline: none;
   }
 `;
+
+/**
+ * Main part
+ */
+
+export const StyledMain = styled.main`
+  background: #fff;
+  color: #222;
+  display: flex;
+  margin: 0;
+  padding: 30px;
+  line-height: 40px;
+  box-sizing: border-box;
+  font-size: 22px;
+  font-family: fjalla;
+  min-height: 800px;
+`;
+
+export const StyledSection = styled.section`
+  position: relative;
+  width: 100%;
+  min-height: 50px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  color: #e3e3e1;
+  padding: 0;
+`;

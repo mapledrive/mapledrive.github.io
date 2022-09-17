@@ -4,6 +4,7 @@ import { fetchCurrency } from 'features/currency/currencySlice';
 import { financial } from 'utils/financial';
 import 'features/currency/currency.css';
 import Spinner from 'components/Spinner';
+import { StyledSection } from 'style';
 
 const initialState = {
   rub: 0,
@@ -331,7 +332,7 @@ function Currencypage() {
   };
 
   return (
-    <section>
+    <StyledSection>
       <div className='sectionTitle'>Income Tax Converter</div>
       <div className='holder'>
         <div className={isLoading ? 'loadingcalcwrapper' : 'calcwrapper'}>
@@ -432,7 +433,7 @@ function Currencypage() {
         <div className='sidecalc'></div>
         {isLoading && <Spinner />}
       </div>
-    </section>
+    </StyledSection>
   );
 }
 

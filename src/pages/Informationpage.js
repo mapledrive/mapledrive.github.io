@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { StyledSection } from 'style';
 import axios from 'axios';
 
 function Informationpage() {
@@ -22,7 +23,7 @@ function Informationpage() {
   }, [query]);
 
   return (
-    <section>
+    <StyledSection>
       <input value={query} onChange={e => setQuery(e.target.value)} />
       <ul>
         {data.hits.map(item => (
@@ -31,7 +32,7 @@ function Informationpage() {
           </li>
         ))}
       </ul>
-    </section>
+    </StyledSection>
   );
 }
 

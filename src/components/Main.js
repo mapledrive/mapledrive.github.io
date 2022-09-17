@@ -8,9 +8,10 @@ import { Currencypage } from 'pages/Currencypage';
 import { Converterpage } from 'pages/Converterpage';
 import { Informationpage } from 'pages/Informationpage';
 import { Githubpage } from 'pages/Githubpage';
+import { StyledMain } from 'style';
 
 export const Main = () => (
-  <main>
+  <StyledMain>
     <Routes>
       <Route path='/' element={<Homepage />} />
       <Route path='/pdf' element={<Pdfpage />} />
@@ -22,5 +23,5 @@ export const Main = () => (
       <Route path='/github' element={<Githubpage />} />
       <Route path='*' element={<Homepage />} />
     </Routes>
-  </main>
+  </StyledMain>
 );

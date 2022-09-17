@@ -458,12 +458,7 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
     <SliderInputRoot405>
       <DcInput612>
         <DcInputInputContainer612>
-          <DcInput__Input612
-            id={id}
-            step='1'
-            onChange={handler}
-            value={currencyvalue}
-          />
+          <Input612 id={id} step='1' onChange={handler} value={currencyvalue} />
           <StyledLabel>{label}</StyledLabel>
         </DcInputInputContainer612>
       </DcInput612>
@@ -517,7 +512,7 @@ export const DcInputInputContainer612 = styled.div`
   box-sizing: inherit;
 `;
 
-export const DcInput__Input612 = styled.input`
+export const Input612 = styled.input`
   padding-top: 29px;
   width: 100%;
   height: calc(100% - 2px);

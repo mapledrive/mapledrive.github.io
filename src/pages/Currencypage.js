@@ -463,7 +463,7 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
         </DcInputInputContainer612>
       </DcInput612>
       <SliderRoot405>
-        <div className='slider-axis-4-0-5'>
+        <SliderAxis405>
           <LowerInput
             id={id}
             type='range'
@@ -473,7 +473,7 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
             style={getBackgroundSize()}
             value={currencyvalue}
           />
-        </div>
+        </SliderAxis405>
       </SliderRoot405>
     </SliderInputRoot405>
   );
@@ -630,4 +630,17 @@ export const LowerInput = styled.input.attrs({ type: 'range' })`
       left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
       bottom 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
+`;
+
+export const SliderAxis405 = styled.div`
+  height: 8px;
+  position: absolute;
+  width: 100%;
+  top: 10px;
+  left: 0px;
+  box-sizing: border-box;
+  outline: none;
+  box-shadow: none;
+  font-size: 0;
+  line-height: 0;
 `;

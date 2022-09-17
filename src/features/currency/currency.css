@@ -101,34 +101,3 @@ input[type='range'] {
   /* а то короткая по умолчанию */
   border-radius: 0 0 5px 5px;
 }
-
-/* сам кружок - его цвет высота ширина форма */
-/* transition непонятно для чего */
-/* на firefox есть бордюр его надо занулить */
-input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background: #61456a;
-  cursor: pointer;
-  border: 0;
-  outline: 0;
-  transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    bottom 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-}
-
-input[type='range']::-moz-range-thumb {
-  -webkit-appearance: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background: #61456a;
-  cursor: pointer;
-  border: 0;
-  outline: 0;
-  transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    bottom 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-}

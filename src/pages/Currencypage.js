@@ -551,6 +551,37 @@ export const SliderRoot405 = styled.div`
 `;
 
 export const LowerInput = styled.input.attrs({ type: 'range' })`
+  /* сам кружок - его цвет высота ширина форма */
+  /* transition непонятно для чего */
+  /* на firefox есть бордюр его надо занулить */
+  ::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #61456a;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      bottom 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+
+  ::-moz-range-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #61456a;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      bottom 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+
   /* полоска через центр ползунка - разная в firefox и chrome */
   ::-webkit-slider-runnable-track {
     -webkit-appearance: none;

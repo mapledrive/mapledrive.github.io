@@ -223,3 +223,16 @@ export const StyledFooterNavLink = styled(NavLink)`
     color: #32a7e0;
   }
 `;
+
+/**
+ * Sidebar
+ */
+
+export const SidebarWidget = styled.div`
+  width: 100%;
+  min-height: 150px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  color: #e3e3e1;
+  padding: 0;
+`;

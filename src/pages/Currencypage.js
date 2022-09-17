@@ -467,7 +467,7 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
           <StyledLabel>{label}</StyledLabel>
         </DcInputInputContainer612>
       </DcInput612>
-      <div className='slider-root-4-0-5'>
+      <SliderRoot405>
         <div className='slider-axis-4-0-5'>
           <input
             id={id}
@@ -479,7 +479,7 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
             value={currencyvalue}
           />
         </div>
-      </div>
+      </SliderRoot405>
     </SliderInputRoot405>
   );
 };
@@ -541,4 +541,16 @@ export const DcInput__Input612 = styled.input`
   font-style: normal;
   font-stretch: normal;
   line-height: 0;
+`;
+
+export const SliderRoot405 = styled.div`
+  position: absolute;
+  bottom: -9px;
+  display: flex;
+  width: 100%;
+  height: 20px;
+  min-width: 180px;
+  box-sizing: border-box;
+  outline: none;
+  box-shadow: none;
 `;

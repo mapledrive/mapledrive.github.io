@@ -15,7 +15,7 @@ export function Navigation() {
         <StyledNavLink to='/news'>News</StyledNavLink>
       </Cell>
       <Cell>
-        <StyledNavLink to='/slider'>Slider</StyledNavLink>
+        <StyledNavLink to='/github'>Github</StyledNavLink>
       </Cell>
       <Cell>
         <StyledNavLink to='/currency'>Currency</StyledNavLink>

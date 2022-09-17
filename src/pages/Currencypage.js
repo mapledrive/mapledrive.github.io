@@ -464,7 +464,7 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
       </DcInput612>
       <SliderRoot405>
         <div className='slider-axis-4-0-5'>
-          <input
+          <LowerInput
             id={id}
             type='range'
             min='0'
@@ -548,4 +548,30 @@ export const SliderRoot405 = styled.div`
   box-sizing: border-box;
   outline: none;
   box-shadow: none;
+`;
+
+export const LowerInput = styled.input.attrs({ type: 'range' })`
+  /* pseudo-classes тень при наведении на шарик */
+  ::-webkit-slider-thumb:hover {
+    box-shadow: 0px 0px 0px 8px rgba(97, 69, 106, 0.16);
+  }
+
+  ::-moz-range-thumb:hover {
+    box-shadow: 0px 0px 0px 8px rgba(97, 69, 106, 0.16);
+  }
+
+  /* тень при нажатии на шарик становится еще больше */
+  ::-webkit-slider-thumb:active {
+    box-shadow: 0px 0px 0px 14px rgba(97, 69, 106, 0.16);
+    transition: box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      bottom 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+
+  ::-moz-range-thumb:active {
+    box-shadow: 0px 0px 0px 14px rgba(97, 69, 106, 0.16);
+    transition: box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+      bottom 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
 `;

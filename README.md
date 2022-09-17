@@ -16,11 +16,13 @@ Before that I need to push new commits to the master.
 Starts the development server.\
 See CRA standard project scripts.
 
-### Documentation
+### `npm run build`
 
-The Maple Drive project is available at **https://mapledrive.github.io**.
-
-### `npm run build npm run analyze`
+### `npm run analyze`
 
 Builds the app for production to the `build` folder.
 Run the analyze script to analyze the bundle with source-map-explorer.
+
+## Documentation
+
+The Maple Drive project is available at **https://mapledrive.github.io**.

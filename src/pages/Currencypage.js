@@ -11,6 +11,7 @@ import {
   Holder,
   StyledCalcWrapper,
   SideCalc,
+  StyledLabel,
 } from 'style';
 import styled from 'styled-components';
 
@@ -463,7 +464,7 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
             onChange={handler}
             value={currencyvalue}
           />
-          <label className='dc-input__label-6-1-2'>{label}</label>
+          <StyledLabel>{label}</StyledLabel>
         </div>
       </div>
       <div className='slider-root-4-0-5'>

@@ -327,7 +327,6 @@ export const StyledCalcWrapper = styled.div`
   box-sizing: border-box;
   color: #e3e3e1;
   padding: 0;
-  background-color: whitesmoke;
   display: flex;
   flex: 0 2 700px; /* do not grow, do not shrink, start at 700px */
   flex-direction: column;
@@ -372,5 +371,39 @@ export const SideCalc = styled.div`
   width: 100%;
   @media (max-width: 800px) {
     display: none;
+  }
+`;
+
+export const StyledLabel = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  transform: scale(0.75) translateY(-16px);
+  position: absolute;
+  top: 16.5px;
+  left: 12px;
+  width: calc(100% - 24px);
+  font-size: 16px;
+  color: var(--dc-color-grey-640, #737476);
+  line-height: 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transform-origin: left;
+  transition: 0.2s;
+  white-space: nowrap;
+  pointer-events: none;
+  text-align: left;
+  letter-spacing: normal;
+  text-decoration: none;
+  text-transform: none;
+  text-shadow: none;
+  text-indent: 0;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-stretch: normal;
+
+  &:last-child {
+    grid-column: 2;
   }
 `;

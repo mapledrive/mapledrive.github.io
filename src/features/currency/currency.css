@@ -29,16 +29,3 @@
   font-size: 0;
   line-height: 0;
 }
-
-.slider-axis--fill-4-0-5 {
-  width: 151px;
-  border-radius: 0 0 5px 5px;
-  position: absolute;
-  height: 100%;
-  top: 0;
-  left: 10px;
-  background-color: var(--dc-color-green, #53b374);
-  transition: 0.2s;
-  font-size: 0;
-  line-height: 0;
-}

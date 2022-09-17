@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Rooter } from 'style';
 
 function Recently() {
   return <div>yes</div>;
@@ -60,7 +61,7 @@ const FooterList = ({ routes }) => {
 };
 
 export const Footer = () => (
-  <div className='rooter'>
+  <Rooter>
     <div className='footerwidget'>
       <div className='footertitle'>Font Lists</div>
       <FooterList routes={routes} />
@@ -77,5 +78,5 @@ export const Footer = () => (
       <div className='footertitle'>Connect</div>
       <FooterList routes={routes4} />
     </div>
-  </div>
+  </Rooter>
 );

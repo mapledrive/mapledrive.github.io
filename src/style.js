@@ -162,3 +162,17 @@ export const StyledBottom = styled.div`
     padding: 20px;
   }
 `;
+
+/**
+ * Footer part of website
+ */
+
+export const Rooter = styled.div`
+  grid-column: 1 / span 2;
+  background-color: #3d2d43;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+`;

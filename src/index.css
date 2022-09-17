@@ -88,16 +88,6 @@ aside {
  * Footer part of website
  */
 
-.rooter {
-  grid-column: 1 / span 2;
-  background-color: #3d2d43;
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  align-items: center;
-  justify-content: center;
-}
-
 .footerwidget {
   flex: 25%;
   max-width: 25%;

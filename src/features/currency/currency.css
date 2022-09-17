@@ -43,22 +43,6 @@
   line-height: 0;
 }
 
-.slider-circle-4-0-5 {
-  transform: translateX(151px);
-  top: -1px;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  left: -15px;
-  width: 30px;
-  height: 30px;
-  box-sizing: border-box;
-  outline: none;
-  box-shadow: none;
-  font-size: 0;
-  line-height: 0;
-}
-
 .slider-circle-inner-4-0-5 {
   position: absolute;
   border-radius: 50%;

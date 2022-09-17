@@ -12,6 +12,7 @@ import {
   StyledCalcWrapper,
   SideCalc,
   StyledLabel,
+  SliderInputRoot405,
 } from 'style';
 import styled from 'styled-components';
 
@@ -454,7 +455,7 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
   };
 
   return (
-    <div className='slider-input-root-4-0-5'>
+    <SliderInputRoot405>
       <div className='dc-input-6-1-2'>
         <div className='dc-input__input-container-6-1-2'>
           <input
@@ -480,7 +481,7 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
           />
         </div>
       </div>
-    </div>
+    </SliderInputRoot405>
   );
 };
 

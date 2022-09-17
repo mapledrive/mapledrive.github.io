@@ -1,38 +1,3 @@
-.slider-input-root-4-0-5 {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  min-width: 180px;
-  width: 100%;
-  box-sizing: inherit;
-  font-size: 0;
-  line-height: 0;
-  font-family: Roboto, sans-serif;
-  margin-bottom: 25px;
-}
-
-.slider-input-root-4-0-5:not(:last-child) {
-  margin-bottom: 25px;
-}
-
-.slider-input-root-4-0-5:before {
-  content: attr(data-left-hint);
-  left: 0;
-  position: absolute;
-  bottom: -30px;
-  font-size: 14px;
-  line-height: 20px;
-  height: 20px;
-  letter-spacing: normal;
-  text-decoration: none;
-  text-transform: none;
-  text-shadow: none;
-  text-indent: 0;
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-  font-stretch: normal;
-}
-
 .dc-input-6-1-2 {
   width: 100%;
   position: relative;
@@ -187,24 +152,6 @@
   transition: 0.2s;
   font-size: 0;
   line-height: 0;
-}
-
-.slider-input-root-4-0-5::after {
-  content: attr(data-right-hint);
-  right: 0;
-  position: absolute;
-  bottom: -30px;
-  font-size: 14px;
-  line-height: 20px;
-  height: 20px;
-  letter-spacing: normal;
-  text-decoration: none;
-  text-transform: none;
-  text-shadow: none;
-  text-indent: 0;
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-  font-stretch: normal;
 }
 
 /* Толщина палки и цвет справа, закругление, цвет слева */

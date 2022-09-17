@@ -407,3 +407,55 @@ export const StyledLabel = styled.label`
     grid-column: 2;
   }
 `;
+
+export const SliderInputRoot405 = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-width: 180px;
+  width: 100%;
+  box-sizing: inherit;
+  font-size: 0;
+  line-height: 0;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 25px;
+  &:not(:last-child) {
+    margin-bottom: 25px;
+  }
+
+  &:before {
+    content: attr(data-left-hint);
+    left: 0;
+    position: absolute;
+    bottom: -30px;
+    font-size: 14px;
+    line-height: 20px;
+    height: 20px;
+    letter-spacing: normal;
+    text-decoration: none;
+    text-transform: none;
+    text-shadow: none;
+    text-indent: 0;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-stretch: normal;
+  }
+
+  &:after {
+    content: attr(data-right-hint);
+    right: 0;
+    position: absolute;
+    bottom: -30px;
+    font-size: 14px;
+    line-height: 20px;
+    height: 20px;
+    letter-spacing: normal;
+    text-decoration: none;
+    text-transform: none;
+    text-shadow: none;
+    text-indent: 0;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-stretch: normal;
+  }
+`;

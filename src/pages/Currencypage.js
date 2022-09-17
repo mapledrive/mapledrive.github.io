@@ -5,6 +5,7 @@ import { financial } from 'utils/financial';
 import 'features/currency/currency.css';
 import Spinner from 'components/Spinner';
 import { StyledSection, SectionTitle, SectionContent } from 'style';
+import styled from 'styled-components';
 
 const initialState = {
   rub: 0,
@@ -334,7 +335,7 @@ function Currencypage() {
   return (
     <StyledSection>
       <SectionTitle>Income Tax Converter</SectionTitle>
-      <div className='holder'>
+      <Holder>
         <div className={isLoading ? 'loadingcalcwrapper' : 'calcwrapper'}>
           <SectionContent>
             Find out how much your salary is after tax in Russia
@@ -432,7 +433,7 @@ function Currencypage() {
         </div>
         <div className='sidecalc'></div>
         {isLoading && <Spinner />}
-      </div>
+      </Holder>
     </StyledSection>
   );
 }
@@ -479,3 +480,15 @@ CurrencyInput.defaultProps = {
   max: 100000,
   handler: () => {},
 };
+
+export const Holder = styled.div`
+  position: relative;
+  width: 100%;
+  height: 1065px;
+  box-sizing: border-box;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;

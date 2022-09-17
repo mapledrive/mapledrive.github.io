@@ -458,8 +458,7 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
     <SliderInputRoot405>
       <DcInput612>
         <DcInputInputContainer612>
-          <input
-            className='dc-input__input-6-1-2'
+          <DcInput__Input612
             id={id}
             step='1'
             onChange={handler}
@@ -516,4 +515,30 @@ export const DcInputInputContainer612 = styled.div`
   flex-direction: column;
   width: 100%;
   box-sizing: inherit;
+`;
+
+export const DcInput__Input612 = styled.input`
+  padding-top: 29px;
+  width: 100%;
+  height: calc(100% - 2px);
+  margin: 1px 0;
+  padding: 29px 11px 12px 11px;
+  border: 0;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  text-overflow: ellipsis;
+  background-color: transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: var(--dc-color-afro, #242629);
+  letter-spacing: normal;
+  text-decoration: none;
+  text-transform: none;
+  text-shadow: none;
+  text-indent: 0;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0;
 `;

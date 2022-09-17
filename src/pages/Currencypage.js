@@ -551,6 +551,20 @@ export const SliderRoot405 = styled.div`
 `;
 
 export const LowerInput = styled.input.attrs({ type: 'range' })`
+  /* полоска через центр ползунка - разная в firefox и chrome */
+  ::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
+  ::-moz-range-track {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
   /* pseudo-classes тень при наведении на шарик */
   ::-webkit-slider-thumb:hover {
     box-shadow: 0px 0px 0px 8px rgba(97, 69, 106, 0.16);

@@ -9,6 +9,7 @@ import { Converterpage } from 'pages/Converterpage';
 import { Informationpage } from 'pages/Informationpage';
 import { Githubpage } from 'pages/Githubpage';
 import { UseCallbackPage } from 'pages/UseCallbackPage';
+import { Parsepage } from 'pages/Parsepage';
 import { StyledMain } from 'style';
 
 export const Main = () => (
@@ -23,6 +24,7 @@ export const Main = () => (
       <Route path='/converter' element={<Converterpage />} />
       <Route path='/github' element={<Githubpage />} />
       <Route path='/usecallbackpage' element={<UseCallbackPage />} />
+      <Route path='/parse' element={<Parsepage />} />
       <Route path='*' element={<Homepage />} />
     </Routes>
   </StyledMain>

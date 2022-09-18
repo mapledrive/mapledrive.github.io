@@ -14,7 +14,7 @@ Before that I need to push new commits to the master.
 ### `npm start`
 
 Starts the development server.\
-See CRA standard project scripts.
+See Create React App standard project scripts.
 
 ### `npm run build`
 

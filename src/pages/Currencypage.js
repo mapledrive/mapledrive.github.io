@@ -271,178 +271,152 @@ function Currencypage() {
   const handleGeneric = e => {
     const received = e.target.value;
     const id = e.target.id;
+    const payload = { value: received, USDRUB, CADRUB };
     if (id === '1') {
-      dispatcher({
-        type: 'onrubchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'onrubchange', payload });
     }
     if (id === '2') {
-      dispatcher({
-        type: 'onrubtaxedchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'onrubtaxedchange', payload });
     }
     if (id === '3') {
-      dispatcher({
-        type: 'onrubmonthchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'onrubmonthchange', payload });
     }
     if (id === '4') {
-      dispatcher({
-        type: 'onrubmonthtaxedchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'onrubmonthtaxedchange', payload });
     }
     if (id === '5') {
-      dispatcher({
-        type: 'onusdchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'onusdchange', payload });
     }
     if (id === '6') {
-      dispatcher({
-        type: 'onusdtaxedchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'onusdtaxedchange', payload });
     }
     if (id === '7') {
-      dispatcher({
-        type: 'onusdmonthchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'onusdmonthchange', payload });
     }
     if (id === '8') {
-      dispatcher({
-        type: 'onusdmonthtaxedchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'onusdmonthtaxedchange', payload });
     }
     if (id === '9') {
-      dispatcher({
-        type: 'oncadchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'oncadchange', payload });
     }
     if (id === '10') {
-      dispatcher({
-        type: 'oncadtaxedchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'oncadtaxedchange', payload });
     }
     if (id === '11') {
-      dispatcher({
-        type: 'oncadmonthchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'oncadmonthchange', payload });
     }
     if (id === '12') {
-      dispatcher({
-        type: 'oncadmonthtaxedchange',
-        payload: { value: received, USDRUB: USDRUB, CADRUB: CADRUB },
-      });
+      dispatcher({ type: 'oncadmonthtaxedchange', payload });
     }
   };
+
+  const inputData = [
+    {
+      id: 1,
+      label: 'RUB year before tax',
+      handler: handleGeneric,
+      currencyvalue: state.rub,
+      max: 6000000,
+      before: 'Find out how much your salary is after tax in Russia',
+    },
+    {
+      id: 2,
+      label: 'RUB year after tax',
+      handler: handleGeneric,
+      currencyvalue: state.rubtaxed,
+      max: 6000000,
+    },
+    {
+      id: 3,
+      label: 'RUB month before tax',
+      handler: handleGeneric,
+      currencyvalue: state.rubmonth,
+      max: 6000000,
+    },
+    {
+      id: 4,
+      label: 'RUB month after tax',
+      handler: handleGeneric,
+      currencyvalue: state.rubmonthtaxed,
+      max: 6000000,
+    },
+    {
+      id: 5,
+      label: 'USD year before tax',
+      handler: handleGeneric,
+      currencyvalue: state.usd,
+      max: 100000,
+      before: 'Find out how much your salary is in USA',
+    },
+    {
+      id: 6,
+      label: 'USD year after tax',
+      handler: handleGeneric,
+      currencyvalue: state.usdtaxed,
+      max: 100000,
+    },
+    {
+      id: 7,
+      label: 'USD month before tax',
+      handler: handleGeneric,
+      currencyvalue: state.usdmonth,
+      max: 100000,
+    },
+    {
+      id: 8,
+      label: 'USD month after tax',
+      handler: handleGeneric,
+      currencyvalue: state.usdmonthtaxed,
+      max: 100000,
+    },
+    {
+      id: 9,
+      label: 'CAD year before tax',
+      handler: handleGeneric,
+      currencyvalue: state.cad,
+      max: 100000,
+      before: 'Find out how much your salary is in Canada',
+    },
+    {
+      id: 10,
+      label: 'CAD year after tax',
+      handler: handleGeneric,
+      currencyvalue: state.cadtaxed,
+      max: 100000,
+    },
+    {
+      id: 11,
+      label: 'CAD month before tax',
+      handler: handleGeneric,
+      currencyvalue: state.cadmonth,
+      max: 100000,
+    },
+    {
+      id: 12,
+      label: 'CAD month after tax',
+      handler: handleGeneric,
+      currencyvalue: state.cadmonthtaxed,
+      max: 100000,
+    },
+  ];
 
   return (
     <StyledSection>
       <SectionTitle>Income Tax Converter</SectionTitle>
       <Holder>
         <StyledCalcWrapper isLoading={isLoading}>
-          <SectionContent>
-            Find out how much your salary is after tax in Russia
-          </SectionContent>
-          <CurrencyInput
-            id={1}
-            label={'RUB year before tax'}
-            handler={handleGeneric}
-            currencyvalue={state.rub}
-            max={6000000}
-          />
-          <CurrencyInput
-            id={2}
-            label={'RUB year after tax'}
-            handler={handleGeneric}
-            currencyvalue={state.rubtaxed}
-            max={6000000}
-          />
-          <CurrencyInput
-            id={3}
-            label={'RUB month before tax'}
-            handler={handleGeneric}
-            currencyvalue={state.rubmonth}
-            max={6000000}
-          />
-          <CurrencyInput
-            id={4}
-            label={'RUB month after tax'}
-            handler={handleGeneric}
-            currencyvalue={state.rubmonthtaxed}
-            max={6000000}
-          />
-          <SectionContent>
-            Find out how much your salary is in USA
-          </SectionContent>
-          <CurrencyInput
-            id={5}
-            label={'USD year before tax'}
-            handler={handleGeneric}
-            currencyvalue={state.usd}
-            max={100000}
-          />
-          <CurrencyInput
-            id={6}
-            label={'USD year after tax'}
-            handler={handleGeneric}
-            currencyvalue={state.usdtaxed}
-            max={100000}
-          />
-          <CurrencyInput
-            id={7}
-            label={'USD month before tax'}
-            handler={handleGeneric}
-            currencyvalue={state.usdmonth}
-            max={100000}
-          />
-          <CurrencyInput
-            id={8}
-            label={'USD month after tax'}
-            handler={handleGeneric}
-            currencyvalue={state.usdmonthtaxed}
-            max={100000}
-          />
-          <SectionContent>
-            Find out how much your salary is in Canada
-          </SectionContent>
-          <CurrencyInput
-            id={9}
-            label={'CAD year before tax'}
-            handler={handleGeneric}
-            currencyvalue={state.cad}
-            max={100000}
-          />
-          <CurrencyInput
-            id={10}
-            label={'CAD year after tax'}
-            handler={handleGeneric}
-            currencyvalue={state.cadtaxed}
-            max={100000}
-          />
-          <CurrencyInput
-            id={11}
-            label={'CAD month before tax'}
-            handler={handleGeneric}
-            currencyvalue={state.cadmonth}
-            max={100000}
-          />
-          <CurrencyInput
-            id={12}
-            label={'CAD month after tax'}
-            handler={handleGeneric}
-            currencyvalue={state.cadmonthtaxed}
-            max={100000}
-          />
+          {inputData.map(data => (
+            <>
+              {data.before && <SectionContent>{data.before}</SectionContent>}
+              <CurrencyInput
+                id={data.id}
+                label={data.label}
+                handler={data.handler}
+                currencyvalue={data.currencyvalue}
+                max={data.max}
+              />
+            </>
+          ))}
           {isLoading && <Spinner />}
         </StyledCalcWrapper>
         <SideCalc></SideCalc>

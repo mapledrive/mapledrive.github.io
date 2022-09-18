@@ -443,9 +443,9 @@ function Currencypage() {
             currencyvalue={state.cadmonthtaxed}
             max={100000}
           />
+          {isLoading && <Spinner />}
         </StyledCalcWrapper>
         <SideCalc></SideCalc>
-        {isLoading && <Spinner />}
       </Holder>
     </StyledSection>
   );

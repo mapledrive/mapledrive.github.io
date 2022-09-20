@@ -60,7 +60,7 @@ const FooterList = ({ routes }) => {
 export const Footer = () => (
   <Rooter>
     <FooterWidget>
-      <FooterTitle>Font Lists</FooterTitle>
+      <FooterTitle>Portfolio</FooterTitle>
       <FooterList routes={routes} />
     </FooterWidget>
     <FooterWidget>

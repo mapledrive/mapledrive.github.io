@@ -367,8 +367,13 @@ export const GearWrap = styled.div`
 export const SideCalc = styled.div`
   display: flex;
   flex: 1; /* grow */
+  flex-direction: column;
   height: 100%;
   width: 100%;
+  padding: 20px;
+  line-height: 40px;
+  font-size: 22px;
+  font-family: fjalla;
   @media (max-width: 800px) {
     display: none;
   }

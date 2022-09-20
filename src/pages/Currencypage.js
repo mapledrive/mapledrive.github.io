@@ -7,6 +7,8 @@ import {
   StyledSection,
   SectionTitle,
   SectionContent,
+  SidebarContent,
+  SidebarTitle,
   Holder,
   StyledCalcWrapper,
   SideCalc,
@@ -419,7 +421,31 @@ function Currencypage() {
           ))}
           {isLoading && <Spinner />}
         </StyledCalcWrapper>
-        <SideCalc></SideCalc>
+        <SideCalc>
+          <SidebarTitle>Main salary equivalents</SidebarTitle>
+          <SidebarContent>Gross annual salary in USA</SidebarContent>
+          <SectionTitle>$ {state.usd}</SectionTitle>
+          <SidebarContent>Gross annual salary in Canada</SidebarContent>
+          <SectionTitle>CAD {state.cad}</SectionTitle>
+          <SidebarContent>Net monthly salary in Russia</SidebarContent>
+          <SectionTitle>₽ {state.rubmonthtaxed}</SectionTitle>
+          <SidebarContent>
+            If you make $50,000 a year living in Canada, you will be taxed
+            $12,725. That means that your net pay will be $37,275 per year, or
+            $3,106 per month. Your average tax rate in Canada is 25.45%, in USA
+            it will be 25% and your average tax rate in Russia is 13%. For
+            instance, $100000 salary in USA will be taxed at the same rate as
+            $10000 salary, hence, your net pay will always be of same
+            percentage.
+          </SidebarContent>
+          <SidebarTitle>Why do you need this converter?</SidebarTitle>
+          <SidebarContent>
+            The converter helps to find salary equivalent in several countries,
+            as there are different approaches to write salary in vacancy posts -
+            annual or monthly. Also you could start consideration from taxed or
+            gross income and get equivalents before and after tax.
+          </SidebarContent>
+        </SideCalc>
       </Holder>
     </StyledSection>
   );

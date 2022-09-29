@@ -44,7 +44,7 @@ export const Wrapper = styled.div`
  */
 export const StyledHeader = styled.div`
   grid-column: 1 / span 2;
-  background-color: #61456a;
+  background: linear-gradient(60deg, #61456a 0%, #613c6a 100%) !important;
   display: flex;
   align-items: center;
   justify-content: flex-start;

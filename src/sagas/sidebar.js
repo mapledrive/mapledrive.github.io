@@ -9,10 +9,9 @@ import { fetchSidebarApi } from 'features/sidebar/sidebarAPI';
 function* fetchSidebarNews(action) {
   try {
     const response = yield call(fetchSidebarApi, action.payload);
-    yield delay(2000);
+    yield delay(200);
     yield put(fetchSidebarNewsSuccess(response));
   } catch (error) {
-    // yield delay(2000);
     yield put(fetchSidebarNewsError(response_failure));
   }
 }

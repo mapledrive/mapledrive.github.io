@@ -9,6 +9,9 @@ export function Navigation() {
         <StyledNavLink to='/' end>Home</StyledNavLink>
       </Cell>
       <Cell>
+        <StyledNavLink to='/currency'>Currency</StyledNavLink>
+      </Cell>
+      <Cell>
         <StyledNavLink to='/pdf'>Pdf</StyledNavLink>
       </Cell>
       <Cell>
@@ -16,9 +19,6 @@ export function Navigation() {
       </Cell>
       <Cell>
         <StyledNavLink to='/github'>Github</StyledNavLink>
-      </Cell>
-      <Cell>
-        <StyledNavLink to='/currency'>Currency</StyledNavLink>
       </Cell>
       <Cell>
         <StyledNavLink to='/information'>Information</StyledNavLink>

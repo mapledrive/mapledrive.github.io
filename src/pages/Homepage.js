@@ -7,9 +7,9 @@ const Homepage = () => {
       <SectionTitle>Hi, I'm Sait 👋</SectionTitle>
       <SectionTitle>I love to build amazing apps.</SectionTitle>
       <SkillsContent>
-        I am a Javascript Developer 🚀 I have experience in building <br />
-        Web applications with JavaScript / Reactjs / Redux / Material UI <br />
-        and some other cool libraries and frameworks.
+        I am a Javascript Developer 🚀 I have experience in building Web
+        applications with JavaScript / Reactjs / Redux / Material UI and some
+        other cool libraries and frameworks.
       </SkillsContent>
     </StyledSection>
   );
@@ -22,6 +22,7 @@ const SkillsContent = styled.main`
   padding: 12px 0px;
   box-sizing: border-box;
   font-size: 20px;
+  width: 600px;
   font-family: Roboto;
   line-height: 30px;
   font-weight: 400;

@@ -1,4 +1,4 @@
-import { StyledSection, SectionTitle, SectionContent } from 'style';
+import { StyledSection, SectionTitle } from 'style';
 import styled from 'styled-components';
 
 const Homepage = () => {
@@ -17,7 +17,7 @@ const Homepage = () => {
 
 export { Homepage };
 
-export const SkillsContent = styled.main`
+const SkillsContent = styled.main`
   color: #222;
   padding: 12px 0px;
   box-sizing: border-box;

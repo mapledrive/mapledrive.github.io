@@ -6,7 +6,7 @@ const Homepage = () => {
     <TopWrap>
       <InnerLeft>
         <SectionTitle>Hi, I'm Sait 👋</SectionTitle>
-        {/* <SectionTitle>I love to build amazing apps.</SectionTitle> */}
+        <SectionTitle>I love to build amazing apps.</SectionTitle>
         <SkillsContent>
           I am a Javascript Developer 🚀 I have experience in building Web
           applications with JavaScript / Reactjs / Antd / Material UI and some
@@ -44,6 +44,10 @@ const InnerLeft = styled.div`
   line-height: 75px;
   font-size: 30px;
   padding: 0px;
+  ${SectionTitle} {
+    font-size: 30px;
+    line-height: 40px;
+  }
   @media (max-width: 800px) {
     width: 100%;
     padding: 0px;
@@ -67,7 +71,7 @@ const SkillsContent = styled.main`
   color: #222;
   padding: 12px 0px;
   box-sizing: border-box;
-  font-size: 20px;
+  font-size: 18px;
   font-family: Roboto;
   line-height: 30px;
   font-weight: 400;

@@ -18,7 +18,7 @@ function Parserpage() {
   // add an onChange handler to the input
   return (
     <StyledSection>
-      <SectionTitle>Parser for text files</SectionTitle>
+      <SectionTitle>Parser for CSV and text files</SectionTitle>
       <input ref={inputEl} onChange={onChange} type='file' />
       {/* <SectionContent>{text}</SectionContent> */}
       <SectionContent>

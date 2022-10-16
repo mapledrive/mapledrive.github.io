@@ -19,14 +19,11 @@ export const Aside = () => {
     dispatch(fetchSidebarNews()); // Safe to add dispatch to the dependencies array
   }, [dispatch]);
   return (
-    <StyledAside>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        list.map((post, index) => (
-          <Pack key={index} title={post.title} content={post.content} />
-        ))
-      )}
+    <StyledAside isLoading={isLoading}>
+      {isLoading && <Spinner />}
+      {list.map((post, index) => (
+        <Pack key={index} title={post.title} content={post.content} />
+      ))}
     </StyledAside>
   );
 };

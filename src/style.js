@@ -185,6 +185,7 @@ export const StyledAside = styled.aside`
   padding: 30px;
   box-sizing: border-box;
   min-height: 800px;
+  opacity: ${props => (props.isLoading ? 0.4 : 1)};
 
   @media (max-width: 800px) {
     grid-column: 1 / span 2;

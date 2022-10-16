@@ -24,7 +24,7 @@ export function Navigation() {
         <StyledNavLink to='/information'>Information</StyledNavLink>
       </Cell>
       <Cell>
-        <StyledNavLink to='/parse'>Parse</StyledNavLink>
+        <StyledNavLink to='/parser'>Parser</StyledNavLink>
       </Cell>
     </StyledNavigation>
   );

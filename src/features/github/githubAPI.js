@@ -4,7 +4,6 @@ export const fetchGithubApi = async () => {
   const response = await axios.get(
     `https://api.github.com/search/repositories?q=Eiad`
   );
-  console.log(response, 'response');
   return response.data;
 };
 

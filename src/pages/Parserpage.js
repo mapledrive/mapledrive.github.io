@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { StyledSection, SectionTitle, SectionContent } from 'style';
 
-function Parsepage() {
+function Parserpage() {
   //const [text, setText] = useState('');
   const [structure, setArray] = useState([]);
   // Start by creating a variable called inputEl to store the Ref:
@@ -15,7 +15,6 @@ function Parsepage() {
     let resultingArray = parseCsv(fileContent);
     setArray(resultingArray);
   };
-  console.log(structure);
   // add an onChange handler to the input
   return (
     <StyledSection>
@@ -33,7 +32,7 @@ function Parsepage() {
   );
 }
 
-export { Parsepage };
+export { Parserpage };
 
 /**
  * CSV Parser.  Takes a string as input and returns

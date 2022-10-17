@@ -175,6 +175,13 @@ export const SectionContent = styled.div`
   font-style: normal;
 `;
 
+export const NewsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  opacity: ${props => (props.isLoading ? 0.4 : 1)};
+`;
+
 export const StyledAside = styled.aside`
   position: relative;
   background-color: #e4e4e2;

@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrency } from 'features/currency/currencySlice';
 import { financial } from 'utils/financial';
@@ -408,7 +408,7 @@ function Currencypage() {
       <Holder>
         <StyledCalcWrapper isLoading={isLoading}>
           {inputData.map(data => (
-            <>
+            <React.Fragment key={data.id}>
               {data.before && <SectionContent>{data.before}</SectionContent>}
               <CurrencyInput
                 id={data.id}
@@ -417,7 +417,7 @@ function Currencypage() {
                 currencyvalue={data.currencyvalue}
                 max={data.max}
               />
-            </>
+            </React.Fragment>
           ))}
           {isLoading && <Spinner />}
         </StyledCalcWrapper>

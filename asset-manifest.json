@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/static/js/main.962edc21.js",
+    "main.js": "/static/js/main.e7240fd2.js",
     "static/media/logo.png": "/static/media/logo.11b58aa4bfb08fe8cfb5.png",
     "static/media/PTS55F-webfont.woff": "/static/media/PTS55F-webfont.05ff52cc891195932dc3.woff",
     "static/media/roboto-v18-latin-regular.woff": "/static/media/roboto-v18-latin-regular.fbebe70817c0f48eb4ee.woff",
     "static/media/fjalla-one-v4-latin-regular.woff": "/static/media/fjalla-one-v4-latin-regular.fb7d7e8c5230f156c2f9.woff",
     "index.html": "/index.html",
-    "main.962edc21.js.map": "/static/js/main.962edc21.js.map"
+    "main.e7240fd2.js.map": "/static/js/main.e7240fd2.js.map"
   },
   "entrypoints": [
-    "static/js/main.962edc21.js"
+    "static/js/main.e7240fd2.js"
   ]
 }

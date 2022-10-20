@@ -10,6 +10,7 @@ import { Informationpage } from 'pages/Informationpage';
 import { Githubpage } from 'pages/Githubpage';
 import { UseCallbackPage } from 'pages/UseCallbackPage';
 import { Parserpage } from 'pages/Parserpage';
+import { Questionspage } from 'pages/QuestionsPage';
 import { StyledMain } from 'style';
 
 export const Main = () => (
@@ -25,6 +26,7 @@ export const Main = () => (
       <Route path='/github' element={<Githubpage />} />
       <Route path='/usecallbackpage' element={<UseCallbackPage />} />
       <Route path='/parser' element={<Parserpage />} />
+      <Route path='/questions' element={<Questionspage />} />
       <Route path='*' element={<Homepage />} />
     </Routes>
   </StyledMain>

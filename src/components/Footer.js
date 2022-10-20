@@ -6,6 +6,7 @@ import {
   FooterUl,
   StyledFooterNavLink,
 } from 'style';
+import { Questionspage } from 'pages/QuestionsPage';
 
 function Recently() {
   return <div>yes</div>;
@@ -29,9 +30,9 @@ export const routes2 = [
 
 export const routes3 = [
   {
-    path: '/frequently',
-    component: Recently,
-    name: 'Frequently Asked Questions',
+    path: '/questions',
+    component: Questionspage,
+    name: 'Questions',
   },
   { path: '/help', component: Recently, name: 'Help Installing Fonts' },
   { path: '/contactus', component: Recently, name: 'Contact Us' },

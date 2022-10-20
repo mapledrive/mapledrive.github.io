@@ -6,13 +6,15 @@ export function Navigation() {
   return (
     <StyledNavigation>
       <Cell>
-        <StyledNavLink to='/' end>Home</StyledNavLink>
+        <StyledNavLink to='/' end>
+          Home
+        </StyledNavLink>
       </Cell>
       <Cell>
         <StyledNavLink to='/currency'>Currency</StyledNavLink>
       </Cell>
       <Cell>
-        <StyledNavLink to='/pdf'>Pdf</StyledNavLink>
+        <StyledNavLink to='/skeleton'>Skeleton</StyledNavLink>
       </Cell>
       <Cell>
         <StyledNavLink to='/news'>News</StyledNavLink>

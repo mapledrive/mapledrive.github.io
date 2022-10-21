@@ -473,14 +473,14 @@ export const SliderInputRoot405 = styled.div`
   }
 `;
 
-export const DcInput612 = styled.div`
+export const NumericInputHolder = styled.div`
   width: 100%;
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--dc-color-white, #fff);
-  border: 1px solid var(--dc-color-grey-200, #d3d4d4);
+  background-color: #fff;
+  border: 1px solid #d3d4d4;
   transition: border-color 0.2s;
   box-sizing: border-box;
   outline: none;
@@ -492,7 +492,7 @@ export const DcInput612 = styled.div`
   border-bottom-right-radius: 0px;
 `;
 
-export const DcInputInputContainer612 = styled.div`
+export const HybridInputContainer = styled.div`
   height: 52px;
   position: relative;
   display: flex;
@@ -515,7 +515,7 @@ export const Input612 = styled.input`
   background-color: transparent;
   box-shadow: none;
   box-sizing: border-box;
-  color: var(--dc-color-afro, #242629);
+  color: #242629;
   letter-spacing: normal;
   text-decoration: none;
   text-transform: none;
@@ -621,7 +621,7 @@ export const LowerInput = styled.input.attrs({ type: 'range' })`
   }
 `;
 
-export const SliderAxis405 = styled.div`
+export const SliderAxis = styled.div`
   height: 8px;
   position: absolute;
   width: 100%;

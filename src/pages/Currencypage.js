@@ -14,12 +14,12 @@ import {
   SideCalc,
   StyledLabel,
   SliderInputRoot405,
-  DcInput612,
-  DcInputInputContainer612,
+  NumericInputHolder,
+  HybridInputContainer,
   Input612,
   SliderRoot405,
   LowerInput,
-  SliderAxis405,
+  SliderAxis,
 } from 'style';
 
 const initialState = {
@@ -460,14 +460,14 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
 
   return (
     <SliderInputRoot405>
-      <DcInput612>
-        <DcInputInputContainer612>
+      <NumericInputHolder>
+        <HybridInputContainer>
           <Input612 id={id} step='1' onChange={handler} value={currencyvalue} />
           <StyledLabel>{label}</StyledLabel>
-        </DcInputInputContainer612>
-      </DcInput612>
+        </HybridInputContainer>
+      </NumericInputHolder>
       <SliderRoot405>
-        <SliderAxis405>
+        <SliderAxis>
           <LowerInput
             id={id}
             type='range'
@@ -477,7 +477,7 @@ const CurrencyInput = ({ label, handler, currencyvalue, max, id = 123 }) => {
             style={getBackgroundSize()}
             value={currencyvalue}
           />
-        </SliderAxis405>
+        </SliderAxis>
       </SliderRoot405>
     </SliderInputRoot405>
   );

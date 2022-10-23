@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const fetchGithubApi = async () => {
+export const fetchGithubApi = async payload => {
   const response = await axios.get(
-    `https://api.github.com/search/repositories?q=Eiad`
+    `https://api.github.com/search/repositories?q=${payload}`
   );
   return response.data;
 };

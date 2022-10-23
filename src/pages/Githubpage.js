@@ -38,7 +38,7 @@ const Repos = props => {
               <TodoRow key={key}>
                 <div>
                   <span>Repo name: </span>{' '}
-                  <a href={reposinfoz.html_url}>{reposinfoz.name} </a>
+                  <a href={reposinfoz.name}>{reposinfoz.name} </a>
                 </div>
                 <div>
                   <span>Desc: </span>{' '}
@@ -51,10 +51,12 @@ const Repos = props => {
                   <span>Last Update: </span> {reposinfoz.updated_at}
                 </div>
                 <div>
-                  <span>Last Update: </span> {reposinfoz.updated_at}
+                  <span>URL: </span>{' '}
+                  <a href={reposinfoz.url}>{reposinfoz.url} </a>
                 </div>
                 <div>
-                  <span>Last Update: </span> {reposinfoz.updated_at}
+                  <span>HTML URL: </span>{' '}
+                  <a href={reposinfoz.html_url}>{reposinfoz.html_url} </a>
                 </div>
               </TodoRow>
             ))}
@@ -68,32 +70,24 @@ const Repos = props => {
 };
 
 const GithubComponent = () => {
-  const [author, setAuthor] = useState('');
+  const [searchValue, setSearchValue] = useState('');
   const dispatch = useDispatch();
   const handleChange = e => {
-    setAuthor(e.target.value);
+    setSearchValue(e.target.value);
   };
 
   useEffect(() => {
-    if (author) {
-      fetchData();
+    if (searchValue) {
+      dispatch(fetchGithub(searchValue));
     }
-  }, [author]);
+  }, [searchValue, dispatch]);
 
-  const fetchData = () => {
-    //dispatch(fetchGithub(author));
-    console.log(author, 'author');
-  };
   const list = useSelector(state => state.github.list);
   const isLoading = useSelector(state => state.github.isLoading);
 
-  useEffect(() => {
-    dispatch(fetchGithub()); // Safe to add dispatch to the dependencies array
-  }, [dispatch]);
-
   return (
     <>
-      <InputItem onChange={handleChange} value={author} />
+      <InputItem onChange={handleChange} value={searchValue} />
       {isLoading ? <Spinner /> : <Repos data={list} />}
     </>
   );

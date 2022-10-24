@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSidebarNews } from 'features/sidebar/sidebarSlice';
 import Spinner from 'components/Spinner';
@@ -10,7 +9,7 @@ import {
   StyledAside,
 } from 'style';
 
-export const Aside = () => {
+const Aside = memo(() => {
   const list = useSelector(state => state.sidebar.list);
   const isLoading = useSelector(state => state.sidebar.isLoading);
 
@@ -26,7 +25,7 @@ export const Aside = () => {
       ))}
     </StyledAside>
   );
-};
+});
 
 const Pack = ({ title, content }) => (
   <SidebarWidget>
@@ -34,3 +33,5 @@ const Pack = ({ title, content }) => (
     <SidebarContent>{content}</SidebarContent>
   </SidebarWidget>
 );
+
+export { Aside };

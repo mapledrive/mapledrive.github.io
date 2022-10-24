@@ -22,11 +22,9 @@ function Parserpage() {
       <input ref={inputEl} onChange={onChange} type='file' />
       {/* <SectionContent>{text}</SectionContent> */}
       <SectionContent>
-        <ul>
-          {structure.map((item, index) => {
-            return <li key={index}>{item.join()}</li>;
-          })}
-        </ul>
+        {structure.map((item, index) => {
+          return <div key={index}>{item.join()}</div>;
+        })}
       </SectionContent>
     </StyledSection>
   );

@@ -6,7 +6,7 @@ export default defineConfig(({ mode }) => ({
   base: mode === 'development' ? '/' : '/mapledrive.github.io/',
   plugins: [react()],
   build: {
-    outDir: 'build', // совпадает с React Scripts, если хотите сохранить папку билда
+    outDir: 'dist', // совпадает с React Scripts, если хотите сохранить папку билда
   },
   resolve: {
     alias: {

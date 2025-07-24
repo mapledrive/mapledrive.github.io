@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig(({ mode }) => ({
-  base: mode === 'development' ? '/' : '/mapledrive.github.io/',
+  base: '/',
   plugins: [react()],
   build: {
     outDir: 'dist', // совпадает с React Scripts, если хотите сохранить папку билда

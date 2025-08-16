@@ -2,8 +2,6 @@
 
 # dependencies
 /node_modules
-/dist
-/dist-ssr
 /.pnp
 .pnp.js
 

@@ -1,14 +1,14 @@
 import { call, put, takeLatest, delay } from 'redux-saga/effects';
-
+import type { SagaIterator } from 'redux-saga';
 import {
   fetchSidebarNewsSuccess,
   fetchSidebarNewsError,
 } from 'features/sidebar/sidebarSlice';
 import { fetchSidebarApi } from 'features/sidebar/sidebarAPI';
 
-function* fetchSidebarNews(action) {
+function* fetchSidebarNews(): SagaIterator {
   try {
-    const response = yield call(fetchSidebarApi, action.payload);
+    const response: SidebarNewsResponse = yield call(fetchSidebarApi);
     yield delay(400);
     yield put(fetchSidebarNewsSuccess(response));
   } catch (error) {
@@ -16,11 +16,28 @@ function* fetchSidebarNews(action) {
   }
 }
 
-export function* watchSidebarNews() {
+export function* watchSidebarNews(): SagaIterator {
   yield takeLatest('sidebar/fetchSidebarNews', fetchSidebarNews);
 }
 
-const response_failure = [
+// function* fetchSidebarNews(action) {
+//   try {
+//     const response = yield call(fetchSidebarApi, action.payload);
+//     yield delay(400);
+//     yield put(fetchSidebarNewsSuccess(response));
+//   } catch (error) {
+//     yield put(fetchSidebarNewsError(response_failure));
+//   }
+// }
+
+export interface CleanedArticle {
+  title: string;
+  content: string;
+}
+
+export type SidebarNewsResponse = CleanedArticle[];
+
+const response_failure: SidebarNewsResponse = [
   {
     title: 'Startup develops EV battery that can last for 20 years',
     content:

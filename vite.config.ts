@@ -15,6 +15,7 @@ export default defineConfig({
       style: path.resolve(__dirname, './src/style'),
       features: path.resolve(__dirname, './src/features'),
       sagas: path.resolve(__dirname, './src/sagas'),
+      utils: path.resolve(__dirname, './src/utils'),
     },
   },
   server: {

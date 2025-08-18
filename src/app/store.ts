@@ -4,9 +4,9 @@ import type { TypedUseSelectorHook } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import news from 'features/news/newsSlice';
 import currency from 'features/currency/currencySlice';
-import skeleton from 'features/skeleton/skeletonSlice';
+//import skeleton from 'features/skeleton/skeletonSlice';
 import sidebar from 'features/sidebar/sidebarSlice';
-import github from 'features/github/githubSlice';
+//import github from 'features/github/githubSlice';
 import rootSaga from 'sagas';
 
 const sagaMiddleware = createSagaMiddleware();

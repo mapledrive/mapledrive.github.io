@@ -175,18 +175,18 @@ export const SectionContent = styled.div`
   font-style: normal;
 `;
 
-export const NewsWrapper = styled.div`
+interface StyledLoadingProps {
+  isLoading?: boolean;
+}
+
+export const NewsWrapper = styled.div<StyledLoadingProps>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   opacity: ${props => (props.isLoading ? 0.4 : 1)};
 `;
 
-interface StyledAsideProps {
-  isLoading?: boolean;
-}
-
-export const StyledAside = styled.aside<StyledAsideProps>`
+export const StyledAside = styled.aside<StyledLoadingProps>`
   position: relative;
   background-color: #e4e4e2;
   display: flex;
@@ -331,7 +331,7 @@ export const Holder = styled.div`
   align-items: flex-start;
 `;
 
-export const StyledCalcWrapper = styled.div`
+export const StyledCalcWrapper = styled.div<StyledLoadingProps>`
   position: relative;
   max-width: 700px;
   width: 100%;

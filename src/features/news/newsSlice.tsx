@@ -23,17 +23,9 @@ export const newsSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder
-      .addCase(incrementBy, state => {
-        state.isLoading = false;
-      })
-      // Пример добавления другого действия
-      .addMatcher(
-        action => action.type === 'some/other/action',
-        state => {
-          // обработка действия
-        }
-      );
+    builder.addCase(incrementBy, state => {
+      state.isLoading = false;
+    });
   },
 });
 

@@ -36,6 +36,70 @@ const initialState: SidebarState = {
   isLoading: false,
 };
 
+// export const sidebarSlice = createSlice({
+//   name: 'sidebar',
+//   initialState,
+//   reducers: {
+//     fetchSidebarNews: state => {
+//       state.isLoading = true;
+//     },
+//     fetchSidebarNewsSuccess: (
+//       state,
+//       action: PayloadAction<CleanedArticle[]>
+//     ) => {
+//       state.list = action.payload;
+//       state.isLoading = false;
+//       state.error = undefined; // Clear any previous errors
+//     },
+//     fetchSidebarNewsError: (
+//       state,
+//       action: PayloadAction<{
+//         fallbackData?: CleanedArticle[];
+//       }>
+//     ) => {
+//       state.isLoading = false;
+//       state.error = action.payload.errorMessage;
+//       // Use fallback data if provided, otherwise keep current list
+//       if (action.payload.fallbackData) {
+//         state.list = action.payload.fallbackData;
+//       }
+//     },
+//   },
+// });
+
+// export const sidebarSlice = createSlice({
+//   name: 'sidebar',
+//   initialState,
+//   reducers: {
+//     fetchSidebarNews: state => {
+//       state.isLoading = true;
+//     },
+//     fetchSidebarNewsSuccess: (
+//       state,
+//       action: PayloadAction<CleanedArticle[]>
+//     ) => {
+//       state.list = action.payload;
+//       state.isLoading = false;
+//       state.error = undefined;
+//     },
+//     fetchSidebarNewsError: (
+//       state,
+//       action: PayloadAction<{
+//         errorMessage: string; // Добавлено это поле
+//         fallbackData?: CleanedArticle[];
+//       }>
+//     ) => {
+//       state.isLoading = false;
+//       state.error = action.payload.errorMessage; // Теперь errorMessage существует
+//       if (action.payload.fallbackData) {
+//         state.list = action.payload.fallbackData;
+//       }
+//     },
+//   },
+// });
+
+export type SidebarNewsResponse = CleanedArticle[];
+
 export const sidebarSlice = createSlice({
   name: 'sidebar',
   initialState,
@@ -45,25 +109,19 @@ export const sidebarSlice = createSlice({
     },
     fetchSidebarNewsSuccess: (
       state,
-      action: PayloadAction<CleanedArticle[]>
+      action: PayloadAction<SidebarNewsResponse>
     ) => {
       state.list = action.payload;
       state.isLoading = false;
-      state.error = undefined; // Clear any previous errors
+      state.error = undefined;
     },
     fetchSidebarNewsError: (
       state,
-      action: PayloadAction<{
-        fallbackData?: CleanedArticle[];
-        errorMessage: string;
-      }>
+      action: PayloadAction<SidebarNewsResponse> // Теперь принимает массив статей напрямую
     ) => {
       state.isLoading = false;
-      state.error = action.payload.errorMessage;
-      // Use fallback data if provided, otherwise keep current list
-      if (action.payload.fallbackData) {
-        state.list = action.payload.fallbackData;
-      }
+      state.list = action.payload; // Устанавливаем fallback-данные
+      state.error = 'Failed to load news'; // Фиксированное сообщение об ошибке
     },
   },
 });

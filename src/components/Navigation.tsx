@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StyledNavigation, Cell, StyledNavLink } from 'style';
 
 export function Navigation() {

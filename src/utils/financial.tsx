@@ -1,0 +1,1 @@
+export const financial = value => Number.parseFloat(value).toFixed();

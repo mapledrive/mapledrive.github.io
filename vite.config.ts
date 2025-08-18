@@ -9,7 +9,12 @@ export default defineConfig({
     alias: {
       app: path.resolve(__dirname, './src/app'),
       components: path.resolve(__dirname, './src/components'),
-      shared: path.resolve(__dirname, './src/shared'),
+      assets: path.resolve(__dirname, './src/assets'),
+      pages: path.resolve(__dirname, './src/pages'),
+      fonts: path.resolve(__dirname, './src/fonts'),
+      style: path.resolve(__dirname, './src/style'),
+      features: path.resolve(__dirname, './src/features'),
+      sagas: path.resolve(__dirname, './src/sagas'),
     },
   },
   server: {

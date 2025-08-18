@@ -1,12 +1,28 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import type { TypedUseSelectorHook } from 'react-redux';
-// Создаем базовый редюсер (можно добавить свои редюсеры позже)
-const rootReducer = (state = {}) => state;
+import createSagaMiddleware from 'redux-saga';
+import news from 'features/news/newsSlice';
+import currency from 'features/currency/currencySlice';
+import skeleton from 'features/skeleton/skeletonSlice';
+import sidebar from 'features/sidebar/sidebarSlice';
+import github from 'features/github/githubSlice';
+import rootSaga from 'sagas';
+
+const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    news,
+    currency,
+    sidebar,
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(sagaMiddleware),
+  devTools: true,
 });
+
+sagaMiddleware.run(rootSaga);
 
 // Типы для работы с хранилищем
 export type RootState = ReturnType<typeof store.getState>;

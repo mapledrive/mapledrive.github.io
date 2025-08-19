@@ -20,16 +20,6 @@ export function* watchSidebarNews(): SagaIterator {
   yield takeLatest('sidebar/fetchSidebarNews', fetchSidebarNews);
 }
 
-// function* fetchSidebarNews(action) {
-//   try {
-//     const response = yield call(fetchSidebarApi, action.payload);
-//     yield delay(400);
-//     yield put(fetchSidebarNewsSuccess(response));
-//   } catch (error) {
-//     yield put(fetchSidebarNewsError(response_failure));
-//   }
-// }
-
 export interface CleanedArticle {
   title: string;
   content: string;

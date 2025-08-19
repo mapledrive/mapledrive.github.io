@@ -7,7 +7,7 @@ import {
   SidebarContent,
   StyledAside,
 } from 'style';
-import { useAppDispatch, useAppSelector } from 'app/store';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 const Aside = memo(() => {
   const list = useAppSelector(state => state.sidebar.list);

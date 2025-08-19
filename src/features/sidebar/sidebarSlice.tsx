@@ -28,75 +28,13 @@ let dummy: CleanedArticle[] = [
 interface SidebarState {
   list: CleanedArticle[];
   isLoading: boolean;
-  error?: string; // Optional error field
+  error?: string;
 }
 
 const initialState: SidebarState = {
   list: dummy,
   isLoading: false,
 };
-
-// export const sidebarSlice = createSlice({
-//   name: 'sidebar',
-//   initialState,
-//   reducers: {
-//     fetchSidebarNews: state => {
-//       state.isLoading = true;
-//     },
-//     fetchSidebarNewsSuccess: (
-//       state,
-//       action: PayloadAction<CleanedArticle[]>
-//     ) => {
-//       state.list = action.payload;
-//       state.isLoading = false;
-//       state.error = undefined; // Clear any previous errors
-//     },
-//     fetchSidebarNewsError: (
-//       state,
-//       action: PayloadAction<{
-//         fallbackData?: CleanedArticle[];
-//       }>
-//     ) => {
-//       state.isLoading = false;
-//       state.error = action.payload.errorMessage;
-//       // Use fallback data if provided, otherwise keep current list
-//       if (action.payload.fallbackData) {
-//         state.list = action.payload.fallbackData;
-//       }
-//     },
-//   },
-// });
-
-// export const sidebarSlice = createSlice({
-//   name: 'sidebar',
-//   initialState,
-//   reducers: {
-//     fetchSidebarNews: state => {
-//       state.isLoading = true;
-//     },
-//     fetchSidebarNewsSuccess: (
-//       state,
-//       action: PayloadAction<CleanedArticle[]>
-//     ) => {
-//       state.list = action.payload;
-//       state.isLoading = false;
-//       state.error = undefined;
-//     },
-//     fetchSidebarNewsError: (
-//       state,
-//       action: PayloadAction<{
-//         errorMessage: string; // Добавлено это поле
-//         fallbackData?: CleanedArticle[];
-//       }>
-//     ) => {
-//       state.isLoading = false;
-//       state.error = action.payload.errorMessage; // Теперь errorMessage существует
-//       if (action.payload.fallbackData) {
-//         state.list = action.payload.fallbackData;
-//       }
-//     },
-//   },
-// });
 
 export type SidebarNewsResponse = CleanedArticle[];
 

@@ -33,7 +33,7 @@ export const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 70% 30%;
   background-color: #bdbdbb;
-  padding: 40px 0px;
+  padding: 40px 10px;
   max-width: 1200px;
   margin: 0 auto;
 

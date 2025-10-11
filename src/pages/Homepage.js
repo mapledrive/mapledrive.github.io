@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { resources, loadAllSprites } from './Resources';
-import { MarioGame } from './Other';
+import { Game } from './Game';
 
 const Homepage = () => {
   const canvasRef = useRef(null);
@@ -20,7 +20,7 @@ const Homepage = () => {
           throw new Error('Canvas not found');
         }
 
-        const game = new MarioGame(canvas, resources);
+        const game = new Game(canvas, resources);
         gameRef.current = game;
         game.start();
 

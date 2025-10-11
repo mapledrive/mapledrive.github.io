@@ -62,9 +62,6 @@ const Homepage = () => {
           border: '2px solid #333',
         }}
       />
-      <div style={{ color: 'white', marginTop: '10px' }}>
-        Управление: ← → движение, X прыжок, Z бег
-      </div>
     </div>
   );
 };

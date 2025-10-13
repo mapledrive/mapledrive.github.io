@@ -3,6 +3,8 @@ import { Player } from './Player';
 
 /**
  * Класс Floor
+ * от оригинала отличает только то что level экземпляр сделан глобальным
+ * window.level
  */
 export class Floor extends Entity {
   constructor(pos, sprite) {

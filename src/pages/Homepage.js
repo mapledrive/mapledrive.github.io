@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { resources, loadAllSprites } from './Resources';
-import { Game } from './Game';
+import { resources, loadAllSprites } from './mario/Resources';
+import { Game } from './mario/Game';
 
 const Homepage = () => {
   const canvasRef = useRef(null);
@@ -59,7 +59,6 @@ const Homepage = () => {
           margin: '0 auto',
           width: '762px',
           height: '720px',
-          border: '2px solid #333',
         }}
       />
     </div>

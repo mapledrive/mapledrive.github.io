@@ -1,6 +1,6 @@
 import { input } from './InputHandler';
 import { Player } from './Player';
-import { createLevelOneOne } from './Other';
+import { createLevelOneOne } from './11';
 
 /**
  * Основной игровой класс
@@ -54,9 +54,9 @@ export class Game {
 
     if (allLoaded) {
       this.initialized = true;
-      console.log('✅ Игра инициализирована');
+      console.log('Игра инициализирована');
     } else {
-      console.log('⏳ Ожидание загрузки спрайтов...');
+      console.log('Ожидание загрузки спрайтов...');
       setTimeout(() => this.init(), 100);
     }
   }

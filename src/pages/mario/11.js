@@ -8,7 +8,7 @@ export function createLevelOneOne() {
   const level = new Level({
     playerPos: [56, 192],
     loader: createLevelOneOne,
-    background: '#7974FF',
+    background: '#7073F5',
     scrolling: true,
     invincibility: [144, 192, 240],
     exit: 204,

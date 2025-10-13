@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { resources, loadAllSprites } from './mario/Resources';
 import { Game } from './mario/Game';
+import { StyledSection, SectionTitle, SectionContent } from 'style';
 
 const Homepage = () => {
   const canvasRef = useRef(null);
@@ -42,26 +43,30 @@ const Homepage = () => {
   }, []);
 
   return (
-    <div style={{ margin: '0 auto', textAlign: 'center' }}>
-      {loading && (
-        <div style={{ color: 'white', margin: '20px' }}>Загрузка игры...</div>
-      )}
-      {error && (
-        <div style={{ color: 'red', margin: '20px' }}>Ошибка: {error}</div>
-      )}
-      <canvas
-        ref={canvasRef}
-        width={762}
-        height={720}
-        style={{
-          backgroundColor: '#000',
-          display: 'block',
-          margin: '0 auto',
-          width: '762px',
-          height: '720px',
-        }}
-      />
-    </div>
+    <StyledSection>
+      <SectionTitle>Super Mario Bros</SectionTitle>
+      <SectionContent>
+        Use the arrow keys [↑ → ↓ ←] to move Mario, and hold X button to jump
+        higher. Use Z to shoot/run.
+      </SectionContent>
+
+      <div style={{ margin: '0 auto', textAlign: 'center' }}>
+        {loading && <SectionContent>Loading game...</SectionContent>}
+        {error && <SectionContent>Error: {error}</SectionContent>}
+        <canvas
+          ref={canvasRef}
+          width={762}
+          height={720}
+          style={{
+            backgroundColor: '#000',
+            display: 'block',
+            margin: '0 auto',
+            width: '762px',
+            height: '720px',
+          }}
+        />
+      </div>
+    </StyledSection>
   );
 };
 

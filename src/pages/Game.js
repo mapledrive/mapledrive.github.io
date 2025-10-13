@@ -21,6 +21,7 @@ export class Game {
 
     // Создаем уровень и игрока
     this.level = createLevelOneOne();
+    window.level = this.level;
     this.player = new Player(this.level.playerPos);
 
     this.rafId = null;

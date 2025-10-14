@@ -2,44 +2,49 @@
 
 class InputHandler {
   constructor() {
-    this.pressedKeys = {};
-
+    this.pressedKeys = {
+      LEFT: false,
+      RIGHT: false,
+      UP: false,
+      DOWN: false,
+      RUN: false,
+      JUMP: false,
+    };
     document.addEventListener('keydown', e => this._handleKeyDown(e));
     document.addEventListener('keyup', e => this._handleKeyUp(e));
-    window.addEventListener('blur', () => this._handleBlur());
   }
 
   _getKeyFromEvent(event) {
-    const code = event.keyCode || event.which;
-    switch (code) {
-      case 32:
-        return 'SPACE';
-      case 37:
+    switch (event.code) {
+      case 'ArrowLeft':
         return 'LEFT';
-      case 38:
-        return 'UP';
-      case 39:
+      case 'ArrowRight':
         return 'RIGHT';
-      case 40:
+      case 'ArrowUp':
+        return 'UP';
+      case 'ArrowDown':
         return 'DOWN';
-      case 90:
-        return 'RUN'; // Z
-      case 88:
-        return 'JUMP'; // X
+      case 'KeyZ':
+        return 'RUN';
+      case 'KeyX':
+        return 'JUMP';
       default:
         return null;
     }
   }
 
   _handleKeyDown(event) {
+    console.log('Название функции: ' + '_handleKeyDown');
     const key = this._getKeyFromEvent(event);
     if (key) {
       this.pressedKeys[key] = true;
+      console.log(this.pressedKeys);
       event.preventDefault();
     }
   }
 
   _handleKeyUp(event) {
+    console.log('Название функции: ' + '_handleKeyUp');
     const key = this._getKeyFromEvent(event);
     if (key) {
       this.pressedKeys[key] = false;
@@ -47,15 +52,17 @@ class InputHandler {
     }
   }
 
-  _handleBlur() {
-    this.pressedKeys = {};
-  }
-
   isDown(key) {
+    if (!!this.pressedKeys[key]) {
+      // console.log('нажата кнопка');
+    } else {
+      //console.log('не нажаты');
+    }
     return !!this.pressedKeys[key];
   }
 
-  reset(keys = ['RUN', 'LEFT', 'RIGHT', 'DOWN', 'JUMP']) {
+  reset(keys = ['LEFT', 'RIGHT', 'UP', 'DOWN', 'RUN', 'JUMP']) {
+    console.log('Название функции: ' + 'reset');
     keys.forEach(k => {
       this.pressedKeys[k] = false;
     });
@@ -63,10 +70,5 @@ class InputHandler {
 }
 
 const input = new InputHandler();
-
-// Только для отладки в dev-режиме
-if (process.env.NODE_ENV === 'development') {
-  window.input = input;
-}
 
 export default input;

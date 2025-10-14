@@ -213,7 +213,7 @@ export class Game {
     ctx.fillStyle = '#fff';
     ctx.font = '12px Arial';
     ctx.fillText(
-      `Pos: ${Math.round(this.player.pos[0])}, ${Math.round(
+      `Position: ${Math.round(this.player.pos[0])}, ${Math.round(
         this.player.pos[1]
       )}`,
       10,
@@ -233,6 +233,12 @@ export class Game {
       10,
       80
     );
+    ctx.fillText(`Left: ${input.pressedKeys.LEFT}`, 10, 95);
+    ctx.fillText(`Right: ${input.pressedKeys.RIGHT}`, 10, 110);
+    ctx.fillText(`Up: ${input.pressedKeys.UP}`, 10, 125);
+    ctx.fillText(`Down: ${input.pressedKeys.DOWN}`, 10, 140);
+    ctx.fillText(`Run: ${input.pressedKeys.RUN}`, 10, 155);
+    ctx.fillText(`Jump: ${input.pressedKeys.JUMP}`, 10, 170);
 
     // Восстанавливаем трансформацию
     ctx.setTransform(originalTransform);

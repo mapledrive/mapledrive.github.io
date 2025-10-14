@@ -24,7 +24,10 @@ export function createLevelOneOne() {
     pipeTop: new Sprite('/tiles.png', [0, 128], [32, 16], 0),
   });
 
-  var ground = [[0, 212]];
+  var ground = [
+    [0, 8],
+    [10, 212],
+  ];
 
   // Build THE GROUND
   ground.forEach(function (loc) {

@@ -37,6 +37,7 @@ export class Game {
     this.level = createLevelOneOne();
     window.level = this.level;
     this.player = new Player(this.level.playerPos);
+    window.player = this.player;
 
     this.rafId = null;
     this.lastTime = null;

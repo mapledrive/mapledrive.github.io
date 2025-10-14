@@ -1,6 +1,6 @@
 import { Sprite } from './Sprite';
 import { Entity } from './Entity';
-import { input } from './InputHandler';
+import input from './InputHandler';
 /**
  * Класс Player
  */

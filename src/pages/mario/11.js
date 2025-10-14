@@ -33,15 +33,25 @@ export function createLevelOneOne() {
 
   // Build scenery
   // Interactable terrain
-  level.putWall(14, 13, 2);
-  level.putWall(16, 13, 1);
+  level.putPipe(1, 13, 2);
+  level.putPipe(10, 13, 3);
+  level.putPipe(46, 13, 4);
   level.putWall(100, 13, 2);
   level.putWall(183, 13, 3);
   level.putWall(184, 13, 4);
   level.putWall(185, 13, 5);
-  level.putPipe(28, 13, 2);
-  level.putPipe(38, 13, 3);
-  level.putPipe(46, 13, 4);
+  level.putWall(20, 13, 1);
+  level.putWall(21, 13, 2);
+  level.putWall(22, 13, 3);
+  level.putWall(23, 13, 4);
+  level.putWall(24, 13, 5);
+  level.putWall(25, 13, 6);
+  level.putWall(26, 13, 7);
+  level.putWall(27, 13, 8);
+  level.putWall(28, 13, 9);
+  level.putWall(29, 13, 10);
+  level.putWall(30, 13, 11);
+  level.putWall(31, 13, 12);
 
   return level;
 }

@@ -1,4 +1,4 @@
-import { input } from './InputHandler';
+import input from './InputHandler';
 import { Player } from './Player';
 import { createLevelOneOne } from './11';
 

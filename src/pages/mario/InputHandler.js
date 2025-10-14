@@ -69,4 +69,4 @@ if (process.env.NODE_ENV === 'development') {
   window.input = input;
 }
 
-export { input, InputHandler };
+export default input;

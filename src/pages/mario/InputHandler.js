@@ -34,7 +34,6 @@ class InputHandler {
   }
 
   _handleKeyDown(event) {
-    console.log('Название функции: ' + '_handleKeyDown');
     const key = this._getKeyFromEvent(event);
     if (key) {
       this.pressedKeys[key] = true;
@@ -44,7 +43,6 @@ class InputHandler {
   }
 
   _handleKeyUp(event) {
-    console.log('Название функции: ' + '_handleKeyUp');
     const key = this._getKeyFromEvent(event);
     if (key) {
       this.pressedKeys[key] = false;
@@ -53,16 +51,10 @@ class InputHandler {
   }
 
   isDown(key) {
-    if (!!this.pressedKeys[key]) {
-      // console.log('нажата кнопка');
-    } else {
-      //console.log('не нажаты');
-    }
     return !!this.pressedKeys[key];
   }
 
   reset(keys = ['LEFT', 'RIGHT', 'UP', 'DOWN', 'RUN', 'JUMP']) {
-    console.log('Название функции: ' + 'reset');
     keys.forEach(k => {
       this.pressedKeys[k] = false;
     });

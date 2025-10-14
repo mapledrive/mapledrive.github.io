@@ -47,7 +47,14 @@ export class Game {
     if (this.initialized) return;
 
     // Проверяем загружены ли все спрайты
-    const requiredSprites = ['/player.png', '/playerl.png', '/tiles.png'];
+    const requiredSprites = [
+      '/player.png',
+      '/enemy.png',
+      '/tiles.png',
+      '/playerl.png',
+      '/items.png',
+      '/enemyr.png',
+    ];
     const allLoaded = requiredSprites.every(sprite =>
       this.resources.get(sprite)
     );

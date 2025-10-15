@@ -1,6 +1,6 @@
 import input from './InputHandler';
 import { Player } from './Player';
-import { createLevelOneOne } from './11';
+import { oneone } from './11';
 
 /**
  * Основной игровой класс
@@ -34,7 +34,7 @@ export class Game {
     this.ctx.scale(3, 3);
 
     // Создаем уровень и игрока
-    this.level = createLevelOneOne();
+    this.level = oneone();
     window.level = this.level;
     this.player = new Player(this.level.playerPos);
     window.player = this.player;
@@ -46,6 +46,9 @@ export class Game {
 
   init() {
     if (this.initialized) return;
+    window.music = {
+      death: new Audio('sounds/mariodie.wav'),
+    };
 
     // Проверяем загружены ли все спрайты
     const requiredSprites = [

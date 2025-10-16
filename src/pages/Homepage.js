@@ -4,11 +4,12 @@ import { StyledSection, SectionTitle, SectionContent } from 'style';
 import input from './mario/InputHandler';
 
 // 1. Homepage
-// 2. class Game
-// 3. class Entity
-// 4. class Floor
-// 5. class Level
-// 6. class Sprite
+// 2. class Game - игровой движок
+// 3. class Entity Cущность - любой игровой объект, который имеет: позицию на экране (this.pos), спрайт для отрисовки (this.sprite),
+// хитбокс для коллизий, физ св-ва - скорость vel и ускорение acc
+// 4. class Floor Cущность блоки пола
+// 5. class Level не считается сущностью  - уровень (контейнер для сущностей)
+// 6. class Sprite не считается сущностью - компонент отрисовки
 // 7. class Player
 // 8. function oneone()
 
@@ -119,7 +120,6 @@ export class Game {
 
     // Создаем нового игрока на стартовой позиции уровня
     this.player = new Player([...this.level.playerPos]); // Копируем позицию
-    window.player = this.player;
 
     // Сбрасываем состояние игры
     this.vX = 0;
@@ -336,6 +336,21 @@ export class Entity {
   render(ctx, vX, vY) {
     this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
   }
+
+  collideWall(wall) {
+    //the wall will always be a 16x16 block with hitbox = [0,0,16,16].
+    if (this.pos[0] > wall.pos[0]) {
+      //from the right
+      this.pos[0] = wall.pos[0] + wall.hitbox[2] - this.hitbox[0];
+      this.vel[0] = Math.max(0, this.vel[0]);
+      this.acc[0] = Math.max(0, this.acc[0]);
+    } else {
+      this.pos[0] =
+        wall.pos[0] + wall.hitbox[0] - this.hitbox[2] - this.hitbox[0];
+      this.vel[0] = Math.min(0, this.vel[0]);
+      this.acc[0] = Math.min(0, this.acc[0]);
+    }
+  }
 }
 
 /**
@@ -410,7 +425,7 @@ export class Floor extends Entity {
             }
           } else {
             // entity is hitting it from the side, we're a wall
-            //ent.collideWall(this);
+            ent.collideWall(this);
           }
         }
       }

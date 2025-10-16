@@ -116,7 +116,6 @@ export class Game {
   initLevel() {
     // Полностью пересоздаем уровень
     this.level = oneone();
-    window.level = this.level;
 
     // Создаем нового игрока на стартовой позиции уровня
     this.player = new Player([...this.level.playerPos]); // Копируем позицию
@@ -344,13 +343,17 @@ export class Entity {
  * от оригинала отличает только то что level экземпляр сделан глобальным
  * window.level
  */
+/**
+ * Класс Floor
+ */
 export class Floor extends Entity {
-  constructor(pos, sprite) {
+  constructor(pos, sprite, level) {
     super({
       pos: pos,
       sprite: sprite,
       hitbox: [0, 0, 16, 16],
     });
+    this.level = level; // Сохраняем ссылку на уровень
   }
 
   isCollideWith(ent) {
@@ -383,7 +386,8 @@ export class Floor extends Entity {
           // if the entity is over the block, it's basically floor
           const center = hpos2[0] + ent.hitbox[2] / 2;
           if (Math.abs(hpos2[1] + ent.hitbox[3] - hpos1[1]) <= ent.vel[1]) {
-            if (window.level.statics[this.pos[1] / 16 - 1][this.pos[0] / 16]) {
+            // Используем this.level вместо window.level
+            if (this.level.statics[this.pos[1] / 16 - 1]?.[this.pos[0] / 16]) {
               return;
             }
             ent.vel[1] = 0;
@@ -438,8 +442,9 @@ export class Level {
 
   putFloor(start, end) {
     for (let i = start; i < end; i++) {
-      this.statics[13][i] = new Floor([16 * i, 208], this.floorSprite);
-      this.statics[14][i] = new Floor([16 * i, 224], this.floorSprite);
+      // Передаем this (текущий уровень) в конструктор Floor
+      this.statics[13][i] = new Floor([16 * i, 208], this.floorSprite, this);
+      this.statics[14][i] = new Floor([16 * i, 224], this.floorSprite, this);
     }
   }
 }
@@ -812,8 +817,6 @@ export function oneone() {
     floorSprite: new Sprite('/tiles.png', [0, 0], [16, 16], 0),
     wallSprite: new Sprite('/tiles.png', [0, 16], [16, 16], 0),
   });
-
-  window.level = level;
 
   let ground = [
     [0, 8],

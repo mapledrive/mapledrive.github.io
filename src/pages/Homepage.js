@@ -354,12 +354,7 @@ export class Entity {
 }
 
 /**
- * Класс Floor
- * от оригинала отличает только то что level экземпляр сделан глобальным
- * window.level
- */
-/**
- * Класс Floor
+ * Класс Floor  -  от оригинала отличает то что level проброшен в конструктор
  */
 export class Floor extends Entity {
   constructor(pos, sprite, level) {
@@ -401,7 +396,6 @@ export class Floor extends Entity {
           // if the entity is over the block, it's basically floor
           const center = hpos2[0] + ent.hitbox[2] / 2;
           if (Math.abs(hpos2[1] + ent.hitbox[3] - hpos1[1]) <= ent.vel[1]) {
-            // Используем this.level вместо window.level
             if (this.level.statics[this.pos[1] / 16 - 1]?.[this.pos[0] / 16]) {
               return;
             }

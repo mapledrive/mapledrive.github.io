@@ -193,6 +193,23 @@ export class Game {
   updateEntities(dt, gameTime) {
     this.player.update(dt, this.vX);
 
+    // Обновляем блоки
+    for (let i = 0; i < 15; i++) {
+      for (let j = 0; j < this.level.blocks[i]?.length || 0; j++) {
+        if (this.level.blocks[i][j]) {
+          this.level.blocks[i][j].update(dt, gameTime);
+        }
+      }
+    }
+
+    // Обновляем флаги
+    this.level.items.forEach(item => {
+      if (item instanceof Flag) {
+        item.update(dt, this.vX, this.player);
+        item.checkCollisions(this.player);
+      }
+    });
+
     // ОБНОВЛЯЕМ ВРАГОВ ТОЛЬКО ЕСЛИ ИГРОК НЕ УМИРАЕТ
     if (!this.player.dying) {
       this.level.enemies.forEach((enemy, index) => {
@@ -297,8 +314,20 @@ export class Game {
         if (this.level.statics[i] && this.level.statics[i][j]) {
           this.renderEntity(this.level.statics[i][j]);
         }
+
+        // ДОБАВИТЬ: Отрисовка блоков
+        if (this.level.blocks[i] && this.level.blocks[i][j]) {
+          this.renderEntity(this.level.blocks[i][j]);
+        }
       }
     }
+
+    // Отрисовываем флаг
+    this.level.items.forEach(item => {
+      if (item instanceof Flag) {
+        item.render(this.ctx, this.vX, this.vY);
+      }
+    });
 
     // Отрисовываем врагов
     this.level.enemies.forEach(enemy => {
@@ -615,14 +644,17 @@ export class Level {
   }
 
   putBrick(x, y, item) {
-    // this.blocks[y][x] = new Block({
-    //   pos: [x * 16, y * 16],
-    //   item: item,
-    //   sprite: this.brickSprite,
-    //   bounceSprite: this.brickBounceSprite,
-    //   usedSprite: this.ublockSprite,
-    //   breakable: !item,
-    // });
+    this.blocks[y][x] = new Block(
+      {
+        pos: [x * 16, y * 16],
+        item: item,
+        sprite: this.brickSprite,
+        bounceSprite: this.brickBounceSprite,
+        usedSprite: this.ublockSprite,
+        breakable: !item,
+      },
+      this
+    ); // Добавляем this (ссылку на уровень)
   }
 
   putBigHill(x, y) {
@@ -719,12 +751,16 @@ export class Level {
   }
 
   putFlagpole(x) {
-    // this.statics[12][x] = new Floor([16 * x, 192], this.wallSprite);
-    // for (let i = 3; i < 12; i++) {
-    //   this.scenery[i][x] = new Prop([16 * x, 16 * i], this.flagpoleSprites[1]);
-    // }
-    // this.scenery[2][x] = new Prop([16 * x, 32], this.flagpoleSprites[0]);
-    // this.items.push(new Flag(16 * x));
+    const flagX = 16 * x;
+
+    // Создаем флаг
+    const flag = new Flag(flagX, this);
+    this.items.push(flag);
+
+    // Добавляем основание флагштока как статичный объект
+    this.statics[12][x] = new Floor([flagX, 192], this.wallSprite, this);
+
+    return flag; // Возвращаем флаг для доступа
   }
 }
 
@@ -1129,8 +1165,30 @@ export class Player extends Entity {
         if (level.statics[baseY + i]?.[baseX + j]) {
           level.statics[baseY + i][baseX + j].isCollideWith(this);
         }
+
+        if (level.blocks[baseY + i]?.[baseX + j]) {
+          level.blocks[baseY + i][baseX + j].isCollideWith(this);
+        }
       }
     }
+  }
+
+  flag() {
+    this.noInput = true;
+    this.flagging = true;
+    this.vel = [0, 2];
+    this.acc = [0, 0];
+  }
+
+  exit() {
+    // Логика завершения уровня
+    console.log('Level completed!');
+    // this.pos[0] += 16;
+    // this.targetPos[0] = level.exit * 16;
+    // this.left = true;
+    // this.setAnimation();
+    // this.waiting = 1;
+    // this.exiting = true;
   }
 }
 
@@ -1153,6 +1211,17 @@ export function oneone() {
     koopaSprite: function () {
       return new Sprite('/enemy.png', [96, 0], [16, 32], 6, [0, 1]);
     },
+    brickSprite: new Sprite('/tiles.png', [16, 0], [16, 16], 0),
+    brickBounceSprite: new Sprite('/tiles.png', [32, 0], [16, 16], 0),
+    rubbleSprite: function () {
+      return new Sprite('/items.png', [64, 0], [8, 8], 3, [0, 1]);
+    },
+    ublockSprite: new Sprite('/tiles.png', [48, 0], [16, 16], 0),
+    flagPoleSprites: [
+      new Sprite('/tiles.png', [256, 128], [16, 16], 0),
+      new Sprite('/tiles.png', [256, 144], [16, 16], 0),
+      new Sprite('/items.png', [128, 32], [16, 16], 0),
+    ],
   });
 
   let ground = [
@@ -1163,11 +1232,103 @@ export function oneone() {
     level.putFloor(loc[0], loc[1]);
   });
 
-  level.putWall(5, 13, 1);
-  level.putWall(12, 13, 4);
-  level.putWall(13, 13, 4);
-  level.putGoomba(35, 12);
-  level.putKoopa(14, 2);
+  //interactable terrain
+  //level.putQBlock(16, 9, new Mario.Bcoin([256, 144]));
+  level.putBrick(20, 9, null);
+  //level.putQBlock(21, 9, new Mario.Mushroom([336, 144]));
+  level.putBrick(22, 9, null);
+  //level.putQBlock(22, 5, new Mario.Bcoin([352, 80]));
+  //level.putQBlock(23, 9, new Mario.Bcoin([368, 144]));
+  level.putBrick(24, 9, null);
+  //level.putPipe(28, 13, 2);
+  //level.putPipe(38, 13, 3);
+  //level.putPipe(46, 13, 4);
+  //level.putRealPipe(57, 9, 4, 'DOWN', Mario.oneonetunnel);
+  level.putBrick(77, 9, null);
+  //level.putQBlock(78, 9, new Mario.Mushroom([1248, 144]));
+  level.putBrick(79, 9, null);
+  level.putBrick(80, 5, null);
+  level.putBrick(81, 5, null);
+  level.putBrick(82, 5, null);
+  level.putBrick(83, 5, null);
+  level.putBrick(84, 5, null);
+  level.putBrick(85, 5, null);
+  level.putBrick(86, 5, null);
+  level.putBrick(87, 5, null);
+  level.putBrick(91, 5, null);
+  level.putBrick(92, 5, null);
+  level.putBrick(93, 5, null);
+  //level.putQBlock(94, 5, new Mario.Bcoin([1504, 80]));
+  level.putBrick(94, 9, null);
+  //level.putBrick(100, 9, new Mario.Star([1600, 144]));
+  level.putBrick(101, 9, null);
+  //level.putQBlock(105, 9, new Mario.Bcoin([1680, 144]));
+  //level.putQBlock(108, 9, new Mario.Bcoin([1728, 144]));
+  //level.putQBlock(108, 5, new Mario.Mushroom([1728, 80]));
+  //level.putQBlock(111, 9, new Mario.Bcoin([1776, 144]));
+  level.putBrick(117, 9, null);
+  level.putBrick(120, 5, null);
+  level.putBrick(121, 5, null);
+  level.putBrick(122, 5, null);
+  level.putBrick(123, 5, null);
+  level.putBrick(128, 5, null);
+  //level.putQBlock(129, 5, new Mario.Bcoin([2074, 80]));
+  level.putBrick(129, 9, null);
+  //level.putQBlock(130, 5, new Mario.Bcoin([2080, 80]));
+  level.putBrick(130, 9, null);
+  level.putBrick(131, 5, null);
+  level.putWall(134, 13, 1);
+  level.putWall(135, 13, 2);
+  level.putWall(136, 13, 3);
+  level.putWall(137, 13, 4);
+  level.putWall(140, 13, 4);
+  level.putWall(141, 13, 3);
+  level.putWall(142, 13, 2);
+  level.putWall(143, 13, 1);
+  level.putWall(148, 13, 1);
+  level.putWall(149, 13, 2);
+  level.putWall(150, 13, 3);
+  level.putWall(151, 13, 4);
+  level.putWall(152, 13, 4);
+  level.putWall(155, 13, 4);
+  level.putWall(156, 13, 3);
+  level.putWall(157, 13, 2);
+  level.putWall(158, 13, 1);
+  //level.putPipe(163, 13, 2);
+  level.putBrick(168, 9, null);
+  level.putBrick(169, 9, null);
+  //level.putQBlock(170, 9, new Mario.Bcoin([2720, 144]));
+  level.putBrick(171, 9, null);
+  //level.putPipe(179, 13, 2);
+  level.putWall(181, 13, 1);
+  level.putWall(182, 13, 2);
+  level.putWall(183, 13, 3);
+  level.putWall(184, 13, 4);
+  level.putWall(185, 13, 5);
+  level.putWall(186, 13, 6);
+  level.putWall(187, 13, 7);
+  level.putWall(188, 13, 8);
+  level.putWall(189, 13, 8);
+  level.putFlagpole(198);
+
+  //and enemies
+  level.putGoomba(22, 12);
+  level.putGoomba(40, 12);
+  level.putGoomba(50, 12);
+  level.putGoomba(51, 12);
+  level.putGoomba(82, 4);
+  level.putGoomba(84, 4);
+  level.putGoomba(100, 12);
+  level.putGoomba(102, 12);
+  level.putGoomba(114, 12);
+  level.putGoomba(115, 12);
+  level.putGoomba(122, 12);
+  level.putGoomba(123, 12);
+  level.putGoomba(125, 12);
+  level.putGoomba(126, 12);
+  level.putGoomba(170, 12);
+  level.putGoomba(172, 12);
+  level.putKoopa(35, 11);
 
   return level;
 }
@@ -1570,5 +1731,248 @@ export class Koopa extends Entity {
     } else {
       this.vel[0] = 4;
     }
+  }
+}
+
+/**
+ * Класс Block
+ */
+export class Block {
+  constructor(options, levelRef) {
+    // Создаем как самостоятельный класс, а не наследник Floor
+    this.vel = [0, 0];
+    this.acc = [0, 0];
+    this.standing = true;
+    this.pos = options.pos;
+    this.sprite = options.sprite;
+    this.hitbox = [0, 0, 16, 16];
+    this.left = false;
+
+    this.item = options.item;
+    this.usedSprite = options.usedSprite;
+    this.bounceSprite = options.bounceSprite;
+    this.breakable = options.breakable;
+    this.opos = [];
+    this.osprite = null;
+    this.levelRef = levelRef;
+  }
+
+  render(ctx, vX, vY) {
+    if (this.sprite) {
+      this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
+    }
+  }
+
+  update(dt, gameTime) {
+    if (!this.standing) {
+      if (this.pos[1] < this.opos[1] - 8) {
+        this.vel[1] = 2;
+      }
+      if (this.pos[1] > this.opos[1]) {
+        this.vel[1] = 0;
+        this.pos[0] = this.opos[0];
+        this.pos[1] = this.opos[1];
+        if (this.osprite) {
+          this.sprite = this.osprite;
+        }
+        this.standing = true;
+      }
+    } else {
+      if (this.sprite === this.usedSprite) {
+        const x = Math.floor(this.pos[0] / 16);
+        const y = Math.floor(this.pos[1] / 16);
+        this.levelRef.statics[y][x] = new Floor(
+          this.pos,
+          this.usedSprite,
+          this.levelRef
+        );
+        delete this.levelRef.blocks[y][x];
+      }
+    }
+
+    this.pos[1] += this.vel[1];
+    if (this.sprite) {
+      this.sprite.update(dt, gameTime);
+    }
+  }
+
+  bonk(power) {
+    if (power > 0 && this.breakable) {
+      this.break();
+    } else if (this.standing) {
+      this.standing = false;
+      if (this.item) {
+        this.item.spawn();
+        this.item = null;
+      }
+      this.opos[0] = this.pos[0];
+      this.opos[1] = this.pos[1];
+      if (this.bounceSprite) {
+        this.osprite = this.sprite;
+        this.sprite = this.bounceSprite;
+      } else {
+        this.sprite = this.usedSprite;
+      }
+      this.vel[1] = -2;
+    }
+  }
+
+  break() {
+    const x = Math.floor(this.pos[0] / 16);
+    const y = Math.floor(this.pos[1] / 16);
+    delete this.levelRef.blocks[y][x];
+  }
+
+  isCollideWith(ent) {
+    if (!this.standing) return; // Не проверяем столкновения во время анимации
+
+    const hpos1 = [this.pos[0] + this.hitbox[0], this.pos[1] + this.hitbox[1]];
+    const hpos2 = [ent.pos[0] + ent.hitbox[0], ent.pos[1] + ent.hitbox[1]];
+
+    // Проверяем пересечение hitbox'ов
+    if (
+      !(
+        hpos1[0] > hpos2[0] + ent.hitbox[2] ||
+        hpos1[0] + this.hitbox[2] < hpos2[0]
+      )
+    ) {
+      if (
+        !(
+          hpos1[1] > hpos2[1] + ent.hitbox[3] ||
+          hpos1[1] + this.hitbox[3] < hpos2[1]
+        )
+      ) {
+        if (ent instanceof Player) {
+          this.handlePlayerCollision(ent);
+        }
+      }
+    }
+  }
+
+  handlePlayerCollision(player) {
+    const playerBottom = player.pos[1] + player.hitbox[1] + player.hitbox[3];
+    const blockTop = this.pos[1] + this.hitbox[1];
+    const playerTop = player.pos[1] + player.hitbox[1];
+    const blockBottom = this.pos[1] + this.hitbox[1] + this.hitbox[3];
+
+    // Игрок ударяет блок снизу (прыжок)
+    if (player.vel[1] < 0 && Math.abs(playerTop - blockBottom) <= 5) {
+      this.bonk(player.power > 0 ? 1 : 0);
+      player.vel[1] = 0; // Останавливаем движение вверх
+    }
+    // Игрок падает на блок сверху
+    else if (player.vel[1] > 0 && Math.abs(playerBottom - blockTop) <= 5) {
+      player.vel[1] = 0;
+      player.pos[1] = blockTop - player.hitbox[3] - player.hitbox[1];
+      player.standing = true;
+      player.jumping = 0;
+    }
+  }
+
+  // Переименуем старый bonk в bump для совместимости
+  bump() {
+    this.bonk(0);
+  }
+
+  // Добавляем методы для совместимости с Entity
+  collideWall() {}
+}
+
+/**
+ * Класс Flag
+ */
+
+export class Flag extends Entity {
+  constructor(pos, levelRef) {
+    super({
+      pos: [pos, 49],
+      sprite: null,
+      hitbox: [2, 0, 12, 240], // Увеличиваем hitbox для столкновений
+    });
+
+    this.done = false;
+    this.hit = false;
+    this.vel = [0, 0];
+    this.acc = [0, 0];
+    this.levelRef = levelRef; // Сохраняем ссылку на уровень
+  }
+
+  collideWall() {}
+
+  update(dt, vX, player) {
+    if (this.hit && !this.done && this.pos[1] >= 170) {
+      this.vel = [0, 0];
+      this.pos[1] = 170;
+
+      if (player && typeof player.exit === 'function') {
+        player.exit();
+      }
+      this.done = true;
+    }
+    this.pos[1] += this.vel[1];
+  }
+
+  checkCollisions(player) {
+    this.isPlayerCollided(player);
+  }
+
+  isPlayerCollided(player) {
+    if (this.hit || !player) return;
+
+    const playerCenterX =
+      player.pos[0] + player.hitbox[0] + player.hitbox[2] / 2;
+    const flagX = this.pos[0];
+
+    // Проверяем, коснулся ли игрок флагштока
+    if (playerCenterX >= flagX - 8 && playerCenterX <= flagX + 8) {
+      this.hit = true;
+
+      // music.overworld.pause();
+      // sounds.flagpole.play();
+
+      if (typeof player.flag === 'function') {
+        player.flag();
+      }
+      this.vel = [0, 2];
+    }
+  }
+
+  render(ctx, vX, vY) {
+    if (!this.levelRef?.flagpoleSprites) return;
+
+    // Отрисовываем весь флагшток
+    const flagX = this.pos[0];
+
+    // Шарик наверху
+    this.levelRef.flagpoleSprites[0].render(ctx, flagX, 32, vX, vY);
+
+    // Стержень флагштока
+    for (let i = 3; i < 12; i++) {
+      this.levelRef.flagpoleSprites[1].render(ctx, flagX, 16 * i, vX, vY);
+    }
+
+    // Флаг
+    this.levelRef.flagpoleSprites[2].render(
+      ctx,
+      flagX - 8,
+      this.pos[1],
+      vX,
+      vY
+    );
+
+    // Основание
+    this.levelRef.flagpoleSprites[3]?.render(ctx, flagX - 8, 192, vX, vY);
+  }
+}
+
+// класс Prop
+class Prop {
+  constructor(pos, sprite) {
+    this.pos = pos;
+    this.sprite = sprite;
+  }
+
+  render(ctx, vX, vY) {
+    this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
   }
 }

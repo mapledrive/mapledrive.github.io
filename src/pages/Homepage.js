@@ -543,7 +543,9 @@ export class Level {
   }
 
   putKoopa(x, y) {
-    //this.enemies.push(new Koopa([16 * x, 16 * y], this.koopaSprite(), false));
+    this.enemies.push(
+      new Koopa([16 * x, 16 * y], this.koopaSprite(), false, this)
+    );
   }
 
   putWall(x, y, height) {
@@ -1148,6 +1150,9 @@ export function oneone() {
     goombaSprite: function () {
       return new Sprite('/enemy.png', [0, 16], [16, 16], 3, [0, 1]);
     },
+    koopaSprite: function () {
+      return new Sprite('/enemy.png', [96, 0], [16, 32], 2, [0, 1]);
+    },
   });
 
   let ground = [
@@ -1161,13 +1166,18 @@ export function oneone() {
   level.putWall(5, 13, 1);
   level.putWall(15, 13, 4);
   //level.putWall(13, 13, 1);
-  level.putGoomba(14, 12);
+  level.putGoomba(35, 12);
+  level.putKoopa(14, 11);
 
   return level;
 }
 
 // Entity Sprite и Floor - точно как оригинал с минимумом изменений
 // Level - как оригинал некот методы закомментили
+
+/**
+ * Класс Goomba
+ */
 
 class Goomba extends Entity {
   constructor(pos, sprite, levelRef) {
@@ -1324,5 +1334,241 @@ class Goomba extends Entity {
     this.pos[1] -= 1;
     this.vel[0] = 0;
     this.vel[1] = -2.5;
+  }
+}
+
+/**
+ * Класс Koopa
+ */
+
+export class Koopa extends Entity {
+  constructor(pos, sprite, para = false, levelRef) {
+    super({
+      pos: pos,
+      sprite: sprite,
+      hitbox: [2, 8, 12, 24],
+    });
+
+    this.dying = false;
+    this.shell = false;
+    this.para = para;
+    this.turn = false;
+    this.flipping = false;
+    this.vel = [-0.5, 0];
+    this.left = true;
+    this.levelRef = levelRef;
+    this.idx = levelRef.enemies.length;
+    this.koopaSprite = levelRef.koopaSprite;
+  }
+
+  render(ctx, vX, vY) {
+    this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
+  }
+
+  update(dt, vX) {
+    if (this.turn) {
+      this.vel[0] = -this.vel[0];
+      this.turn = false;
+    }
+
+    if (this.vel[0] !== 0) {
+      this.left = this.vel[0] < 0;
+    }
+
+    if (this.left) {
+      this.sprite.img = '/enemy.png';
+    } else {
+      this.sprite.img = '/enemyr.png';
+    }
+
+    if (this.pos[0] - vX > 336) {
+      return;
+    } else if (this.pos[0] - vX < -32) {
+      delete this.levelRef.enemies[this.idx];
+      return;
+    }
+
+    if (this.dying) {
+      this.dying -= 1;
+      if (!this.dying) {
+        delete this.levelRef.enemies[this.idx];
+      }
+    }
+
+    if (this.shell) {
+      if (this.vel[0] === 0) {
+        this.shell -= 1;
+        if (this.shell < 120) {
+          this.sprite.speed = 5;
+        }
+        if (this.shell === 0) {
+          this.sprite = this.koopaSprite();
+          this.hitbox = [2, 8, 12, 24];
+          if (this.left) {
+            this.sprite.img = '/enemy.png';
+            this.vel[0] = 0.5;
+            this.left = false;
+          } else {
+            this.vel[0] = -0.5;
+            this.left = true;
+          }
+          this.pos[1] -= 16;
+        }
+      } else {
+        this.shell = 360;
+        this.sprite.speed = 0;
+        this.sprite.setFrame(0);
+      }
+    }
+
+    this.acc[1] = 0.2;
+    this.vel[1] += this.acc[1];
+    this.pos[0] += this.vel[0];
+    this.pos[1] += this.vel[1];
+    this.sprite.update(dt);
+  }
+
+  collideWall() {
+    this.turn = true;
+  }
+
+  checkCollisions(vX, playerRef) {
+    const h = this.shell ? 1 : 2;
+    const adjustedH = this.pos[1] % 16 !== 0 ? h + 1 : h;
+    const w = this.pos[0] % 16 === 0 ? 1 : 2;
+
+    const baseX = Math.floor(this.pos[0] / 16);
+    const baseY = Math.floor(this.pos[1] / 16);
+
+    if (baseY + adjustedH > 15) {
+      return;
+    }
+
+    if (this.flipping) {
+      return;
+    }
+
+    for (let i = 0; i < adjustedH; i++) {
+      for (let j = 0; j < w; j++) {
+        if (this.levelRef.statics[baseY + i]?.[baseX + j]) {
+          this.levelRef.statics[baseY + i][baseX + j].isCollideWith(this);
+        }
+        if (this.levelRef.blocks[baseY + i]?.[baseX + j]) {
+          this.levelRef.blocks[baseY + i][baseX + j].isCollideWith(this);
+        }
+      }
+    }
+
+    this.levelRef.enemies.forEach(enemy => {
+      if (enemy === this || enemy.pos[0] - vX > 336) {
+        return;
+      }
+      this.isCollideWith(enemy);
+    });
+
+    this.isCollideWith(playerRef);
+  }
+
+  isCollideWith(ent) {
+    if (ent instanceof Player && (this.dying || ent.invincibility)) {
+      return;
+    }
+
+    const hpos1 = [this.pos[0] + this.hitbox[0], this.pos[1] + this.hitbox[1]];
+    const hpos2 = [ent.pos[0] + ent.hitbox[0], ent.pos[1] + ent.hitbox[1]];
+
+    const overlapX = !(
+      hpos1[0] > hpos2[0] + ent.hitbox[2] ||
+      hpos1[0] + this.hitbox[2] < hpos2[0]
+    );
+    const overlapY = !(
+      hpos1[1] > hpos2[1] + ent.hitbox[3] ||
+      hpos1[1] + this.hitbox[3] < hpos2[1]
+    );
+
+    if (overlapX && overlapY) {
+      if (ent instanceof Player) {
+        this.handlePlayerCollision(ent);
+      } else if (this.shell && this.vel[0] !== 0 && ent instanceof Goomba) {
+        ent.bump();
+      } else {
+        this.collideWall();
+      }
+    }
+  }
+
+  handlePlayerCollision(player) {
+    const playerBottom = player.pos[1] + player.hitbox[1] + player.hitbox[3];
+    const enemyTop = this.pos[1] + this.hitbox[1];
+    const playerIsAbove =
+      player.vel[1] > 0 && playerBottom - enemyTop <= player.vel[1] + 2;
+
+    if (playerIsAbove) {
+      // Игрок прыгает сверху
+      player.bounce = true;
+
+      if (this.shell) {
+        if (this.vel[0] === 0) {
+          this.kickShell(player);
+        } else {
+          this.vel[0] = 0;
+        }
+      } else {
+        this.stomp(player);
+      }
+    } else {
+      // Столкновение сбоку
+      if (this.shell) {
+        if (this.vel[0] === 0) {
+          // Неподвижный shell - можно пнуть сбоку
+          this.kickShell(player);
+        } else {
+          // Движущийся shell убивает при боковом столкновении
+          player.damage();
+        }
+      } else {
+        // Обычная Koopa убивает при боковом столкновении
+        player.damage();
+      }
+    }
+  }
+
+  stomp(player) {
+    player.bounce = true;
+
+    if (this.para) {
+      this.para = false;
+      this.sprite.pos[0] -= 32;
+    } else {
+      this.shell = 360;
+      this.sprite.pos[0] += 64;
+      this.sprite.pos[1] += 16;
+      this.sprite.size = [16, 16];
+      this.hitbox = [2, 0, 12, 16];
+      this.sprite.speed = 0;
+      this.sprite.frames = [0, 1];
+      this.vel = [0, 0];
+      this.pos[1] += 16;
+    }
+  }
+
+  bump() {
+    if (this.flipping) return;
+
+    this.flipping = true;
+    this.sprite.pos = [160, 0];
+    this.sprite.size = [16, 16];
+    this.hitbox = [2, 0, 12, 16];
+    this.sprite.speed = 0;
+    this.vel[0] = 0;
+    this.vel[1] = -2.5;
+  }
+
+  kickShell(player) {
+    if (player.left) {
+      this.vel[0] = -4;
+    } else {
+      this.vel[0] = 4;
+    }
   }
 }

@@ -1252,9 +1252,12 @@ export function oneone() {
   });
 
   let ground = [
-    [0, 1],
-    [3, 212],
+    [0, 69],
+    [71, 86],
+    [89, 153],
+    [155, 212],
   ];
+
   ground.forEach(function (loc) {
     level.putFloor(loc[0], loc[1]);
   });

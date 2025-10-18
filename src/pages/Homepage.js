@@ -193,6 +193,16 @@ export class Game {
   updateEntities(dt, gameTime) {
     this.player.update(dt, this.vX);
 
+    // ОБНОВЛЯЕМ ВРАГОВ ТОЛЬКО ЕСЛИ ИГРОК НЕ УМИРАЕТ
+    if (!this.player.dying) {
+      this.level.enemies.forEach((enemy, index) => {
+        if (enemy) {
+          enemy.update(dt, this.vX);
+          enemy.checkCollisions(this.vX, this.player);
+        }
+      });
+    }
+
     // Обновляем все обновляемые объекты
     this.updateables.forEach(ent => {
       ent.update(dt, gameTime);
@@ -226,8 +236,9 @@ export class Game {
       this.player.startDeath();
     }
 
-    // Перезагружаем уровень после завершения анимации смерти
+    // Перезагружаем уровень только после завершения анимации смерти
     if (this.player.dying && this.player.deathTimer <= 0) {
+      console.log('Анимация смерти завершена, перезагружаем уровень...');
       this.resetLevel();
     }
   }
@@ -289,8 +300,25 @@ export class Game {
       }
     }
 
-    // Отрисовываем игрока (с учетом мерцания при неуязвимости)
-    if (!this.player.dying && this.player.invincibility % 2 === 0) {
+    // Отрисовываем врагов
+    this.level.enemies.forEach(enemy => {
+      if (
+        enemy &&
+        enemy.pos[0] - this.vX > -32 &&
+        enemy.pos[0] - this.vX < 336
+      ) {
+        this.renderEntity(enemy);
+      }
+    });
+
+    // Отрисовываем игрока (во время смерти всегда показываем, без мерцания)
+    if (!this.player.dying) {
+      // Обычный рендеринг с мерцанием при неуязвимости
+      if (this.player.invincibility % 2 === 0) {
+        this.renderEntity(this.player);
+      }
+    } else {
+      // Во время смерти всегда показываем игрока
       this.renderEntity(this.player);
     }
   }
@@ -505,7 +533,13 @@ export class Level {
   }
 
   putGoomba(x, y) {
-    //this.enemies.push(new Goomba([16 * x, 16 * y], this.goombaSprite()));
+    const goomba = new Goomba([16 * x, 16 * y], this.goombaSprite(), this);
+    this.enemies.push(goomba);
+    console.log(
+      `Goomba создан на позиции: [${16 * x}, ${16 * y}], индекс: ${
+        this.enemies.length - 1
+      }`
+    );
   }
 
   putKoopa(x, y) {
@@ -897,9 +931,10 @@ export class Player extends Entity {
 
   setAnimation() {
     if (this.dying) {
-      // Анимация смерти
-      this.sprite.pos = [176, 32];
+      // Анимация смерти - специальный спрайт
+      this.sprite.pos = [176, 32]; // Позиция спрайта смерти
       this.sprite.speed = 0;
+      this.sprite.frames = [0]; // Статичный кадр
       return;
     }
 
@@ -943,24 +978,73 @@ export class Player extends Entity {
     }
   }
 
+  damage() {
+    if (this.invincibility > 0 || this.dying) return;
+
+    console.log('Игрок получает урон от Гумбы!');
+
+    // Если игрок большой - уменьшаемся
+    if (this.power > 0) {
+      this.powerDown();
+    } else {
+      // Если маленький - умираем
+      this.startDeath();
+    }
+  }
+
+  powerDown() {
+    console.log('Игрок уменьшается');
+    // Устанавливаем неуязвимость на несколько секунд
+    this.invincibility = 120; // ~2 секунды при 60 FPS
+
+    // Уменьшаем размер игрока
+    this.power = 0;
+    this.sprite.size = [16, 16];
+    this.hitbox = [0, 0, 16, 16];
+
+    // Мигание при неуязвимости
+    this.invincibility = 120;
+  }
+
   startDeath() {
     if (this.dying) return;
 
     console.log('Игрок умирает');
-    window.music.death.play();
+    if (window.music?.death) {
+      window.music.death.play();
+    }
 
     this.dying = true;
-    this.deathTimer = 2.0; // 2 секунды на анимацию смерти
+    this.deathTimer = 2.0;
     this.noInput = true;
 
-    // Останавливаем движение
-    this.vel = [0, -4]; // Подбрасываем вверх для анимации
-    this.acc = [0, 0.5];
+    // Останавливаем движение по X
+    this.vel[0] = 0;
+    this.acc[0] = 0;
+
+    // РАЗЛИЧИЕ МЕЖДУ СМЕРТЬЮ ОТ ВРАГА И ПАДЕНИЕМ В ЯМУ
+    if (this.pos[1] < 240) {
+      // Смерть от врага - подлетает вверх
+      this.vel[1] = -6;
+      this.acc[1] = 0.3;
+    } else {
+      // Падение в яму - просто продолжает падать
+      this.vel[1] = 0;
+      this.acc[1] = 0.25; // Обычная гравитация
+    }
+
+    // Устанавливаем анимацию смерти
+    this.setAnimation();
 
     // Отключаем все управления
     this.noWalk();
     this.noRun();
     this.noJump();
+
+    console.log(
+      'Анимация смерти запущена',
+      this.pos[1] < 240 ? 'с подлетом' : 'без подлета (падение в яму)'
+    );
   }
 
   update(dt, vX) {
@@ -968,13 +1052,15 @@ export class Player extends Entity {
     if (this.dying) {
       this.deathTimer -= dt;
 
-      // Анимация смерти - падение вниз
+      // Продолжаем физику во время смерти
       this.vel[1] += this.acc[1];
       this.pos[0] += this.vel[0];
       this.pos[1] += this.vel[1];
 
-      this.setAnimation();
+      // Всегда показываем спрайт смерти (без мерцания)
       this.sprite.update(dt);
+
+      // Не выходим раньше времени - даем анимации проиграться
       return;
     }
 
@@ -1059,22 +1145,184 @@ export function oneone() {
     exit: 204,
     floorSprite: new Sprite('/tiles.png', [0, 0], [16, 16], 0),
     wallSprite: new Sprite('/tiles.png', [0, 16], [16, 16], 0),
+    goombaSprite: function () {
+      return new Sprite('/enemy.png', [0, 16], [16, 16], 3, [0, 1]);
+    },
   });
 
   let ground = [
-    [0, 8],
-    [10, 212],
+    [0, 1],
+    [3, 212],
   ];
   ground.forEach(function (loc) {
     level.putFloor(loc[0], loc[1]);
   });
 
-  level.putWall(13, 13, 3);
-  level.putWall(14, 13, 3);
-  level.putWall(15, 13, 3);
+  level.putWall(5, 13, 1);
+  level.putWall(15, 13, 4);
+  //level.putWall(13, 13, 1);
+  level.putGoomba(14, 12);
 
   return level;
 }
 
 // Entity Sprite и Floor - точно как оригинал с минимумом изменений
 // Level - как оригинал некот методы закомментили
+
+class Goomba extends Entity {
+  constructor(pos, sprite, levelRef) {
+    super({
+      pos: pos,
+      sprite: sprite,
+      hitbox: [0, 0, 16, 16],
+    });
+
+    this.dying = false;
+    this.vel = [-0.5, 0];
+    this.levelRef = levelRef; // Сохраняем ссылку на уровень
+    this.idx = levelRef.enemies.length;
+    this.flipping = false;
+  }
+
+  render(ctx, vX, vY) {
+    this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
+  }
+
+  update(dt, vX) {
+    if (this.pos[0] - vX > 336) {
+      // if we're too far away, do nothing
+      return;
+    } else if (this.pos[0] - vX < -32) {
+      delete this.levelRef.enemies[this.idx];
+    }
+
+    if (this.dying) {
+      this.dying -= 1;
+      if (!this.dying) {
+        delete this.levelRef.enemies[this.idx];
+      }
+    }
+
+    this.acc[1] = 0.2;
+    this.vel[1] += this.acc[1];
+    this.pos[0] += this.vel[0];
+    this.pos[1] += this.vel[1];
+    this.sprite.update(dt);
+  }
+
+  collideWall() {
+    this.vel[0] = -this.vel[0];
+    // гумба бывает застревает в конце перед блоком и стоит
+    // Добавляем небольшой отступ от стены, чтобы избежать залипания
+    if (this.vel[0] > 0) {
+      this.pos[0] += 1; // Сдвигаем вправо от стены
+    } else {
+      this.pos[0] -= 1; // Сдвигаем влево от стены
+    }
+  }
+
+  checkCollisions(vX, playerRef) {
+    if (this.flipping) {
+      return;
+    }
+
+    const h = this.pos[1] % 16 === 0 ? 1 : 2;
+    const w = this.pos[0] % 16 === 0 ? 1 : 2;
+
+    const baseX = Math.floor(this.pos[0] / 16);
+    const baseY = Math.floor(this.pos[1] / 16);
+
+    if (baseY + h > 15) {
+      delete this.levelRef.enemies[this.idx];
+      return;
+    }
+
+    for (let i = 0; i < h; i++) {
+      for (let j = 0; j < w; j++) {
+        if (this.levelRef.statics[baseY + i]?.[baseX + j]) {
+          this.levelRef.statics[baseY + i][baseX + j].isCollideWith(this);
+        }
+        if (this.levelRef.blocks[baseY + i]?.[baseX + j]) {
+          this.levelRef.blocks[baseY + i][baseX + j].isCollideWith(this);
+        }
+      }
+    }
+
+    this.levelRef.enemies.forEach(enemy => {
+      if (enemy === this) {
+        // don't check collisions with ourselves
+        return;
+      } else if (enemy.pos[0] - vX > 336) {
+        // stop checking once we get to far away dudes
+        return;
+      } else {
+        this.isCollideWith(enemy);
+      }
+    });
+
+    this.isCollideWith(playerRef);
+  }
+
+  isCollideWith(ent) {
+    if (ent instanceof Player && (this.dying || ent.invincibility)) {
+      return;
+    }
+
+    // the first two elements of the hitbox array are an offset
+    const hpos1 = [this.pos[0] + this.hitbox[0], this.pos[1] + this.hitbox[1]];
+    const hpos2 = [ent.pos[0] + ent.hitbox[0], ent.pos[1] + ent.hitbox[1]];
+
+    // if the hitboxes actually overlap
+    if (
+      !(
+        hpos1[0] > hpos2[0] + ent.hitbox[2] ||
+        hpos1[0] + this.hitbox[2] < hpos2[0]
+      )
+    ) {
+      if (
+        !(
+          hpos1[1] > hpos2[1] + ent.hitbox[3] ||
+          hpos1[1] + this.hitbox[3] < hpos2[1]
+        )
+      ) {
+        if (ent instanceof Player) {
+          // Определяем направление столкновения
+          const playerBottom = hpos2[1] + ent.hitbox[3];
+          const goombaTop = hpos1[1];
+          const playerTop = hpos2[1];
+          const goombaBottom = hpos1[1] + this.hitbox[3];
+
+          // Игрок прыгает на Гумбу сверху
+          if (ent.vel[1] > 0 && playerBottom - goombaTop <= ent.vel[1] + 2) {
+            this.stomp(ent);
+          }
+          // Гумба сталкивается с игроком сбоку или снизу
+          else {
+            // or the player gets hit
+            ent.damage();
+          }
+        } else {
+          this.collideWall();
+        }
+      }
+    }
+  }
+
+  stomp(playerRef) {
+    //sounds.stomp.play();
+    playerRef.bounce = true;
+    this.sprite.pos[0] = 32;
+    this.sprite.speed = 0;
+    this.vel[0] = 0;
+    this.dying = 10;
+  }
+
+  bump() {
+    //sounds.kick.play();
+    this.sprite.img = '/enemyr.png';
+    this.flipping = true;
+    this.pos[1] -= 1;
+    this.vel[0] = 0;
+    this.vel[1] = -2.5;
+  }
+}

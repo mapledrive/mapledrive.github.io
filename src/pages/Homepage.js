@@ -1151,7 +1151,7 @@ export function oneone() {
       return new Sprite('/enemy.png', [0, 16], [16, 16], 3, [0, 1]);
     },
     koopaSprite: function () {
-      return new Sprite('/enemy.png', [96, 0], [16, 32], 2, [0, 1]);
+      return new Sprite('/enemy.png', [96, 0], [16, 32], 6, [0, 1]);
     },
   });
 
@@ -1164,10 +1164,10 @@ export function oneone() {
   });
 
   level.putWall(5, 13, 1);
-  level.putWall(15, 13, 4);
-  //level.putWall(13, 13, 1);
+  level.putWall(12, 13, 4);
+  level.putWall(13, 13, 4);
   level.putGoomba(35, 12);
-  level.putKoopa(14, 11);
+  level.putKoopa(14, 2);
 
   return level;
 }

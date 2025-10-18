@@ -587,42 +587,61 @@ export class Level {
   putPipe(x, y, height) {
     for (let i = y - height; i < y; i++) {
       if (i === y - height) {
-        this.statics[i][x] = new Floor([16 * x, 16 * i], this.pipeLEndSprite);
+        this.statics[i][x] = new Floor(
+          [16 * x, 16 * i],
+          this.pipeLEndSprite,
+          this
+        );
         this.statics[i][x + 1] = new Floor(
           [16 * x + 16, 16 * i],
-          this.pipeREndSprite
+          this.pipeREndSprite,
+          this
         );
       } else {
-        this.statics[i][x] = new Floor([16 * x, 16 * i], this.pipeLMidSprite);
+        this.statics[i][x] = new Floor(
+          [16 * x, 16 * i],
+          this.pipeLMidSprite,
+          this
+        );
         this.statics[i][x + 1] = new Floor(
           [16 * x + 16, 16 * i],
-          this.pipeRMidSprite
+          this.pipeRMidSprite,
+          this
         );
       }
     }
   }
 
   putLeftPipe(x, y) {
-    this.statics[y][x] = new Floor([16 * x, 16 * y], this.LPipeSprites[0]);
+    this.statics[y][x] = new Floor(
+      [16 * x, 16 * y],
+      this.LPipeSprites[0],
+      this
+    );
     this.statics[y + 1][x] = new Floor(
       [16 * x, 16 * (y + 1)],
-      this.LPipeSprites[1]
+      this.LPipeSprites[1],
+      this
     );
     this.statics[y][x + 1] = new Floor(
       [16 * (x + 1), 16 * y],
-      this.LPipeSprites[2]
+      this.LPipeSprites[2],
+      this
     );
     this.statics[y + 1][x + 1] = new Floor(
       [16 * (x + 1), 16 * (y + 1)],
-      this.LPipeSprites[3]
+      this.LPipeSprites[3],
+      this
     );
     this.statics[y][x + 2] = new Floor(
       [16 * (x + 2), 16 * y],
-      this.LPipeSprites[4]
+      this.LPipeSprites[4],
+      this
     );
     this.statics[y + 1][x + 2] = new Floor(
       [16 * (x + 2), 16 * (y + 1)],
-      this.LPipeSprites[5]
+      this.LPipeSprites[5],
+      this
     );
   }
 
@@ -1217,6 +1236,14 @@ export function oneone() {
       return new Sprite('/items.png', [64, 0], [8, 8], 3, [0, 1]);
     },
     ublockSprite: new Sprite('/tiles.png', [48, 0], [16, 16], 0),
+    pipeLMidSprite: new Sprite('/tiles.png', [0, 144], [16, 16], 0),
+    pipeRMidSprite: new Sprite('/tiles.png', [16, 144], [16, 16], 0),
+    pipeLEndSprite: new Sprite('/tiles.png', [0, 128], [16, 16], 0),
+    pipeREndSprite: new Sprite('/tiles.png', [16, 128], [16, 16], 0),
+    pipeUpMid: new Sprite('/tiles.png', [0, 144], [32, 16], 0),
+    pipeSideMid: new Sprite('/tiles.png', [48, 128], [16, 32], 0),
+    pipeLeft: new Sprite('/tiles.png', [32, 128], [16, 32], 0),
+    pipeTop: new Sprite('/tiles.png', [0, 128], [32, 16], 0),
     flagPoleSprites: [
       new Sprite('/tiles.png', [256, 128], [16, 16], 0),
       new Sprite('/tiles.png', [256, 144], [16, 16], 0),
@@ -1240,9 +1267,9 @@ export function oneone() {
   //level.putQBlock(22, 5, new Mario.Bcoin([352, 80]));
   //level.putQBlock(23, 9, new Mario.Bcoin([368, 144]));
   level.putBrick(24, 9, null);
-  //level.putPipe(28, 13, 2);
-  //level.putPipe(38, 13, 3);
-  //level.putPipe(46, 13, 4);
+  level.putPipe(28, 13, 2);
+  level.putPipe(38, 13, 3);
+  level.putPipe(46, 13, 4);
   //level.putRealPipe(57, 9, 4, 'DOWN', Mario.oneonetunnel);
   level.putBrick(77, 9, null);
   //level.putQBlock(78, 9, new Mario.Mushroom([1248, 144]));
@@ -1294,12 +1321,12 @@ export function oneone() {
   level.putWall(156, 13, 3);
   level.putWall(157, 13, 2);
   level.putWall(158, 13, 1);
-  //level.putPipe(163, 13, 2);
+  level.putPipe(163, 13, 2);
   level.putBrick(168, 9, null);
   level.putBrick(169, 9, null);
   //level.putQBlock(170, 9, new Mario.Bcoin([2720, 144]));
   level.putBrick(171, 9, null);
-  //level.putPipe(179, 13, 2);
+  level.putPipe(179, 13, 2);
   level.putWall(181, 13, 1);
   level.putWall(182, 13, 2);
   level.putWall(183, 13, 3);

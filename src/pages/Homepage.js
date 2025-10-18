@@ -24,13 +24,7 @@ const Homepage = () => {
       try {
         setLoading(true);
         await loadAllSprites();
-        console.log('Все спрайты загружены');
-
         const canvas = canvasRef.current;
-        if (!canvas) {
-          throw new Error('Canvas not found');
-        }
-
         const game = new Game(canvas, resources);
         gameRef.current = game;
         game.start();
@@ -127,8 +121,6 @@ export class Game {
     this.gameTime = 0;
     this.updateables = [];
     this.fireballs = [];
-
-    console.log('Уровень перезагружен, игрок на позиции:', this.player.pos);
   }
 
   init() {
@@ -152,9 +144,7 @@ export class Game {
 
     if (allLoaded) {
       this.initialized = true;
-      console.log('Игра инициализирована');
     } else {
-      console.log('Ожидание загрузки спрайтов...');
       setTimeout(() => this.init(), 100);
     }
   }
@@ -255,7 +245,6 @@ export class Game {
 
     // Перезагружаем уровень только после завершения анимации смерти
     if (this.player.dying && this.player.deathTimer <= 0) {
-      console.log('Анимация смерти завершена, перезагружаем уровень...');
       this.resetLevel();
     }
   }
@@ -564,11 +553,6 @@ export class Level {
   putGoomba(x, y) {
     const goomba = new Goomba([16 * x, 16 * y], this.goombaSprite(), this);
     this.enemies.push(goomba);
-    console.log(
-      `Goomba создан на позиции: [${16 * x}, ${16 * y}], индекс: ${
-        this.enemies.length - 1
-      }`
-    );
   }
 
   putKoopa(x, y) {
@@ -853,8 +837,6 @@ export class Player extends Entity {
       hitbox: [0, 0, 16, 16],
     });
 
-    console.log('Создан новый игрок на позиции:', this.pos);
-
     // Состояния (как в оригинале)
     this.powering = [];
     this.jumping = 0;
@@ -899,8 +881,6 @@ export class Player extends Entity {
     this.sprite.speed = 0;
     this.sprite.frames = [0];
     this.sprite.img = '/player.png';
-
-    console.log('Состояние игрока сброшено, позиция:', this.pos);
   }
 
   run() {
@@ -1038,8 +1018,6 @@ export class Player extends Entity {
   damage() {
     if (this.invincibility > 0 || this.dying) return;
 
-    console.log('Игрок получает урон от Гумбы!');
-
     // Если игрок большой - уменьшаемся
     if (this.power > 0) {
       this.powerDown();
@@ -1050,8 +1028,6 @@ export class Player extends Entity {
   }
 
   powerDown() {
-    console.log('Игрок уменьшается');
-    // Устанавливаем неуязвимость на несколько секунд
     this.invincibility = 120; // ~2 секунды при 60 FPS
 
     // Уменьшаем размер игрока
@@ -1066,7 +1042,6 @@ export class Player extends Entity {
   startDeath() {
     if (this.dying) return;
 
-    console.log('Игрок умирает');
     if (window.music?.death) {
       window.music.death.play();
     }
@@ -1097,11 +1072,6 @@ export class Player extends Entity {
     this.noWalk();
     this.noRun();
     this.noJump();
-
-    console.log(
-      'Анимация смерти запущена',
-      this.pos[1] < 240 ? 'с подлетом' : 'без подлета (падение в яму)'
-    );
   }
 
   update(dt, vX) {
@@ -1201,7 +1171,6 @@ export class Player extends Entity {
 
   exit() {
     // Логика завершения уровня
-    console.log('Level completed!');
     // this.pos[0] += 16;
     // this.targetPos[0] = level.exit * 16;
     // this.left = true;
@@ -1362,9 +1331,6 @@ export function oneone() {
 
   return level;
 }
-
-// Entity Sprite и Floor - точно как оригинал с минимумом изменений
-// Level - как оригинал некот методы закомментили
 
 /**
  * Класс Goomba

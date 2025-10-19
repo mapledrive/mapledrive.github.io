@@ -76,7 +76,7 @@ const Homepage = () => {
 export { Homepage };
 
 /**
- * Основной игровой класс
+ * Основной игровой класс Game
  */
 export class Game {
   constructor(canvas, resources) {
@@ -366,7 +366,7 @@ export class Game {
 }
 
 /**
- * Базовый класс Entity !!!
+ * класс Entity
  */
 export class Entity {
   constructor(options) {
@@ -638,12 +638,16 @@ export class Level {
   }
 
   putQBlock(x, y, item) {
-    // this.blocks[y][x] = new Block({
-    //   pos: [x * 16, y * 16],
-    //   item: item,
-    //   sprite: this.qblockSprite,
-    //   usedSprite: this.ublockSprite,
-    // });
+    console.log(this, 'this');
+    this.blocks[y][x] = new Block(
+      {
+        pos: [x * 16, y * 16],
+        item: item,
+        sprite: this.qblockSprite,
+        usedSprite: this.ublockSprite,
+      },
+      this
+    );
   }
 
   putBrick(x, y, item) {
@@ -1213,6 +1217,16 @@ export function oneone() {
     pipeSideMid: new Sprite('/tiles.png', [48, 128], [16, 32], 0),
     pipeLeft: new Sprite('/tiles.png', [32, 128], [16, 32], 0),
     pipeTop: new Sprite('/tiles.png', [0, 128], [32, 16], 0),
+    qblockSprite: new Sprite(
+      '/tiles.png',
+      [384, 0],
+      [16, 16],
+      8,
+      [0, 0, 0, 0, 1, 2, 1]
+    ),
+    bcoinSprite: function () {
+      return new Sprite('/items.png', [0, 112], [16, 16], 20, [0, 1, 2, 3]);
+    },
     flagPoleSprites: [
       new Sprite('/tiles.png', [256, 128], [16, 16], 0),
       new Sprite('/tiles.png', [256, 144], [16, 16], 0),
@@ -1232,12 +1246,12 @@ export function oneone() {
   });
 
   //interactable terrain
-  //level.putQBlock(16, 9, new Mario.Bcoin([256, 144]));
+  level.putQBlock(16, 9, new Bcoin([256, 144], level.bcoinSprite, level));
   level.putBrick(20, 9, null);
-  //level.putQBlock(21, 9, new Mario.Mushroom([336, 144]));
+  level.putQBlock(21, 9, null);
   level.putBrick(22, 9, null);
-  //level.putQBlock(22, 5, new Mario.Bcoin([352, 80]));
-  //level.putQBlock(23, 9, new Mario.Bcoin([368, 144]));
+  level.putQBlock(22, 5, null);
+  level.putQBlock(23, 9, null);
   level.putBrick(24, 9, null);
   level.putPipe(28, 13, 2);
   level.putPipe(38, 13, 3);
@@ -1970,5 +1984,49 @@ class Prop {
 
   render(ctx, vX, vY) {
     this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
+  }
+}
+
+export class Bcoin extends Entity {
+  constructor(pos, sprite, levelRef) {
+    console.log('pos, sprite, levelRef', pos, sprite, levelRef);
+    super({
+      pos: pos,
+      sprite: sprite,
+      hitbox: [0, 0, 16, 16],
+    });
+
+    this.levelRef = levelRef;
+  }
+
+  spawn() {
+    // sounds.coin.currentTime = 0.05;
+    // sounds.coin.play();
+    this.idx = this.levelRef.items.length; //     TypeError: can't access property "items", this.levelRef is undefined
+    this.levelRef.items.push(this);
+    this.active = true;
+    this.vel = -12;
+    this.targetPos = this.pos[1] - 32;
+  }
+
+  update(dt) {
+    if (!this.active) return;
+    if (this.vel > 0 && this.pos[1] >= this.targetPos) {
+      // spawn a score thingy.
+      delete this.levelRef.items[this.idx];
+      return;
+    }
+    this.acc = 0.75;
+    this.vel += this.acc;
+    this.pos[1] += this.vel;
+    this.sprite.update(dt);
+  }
+
+  checkCollisions() {}
+
+  render(ctx, vX, vY) {
+    if (this.active) {
+      this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
+    }
   }
 }

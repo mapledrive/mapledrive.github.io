@@ -1,5 +1,4 @@
 import { Entity } from './entity';
-import { Player } from './player';
 import { gameState } from './gameState.js';
 
 export class Floor extends Entity {

@@ -1,4 +1,4 @@
-import { Entity } from './entity';
+import { Entity } from './entity.js';
 import { gameState } from './gameState.js';
 
 export class Floor extends Entity {

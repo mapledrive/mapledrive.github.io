@@ -336,21 +336,4 @@ export class Player extends Entity {
       }
     }
   }
-
-  flag() {
-    this.noInput = true;
-    this.flagging = true;
-    this.vel = [0, 2];
-    this.acc = [0, 0];
-  }
-
-  exit() {
-    // Логика завершения уровня
-    // this.pos[0] += 16;
-    // this.targetPos[0] = level.exit * 16;
-    // this.left = true;
-    // this.setAnimation();
-    // this.waiting = 1;
-    // this.exiting = true;
-  }
 }

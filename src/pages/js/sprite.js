@@ -1,4 +1,4 @@
-import { resources } from './resources';
+import { resources } from '../mario/Resources';
 
 export class Sprite {
   constructor(img, pos, size, speed, frames, once) {
@@ -25,8 +25,8 @@ export class Sprite {
     var frame;
 
     if (this.speed > 0) {
-      const max = this.frames.length;
-      const idx = Math.floor(this._index);
+      var max = this.frames.length;
+      var idx = Math.floor(this._index);
       frame = this.frames[idx % max];
 
       if (this.once && idx >= max) {

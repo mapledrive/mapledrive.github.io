@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { resources, loadAllSprites } from './mario/Resources';
 import { StyledSection, SectionTitle, SectionContent } from 'style';
 import input from './mario/InputHandler';
+import { Entity } from './js/entity';
+import { Sprite } from './js/sprite';
 
 // 1. Homepage
 // 2. class Game - игровой движок
@@ -351,42 +353,6 @@ export class Game {
 }
 
 /**
- * класс Entity
- */
-export class Entity {
-  constructor(options) {
-    this.vel = [0, 0];
-    this.acc = [0, 0];
-    this.standing = true;
-    this.pos = options.pos;
-    this.sprite = options.sprite;
-    this.hitbox = options.hitbox;
-    this.left = false;
-  }
-
-  render(ctx, vX, vY) {
-    this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
-  }
-
-  collideWall(wall) {
-    //the wall will always be a 16x16 block with hitbox = [0,0,16,16].
-    if (this.pos[0] > wall.pos[0]) {
-      //from the right
-      this.pos[0] = wall.pos[0] + wall.hitbox[2] - this.hitbox[0];
-      this.vel[0] = Math.max(0, this.vel[0]);
-      this.acc[0] = Math.max(0, this.acc[0]);
-    } else {
-      this.pos[0] =
-        wall.pos[0] + wall.hitbox[0] - this.hitbox[2] - this.hitbox[0];
-      this.vel[0] = Math.min(0, this.vel[0]);
-      this.acc[0] = Math.min(0, this.acc[0]);
-    }
-  }
-
-  bump() {}
-}
-
-/**
  * Класс Floor  -  от оригинала отличает то что level проброшен в конструктор
  */
 export class Floor extends Entity {
@@ -712,65 +678,6 @@ export class Level {
     // // Добавляем основание флагштока как статичный объект
     // this.statics[12][x] = new Floor([flagX, 192], this.wallSprite, this);
     // return flag; // Возвращаем флаг для доступа
-  }
-}
-
-/**
- * Класс Sprite для анимаций
- */
-export class Sprite {
-  constructor(img, pos, size, speed, frames, once) {
-    this.pos = pos;
-    this.size = size;
-    this.speed = speed;
-    this._index = 0;
-    this.img = img;
-    this.once = once;
-    this.frames = frames;
-    this.done = false;
-    this.lastUpdated = null;
-  }
-
-  update(dt, gameTime) {
-    if (gameTime && gameTime === this.lastUpdated) return;
-    this._index += this.speed * dt;
-    if (gameTime) this.lastUpdated = gameTime;
-  }
-
-  setFrame(frame) {
-    this._index = frame;
-  }
-
-  render(ctx, posx, posy, vX, vY) {
-    let frame;
-
-    if (this.speed > 0) {
-      const max = this.frames.length;
-      const idx = Math.floor(this._index);
-      frame = this.frames[idx % max];
-
-      if (this.once && idx >= max) {
-        this.done = true;
-        return;
-      }
-    } else {
-      frame = 0;
-    }
-
-    const x = this.pos[0] + frame * this.size[0];
-    const y = this.pos[1];
-
-    ctx.drawImage(
-      resources.get(this.img),
-      x + 1 / 3,
-      y + 1 / 3,
-      this.size[0] - 2 / 3,
-      this.size[1] - 2 / 3,
-      Math.round(posx - vX),
-      Math.round(posy - vY),
-      this.size[0],
-      this.size[1]
-    );
   }
 }
 

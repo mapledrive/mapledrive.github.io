@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StyledSection, SectionTitle, SectionContent } from 'style';
-
 import input, { InputHandler } from './mario/InputHandler';
 import { resources, loadAllSprites, Resources } from './mario/Resources';
 import { Sprite } from './js/sprite.js';

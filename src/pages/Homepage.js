@@ -1,9 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { resources, loadAllSprites } from './mario/Resources';
 import { StyledSection, SectionTitle, SectionContent } from 'style';
-import input from './mario/InputHandler';
-import { Entity } from './js/entity';
-import { Sprite } from './js/sprite';
+
+import input, { InputHandler } from './mario/InputHandler';
+import { resources, loadAllSprites, Resources } from './mario/Resources';
+import { Sprite } from './js/sprite.js';
+import { Entity } from './js/entity.js';
+import { Floor } from './js/floor.js';
+//import { Player } from './js/player.js';
+//import { Level } from './js/levels/level.js';
+//import { oneone } from './js/levels/11.js';
+//import { gameState } from './js/gameState.js';
+
+window.Mario = {};
+window.input = input;
+window.resources = resources;
+
+// Экспортируем классы
+window.Mario.Sprite = Sprite;
+window.Mario.Entity = Entity;
+//window.Mario.Floor = Floor;
+//window.Mario.Player = Player;
+//window.Mario.Level = Level;
+//window.Mario.oneone = oneone;
+
+// Делаем gameState доступным глобально для обратной совместимости
+//window.gameState = gameState;
 
 // 1. Homepage
 // 2. class Game - игровой движок
@@ -350,82 +371,6 @@ export class Game {
       this.rafId = null;
     }
   }
-}
-
-/**
- * Класс Floor  -  от оригинала отличает то что level проброшен в конструктор
- */
-export class Floor extends Entity {
-  constructor(pos, sprite, level) {
-    super({
-      pos: pos,
-      sprite: sprite,
-      hitbox: [0, 0, 16, 16],
-    });
-    this.level = level; // Сохраняем ссылку на уровень
-  }
-
-  isCollideWith(ent) {
-    // the first two elements of the hitbox array are an offset, so let's do this now.
-    const hpos1 = [
-      Math.floor(this.pos[0] + this.hitbox[0]),
-      Math.floor(this.pos[1] + this.hitbox[1]),
-    ];
-    const hpos2 = [
-      Math.floor(ent.pos[0] + ent.hitbox[0]),
-      Math.floor(ent.pos[1] + ent.hitbox[1]),
-    ];
-
-    // if the hitboxes actually overlap
-    if (
-      !(
-        hpos1[0] > hpos2[0] + ent.hitbox[2] ||
-        hpos1[0] + this.hitbox[2] < hpos2[0]
-      )
-    ) {
-      if (
-        !(
-          hpos1[1] > hpos2[1] + ent.hitbox[3] ||
-          hpos1[1] + this.hitbox[3] < hpos2[1]
-        )
-      ) {
-        if (!this.standing) {
-          ent.bump();
-        } else {
-          // if the entity is over the block, it's basically floor
-          const center = hpos2[0] + ent.hitbox[2] / 2;
-          if (Math.abs(hpos2[1] + ent.hitbox[3] - hpos1[1]) <= ent.vel[1]) {
-            if (this.level.statics[this.pos[1] / 16 - 1]?.[this.pos[0] / 16]) {
-              return;
-            }
-            ent.vel[1] = 0;
-            ent.pos[1] = hpos1[1] - ent.hitbox[3] - ent.hitbox[1];
-            ent.standing = true;
-            if (ent instanceof Player) {
-              ent.jumping = 0;
-            }
-          } else if (
-            Math.abs(hpos2[1] - hpos1[1] - this.hitbox[3]) > ent.vel[1] &&
-            center + 2 >= hpos1[0] &&
-            center - 2 <= hpos1[0] + this.hitbox[2]
-          ) {
-            // ent is under the block.
-            ent.vel[1] = 0;
-            ent.pos[1] = hpos1[1] + this.hitbox[3];
-            if (ent instanceof Player) {
-              this.bonk(ent.power);
-              ent.jumping = 0;
-            }
-          } else {
-            // entity is hitting it from the side, we're a wall
-            ent.collideWall(this);
-          }
-        }
-      }
-    }
-  }
-
-  bonk() {}
 }
 
 /**

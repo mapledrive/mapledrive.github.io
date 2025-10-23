@@ -12,7 +12,7 @@ export class Sprite {
   }
 
   update(dt, gameTime) {
-    if (gameTime && gameTime === this.lastUpdated) return;
+    if (gameTime && gameTime == this.lastUpdated) return;
     this._index += this.speed * dt;
     if (gameTime) this.lastUpdated = gameTime;
   }

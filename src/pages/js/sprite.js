@@ -1,5 +1,3 @@
-import { resources } from '../mario/Resources';
-
 export class Sprite {
   constructor(img, pos, size, speed, frames, once) {
     this.pos = pos;
@@ -42,7 +40,7 @@ export class Sprite {
 
     x += frame * this.size[0];
     ctx.drawImage(
-      resources.get(this.img),
+      window.resources.get(this.img),
       x + 1 / 3,
       y + 1 / 3,
       this.size[0] - 2 / 3,

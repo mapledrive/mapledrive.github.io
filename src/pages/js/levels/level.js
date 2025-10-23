@@ -64,77 +64,77 @@ export class Level {
   putFloor(start, end) {
     for (let i = start; i < end; i++) {
       // Передаем this (текущий уровень) в конструктор Floor
-      this.statics[13][i] = new Floor([16 * i, 208], this.floorSprite, this);
-      this.statics[14][i] = new Floor([16 * i, 224], this.floorSprite, this);
+      this.statics[13][i] = new Floor([16 * i, 208], this.floorSprite, 6);
+      this.statics[14][i] = new Floor([16 * i, 224], this.floorSprite, 6);
     }
   }
 
   putWall(x, y, height) {
-    // y - нижняя точка стены
-    for (let i = y - height; i < y; i++) {
-      this.statics[i][x] = new Floor([16 * x, 16 * i], this.wallSprite, this);
-    }
+    // // y - нижняя точка стены
+    // for (let i = y - height; i < y; i++) {
+    //   this.statics[i][x] = new Floor([16 * x, 16 * i], this.wallSprite, this);
+    // }
   }
 
   putPipe(x, y, height) {
-    for (let i = y - height; i < y; i++) {
-      if (i === y - height) {
-        this.statics[i][x] = new Floor(
-          [16 * x, 16 * i],
-          this.pipeLEndSprite,
-          this
-        );
-        this.statics[i][x + 1] = new Floor(
-          [16 * x + 16, 16 * i],
-          this.pipeREndSprite,
-          this
-        );
-      } else {
-        this.statics[i][x] = new Floor(
-          [16 * x, 16 * i],
-          this.pipeLMidSprite,
-          this
-        );
-        this.statics[i][x + 1] = new Floor(
-          [16 * x + 16, 16 * i],
-          this.pipeRMidSprite,
-          this
-        );
-      }
-    }
+    // for (let i = y - height; i < y; i++) {
+    //   if (i === y - height) {
+    //     this.statics[i][x] = new Floor(
+    //       [16 * x, 16 * i],
+    //       this.pipeLEndSprite,
+    //       this
+    //     );
+    //     this.statics[i][x + 1] = new Floor(
+    //       [16 * x + 16, 16 * i],
+    //       this.pipeREndSprite,
+    //       this
+    //     );
+    //   } else {
+    //     this.statics[i][x] = new Floor(
+    //       [16 * x, 16 * i],
+    //       this.pipeLMidSprite,
+    //       this
+    //     );
+    //     this.statics[i][x + 1] = new Floor(
+    //       [16 * x + 16, 16 * i],
+    //       this.pipeRMidSprite,
+    //       this
+    //     );
+    //   }
+    // }
   }
 
   putLeftPipe(x, y) {
-    this.statics[y][x] = new Floor(
-      [16 * x, 16 * y],
-      this.LPipeSprites[0],
-      this
-    );
-    this.statics[y + 1][x] = new Floor(
-      [16 * x, 16 * (y + 1)],
-      this.LPipeSprites[1],
-      this
-    );
-    this.statics[y][x + 1] = new Floor(
-      [16 * (x + 1), 16 * y],
-      this.LPipeSprites[2],
-      this
-    );
-    this.statics[y + 1][x + 1] = new Floor(
-      [16 * (x + 1), 16 * (y + 1)],
-      this.LPipeSprites[3],
-      this
-    );
-    this.statics[y][x + 2] = new Floor(
-      [16 * (x + 2), 16 * y],
-      this.LPipeSprites[4],
-      this
-    );
-    this.statics[y + 1][x + 2] = new Floor(
-      [16 * (x + 2), 16 * (y + 1)],
-      this.LPipeSprites[5],
-      this
-    );
+    // this.statics[y][x] = new Floor(
+    //   [16 * x, 16 * y],
+    //   this.LPipeSprites[0],
+    //   this
+    // );
+    // this.statics[y + 1][x] = new Floor(
+    //   [16 * x, 16 * (y + 1)],
+    //   this.LPipeSprites[1],
+    //   this
+    // );
+    // this.statics[y][x + 1] = new Floor(
+    //   [16 * (x + 1), 16 * y],
+    //   this.LPipeSprites[2],
+    //   this
+    // );
+    // this.statics[y + 1][x + 1] = new Floor(
+    //   [16 * (x + 1), 16 * (y + 1)],
+    //   this.LPipeSprites[3],
+    //   this
+    // );
+    // this.statics[y][x + 2] = new Floor(
+    //   [16 * (x + 2), 16 * y],
+    //   this.LPipeSprites[4],
+    //   this
+    // );
+    // this.statics[y + 1][x + 2] = new Floor(
+    //   [16 * (x + 2), 16 * (y + 1)],
+    //   this.LPipeSprites[5],
+    //   this
+    // );
   }
 
   putCoin(x, y) {

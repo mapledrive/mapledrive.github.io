@@ -48,6 +48,8 @@ export function oneone() {
     ],
   });
 
+  window.gameState.level = level;
+
   let ground = [
     [0, 69],
     [71, 86],

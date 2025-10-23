@@ -9,7 +9,7 @@ import { Floor } from './js/floor.js';
 import { Player } from './js/player.js';
 import { Level } from './js/levels/level.js';
 import { oneone } from './js/levels/11.js';
-//import { gameState } from './js/gameState.js';
+import { gameState } from './js/gameState.js';
 
 window.Mario = {};
 window.input = input;
@@ -18,23 +18,16 @@ window.resources = resources;
 // Экспортируем классы
 window.Mario.Sprite = Sprite;
 window.Mario.Entity = Entity;
-//window.Mario.Floor = Floor;
+window.Mario.Floor = Floor;
 window.Mario.Player = Player;
 window.Mario.Level = Level;
 window.Mario.oneone = oneone;
 
 // Делаем gameState доступным глобально для обратной совместимости
-//window.gameState = gameState;
+window.gameState = gameState;
 
 // 1. Homepage
 // 2. class Game - игровой движок
-// 3. class Entity Cущность - любой игровой объект, который имеет: позицию на экране pos, спрайт для отрисовки sprite,
-// хитбокс для коллизий, физ св-ва - скорость vel и ускорение acc
-// 4. class Floor универсальный класс для статичных блоков уровня - пол (floor это сущность)
-// 5. class Level не считается сущностью  - уровень (контейнер для сущностей)
-// 6. class Sprite не считается сущностью - компонент отрисовки
-// 7. class Player
-// 8. function oneone()
 
 const Homepage = () => {
   const canvasRef = useRef(null);

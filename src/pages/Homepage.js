@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StyledSection, SectionTitle, SectionContent } from 'style';
-import input, { InputHandler } from './mario/InputHandler';
+import { InputHandler } from './js/input';
 import { resources, loadAllSprites, Resources } from './mario/Resources';
 import { Sprite } from './js/sprite.js';
 import { Entity } from './js/entity.js';
@@ -11,7 +11,10 @@ import { oneone } from './js/levels/11.js';
 import { gameState } from './js/gameState.js';
 
 window.Mario = {};
+
+let input = new InputHandler();
 window.input = input;
+
 window.resources = resources;
 
 // Экспортируем классы

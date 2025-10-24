@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StyledSection, SectionTitle, SectionContent } from 'style';
 import { InputHandler } from './js/input';
-import { resources, loadAllSprites } from './js/resources';
+import { ResourceLoader } from './js/resources';
 import { Sprite } from './js/sprite.js';
 import { Entity } from './js/entity.js';
 import { Floor } from './js/floor.js';
@@ -15,7 +15,34 @@ window.Mario = {};
 let input = new InputHandler();
 window.input = input;
 
+// Создаем экземпляр ResourceLoader и делаем глобальным
+export const resources = new ResourceLoader();
 window.resources = resources;
+
+// Функция загрузки всех спрайтов
+export const loadAllSprites = () => {
+  return new Promise(resolve => {
+    resources.load([
+      '/player.png',
+      '/enemy.png',
+      '/tiles.png',
+      '/playerl.png',
+      '/items.png',
+      '/enemyr.png',
+    ]);
+
+    // Ждем пока все ресурсы загрузятся
+    const checkReady = () => {
+      if (resources.isReady()) {
+        resolve();
+      } else {
+        setTimeout(checkReady, 100);
+      }
+    };
+
+    checkReady();
+  });
+};
 
 // Экспортируем классы
 window.Mario.Sprite = Sprite;
@@ -147,23 +174,14 @@ export class Game {
       death: new Audio('sounds/mariodie.wav'),
     };
 
-    // Проверяем загружены ли все спрайты
-    const requiredSprites = [
-      '/player.png',
-      '/enemy.png',
-      '/tiles.png',
-      '/playerl.png',
-      '/items.png',
-      '/enemyr.png',
-    ];
-    const allLoaded = requiredSprites.every(sprite =>
-      this.resources.get(sprite)
-    );
-
-    if (allLoaded) {
+    // Используем новую систему проверки готовности ресурсов
+    if (resources.isReady()) {
       this.initialized = true;
     } else {
-      setTimeout(() => this.init(), 100);
+      // Ждем пока все ресурсы загрузятся
+      resources.onReady(() => {
+        this.initialized = true;
+      });
     }
   }
 

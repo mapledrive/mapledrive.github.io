@@ -171,7 +171,7 @@ export class Player extends Entity {
         if (this.vel[0] * this.acc[0] >= 0) {
           this.sprite.pos[0] = 96;
           this.sprite.frames = [0, 1, 2];
-          if (this.vel[0] < 0.2) {
+          if (Math.abs(this.vel[0]) < 0.2) {
             this.sprite.speed = 5;
           } else {
             this.sprite.speed = Math.abs(this.vel[0]) * 8;
@@ -373,7 +373,13 @@ export class Player extends Entity {
         [curx, window.level.invincibility[2]],
         [curx, 96],
       ];
-      this.powerSizes([16, 32], [16, 32], [16, 32], [16, 32], [16, 32]);
+      this.powerSizes = [
+        [16, 32],
+        [16, 32],
+        [16, 32],
+        [16, 32],
+        [16, 32],
+      ];
       this.shift = [0, 0, 0, 0, 0];
       this.power = 2;
     } else {

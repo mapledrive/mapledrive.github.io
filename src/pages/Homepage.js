@@ -10,6 +10,21 @@ import { Level } from './js/levels/level.js';
 import { oneone } from './js/levels/11.js';
 import { gameState } from './js/gameState.js';
 
+// Глобальные переменные для обратной совместимости
+window.level = null;
+window.sounds = {
+  powerup: { play: () => {} },
+  pipe: { play: () => {} },
+  smallJump: { play: () => {} },
+  bigJump: { play: () => {} },
+};
+window.music = {
+  overworld: { pause: () => {}, currentTime: 0 },
+  underground: { pause: () => {} },
+  death: { play: () => {} },
+};
+window.player = null;
+
 window.Mario = {};
 
 let input = new InputHandler();
@@ -154,11 +169,23 @@ export class Game {
   }
 
   initLevel() {
-    // Полностью пересоздаем уровень
+    // Полностью пересоздаваем уровень
     this.level = oneone();
 
     // Создаем нового игрока на стартовой позиции уровня
     this.player = new Player([...this.level.playerPos]); // Копируем позицию
+
+    // ИНИЦИАЛИЗИРУЕМ ОТСУТСТВУЮЩИЕ СВОЙСТВА ИГРОКА
+    this.player.maxSpeed = 1.5;
+    this.player.moveAcc = 0.07;
+    this.player.standing = true;
+    this.player.dying = false;
+    this.player.waiting = 0;
+    this.player.piping = false;
+    this.player.flagging = false;
+    this.player.exiting = false;
+    this.player.starTime = 0;
+    this.player.shooting = 0;
 
     // Сбрасываем состояние игры
     this.vX = 0;
@@ -170,8 +197,15 @@ export class Game {
 
   init() {
     if (this.initialized) return;
+
+    // Инициализируем глобальные переменные
+    window.level = this.level;
+    window.player = this.player;
+
     window.music = {
       death: new Audio('sounds/mariodie.wav'),
+      overworld: { pause: () => {}, currentTime: 0 },
+      underground: { pause: () => {} },
     };
 
     // Используем новую систему проверки готовности ресурсов
@@ -266,13 +300,13 @@ export class Game {
   }
 
   checkPlayerDeath() {
-    // Проверяем падение в яму
+    // Проверяем падение в яму (используем оригинальную логику из player.js)
     if (this.player.pos[1] > 240 && !this.player.dying) {
-      this.player.startDeath();
+      this.player.die();
     }
 
-    // Перезагружаем уровень только после завершения анимации смерти
-    if (this.player.dying && this.player.deathTimer <= 0) {
+    // Перезагружаем уровень после завершения анимации смерти
+    if (this.player.dying && this.player.dying <= 0) {
       this.resetLevel();
     }
   }
@@ -280,6 +314,11 @@ export class Game {
   resetLevel() {
     console.log('Перезагрузка уровня...');
     this.initLevel();
+
+    // Обновляем глобальные ссылки
+    window.level = this.level;
+    window.player = this.player;
+
     input.reset();
   }
 

@@ -169,11 +169,17 @@ export class Game {
   }
 
   initLevel() {
-    // Полностью пересоздаваем уровень
-    this.level = oneone();
+    // Инициализируем gameState
+    gameState.canvas = this.canvas;
+    gameState.ctx = this.ctx;
+    gameState.updateables = this.updateables;
+    gameState.fireballs = this.fireballs;
+    gameState.vX = this.vX;
+    gameState.vY = this.vY;
+    gameState.gameTime = this.gameTime;
 
     // Создаем нового игрока на стартовой позиции уровня
-    this.player = new Player([...this.level.playerPos]); // Копируем позицию
+    this.player = new Player([56, 192]); // Используем стандартную позицию
 
     // ИНИЦИАЛИЗИРУЕМ ОТСУТСТВУЮЩИЕ СВОЙСТВА ИГРОКА
     this.player.maxSpeed = 1.5;
@@ -187,12 +193,28 @@ export class Game {
     this.player.starTime = 0;
     this.player.shooting = 0;
 
+    // Устанавливаем игрока в gameState
+    gameState.player = this.player;
+
+    // Создаем уровень через oneone() - она теперь работает с gameState
+    oneone();
+
+    // Получаем уровень из gameState
+    this.level = gameState.level;
+
     // Сбрасываем состояние игры
     this.vX = 0;
     this.vY = 0;
     this.gameTime = 0;
     this.updateables = [];
     this.fireballs = [];
+
+    // Обновляем gameState
+    gameState.vX = this.vX;
+    gameState.vY = this.vY;
+    gameState.gameTime = this.gameTime;
+    gameState.updateables = this.updateables;
+    gameState.fireballs = this.fireballs;
   }
 
   init() {
@@ -253,6 +275,10 @@ export class Game {
   updateEntities(dt, gameTime) {
     this.player.update(dt, this.vX);
 
+    // Обновляем gameState
+    gameState.vX = this.vX;
+    gameState.gameTime = this.gameTime;
+
     // Обновляем блоки
     for (let i = 0; i < 15; i++) {
       for (let j = 0; j < this.level.blocks[i]?.length || 0; j++) {
@@ -281,9 +307,11 @@ export class Game {
     if (this.player.exiting) {
       if (this.player.pos[0] > this.vX + 96) {
         this.vX = this.player.pos[0] - 96;
+        gameState.vX = this.vX;
       }
     } else if (this.level.scrolling && this.player.pos[0] > this.vX + 80) {
       this.vX = this.player.pos[0] - 80;
+      gameState.vX = this.vX;
     }
 
     // Обновляем остальные объекты уровня, если игрок не в особом состоянии
@@ -408,6 +436,7 @@ export class Game {
 
     // Сбрасываем updateables как в оригинале
     this.updateables = [];
+    gameState.updateables = this.updateables;
 
     // Отрисовываем только видимую область
     for (let i = 0; i < 15; i++) {

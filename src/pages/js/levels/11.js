@@ -10,7 +10,7 @@ export function oneone() {
     scrolling: true,
     invincibility: [144, 192, 240],
     exit: 40,
-    floorSprite: new Sprite('/tiles.png', [0, 0], [16, 16], 0),
+    floorSprite: new Sprite('/sprites/tiles.png', [0, 0], [16, 16], 0),
   });
 
   let ground = [

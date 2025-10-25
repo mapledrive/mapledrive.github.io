@@ -68,12 +68,12 @@ export { Homepage };
 export const loadAllSprites = () => {
   return new Promise(resolve => {
     resources.load([
-      '/player.png',
-      '/enemy.png',
-      '/tiles.png',
-      '/playerl.png',
-      '/items.png',
-      '/enemyr.png',
+      '/sprites/player.png',
+      '/sprites/enemy.png',
+      '/sprites/tiles.png',
+      '/sprites/playerl.png',
+      '/sprites/items.png',
+      '/sprites/enemyr.png',
     ]);
 
     // Ждем пока все ресурсы загрузятся

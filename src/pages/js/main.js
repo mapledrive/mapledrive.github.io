@@ -1,23 +1,35 @@
 import { InputHandler } from './input';
 import { ResourceLoader } from './resources';
-import { gameState } from './gameState.js';
 import { Sprite } from './sprite.js';
 import { Entity } from './entity.js';
 import { Floor } from './floor.js';
 import { Player } from './player.js';
 import { Level } from './levels/level.js';
 import { oneone } from './levels/11.js';
+import { gameState } from './gameState.js';
+import { renderDebugInfo } from './debug.js';
 
+window.Mario = {};
 let input = new InputHandler();
 window.input = input;
+export const resources = new ResourceLoader();
+window.resources = resources;
+
+// Глобальные переменные для обратной совместимости
+
+window.level = null;
+window.player = null;
+
+// Экспортируем классы
+window.Mario.Sprite = Sprite;
+window.Mario.Entity = Entity;
+window.Mario.Floor = Floor;
+window.Mario.Player = Player;
+window.Mario.Level = Level;
+window.Mario.oneone = oneone;
 
 // Делаем gameState доступным глобально для обратной совместимости
 window.gameState = gameState;
-
-// Глобальные переменные для обратной совместимости
-window.Mario = {};
-window.level = null;
-window.player = null;
 
 gameState.music = {
   overworld: new Audio('sounds/aboveground_bgm.ogg'),
@@ -39,18 +51,6 @@ gameState.sounds = {
   powerup: new Audio('sounds/powerup.wav'),
   stomp: new Audio('sounds/stomp.wav'),
 };
-
-// Экспортируем классы
-window.Mario.Sprite = Sprite;
-window.Mario.Entity = Entity;
-window.Mario.Floor = Floor;
-window.Mario.Player = Player;
-window.Mario.Level = Level;
-window.Mario.oneone = oneone;
-
-// Создаем экземпляр ResourceLoader и делаем глобальным
-export const resources = new ResourceLoader();
-window.resources = resources;
 
 /**
  * Основной игровой класс Main
@@ -281,56 +281,6 @@ export class Main {
     entity.render(this.ctx, this.vX, this.vY);
   }
 
-  renderDebugInfo() {
-    const ctx = this.ctx;
-    const player = this.player;
-
-    // Сохраняем текущую трансформацию
-    const originalTransform = ctx.getTransform();
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-
-    // Отладочная информация
-    ctx.fillStyle = '#fff';
-    ctx.font = '12px Arial';
-    ctx.fillText(
-      `Position: ${Math.round(player.pos[0])}, ${Math.round(player.pos[1])}`,
-      10,
-      20
-    );
-    ctx.fillText(
-      `Vel: ${player.vel[0].toFixed(2)}, ${player.vel[1].toFixed(2)}`,
-      10,
-      35
-    );
-    ctx.fillText(`Standing: ${player.standing}`, 10, 50);
-    ctx.fillText(`Camera: ${Math.round(this.vX)}`, 10, 65);
-    ctx.fillText(
-      `Viewport: ${Math.floor(this.vX / 16)} - ${
-        Math.floor(this.vX / 16) + 20
-      }`,
-      10,
-      80
-    );
-    ctx.fillText(`Left: ${input.pressedKeys.LEFT}`, 10, 95);
-    ctx.fillText(`Right: ${input.pressedKeys.RIGHT}`, 10, 110);
-    ctx.fillText(`Up: ${input.pressedKeys.UP}`, 10, 125);
-    ctx.fillText(`Down: ${input.pressedKeys.DOWN}`, 10, 140);
-    ctx.fillText(`Run: ${input.pressedKeys.RUN}`, 10, 155);
-    ctx.fillText(`Jump: ${input.pressedKeys.JUMP}`, 10, 170);
-    ctx.fillText(`Power: ${player.power}`, 10, 185);
-    ctx.fillText(`Jumping: ${player.jumping}`, 10, 200);
-    ctx.fillText(`Crouching: ${player.crouching}`, 10, 215);
-    ctx.fillText(`Invincibility: ${player.invincibility}`, 10, 230);
-    ctx.fillText(`Fireballs: ${player.fireballs}`, 10, 245);
-    ctx.fillText(`Dying: ${player.dying}`, 10, 260);
-    ctx.fillText(`Piping: ${player.piping}`, 10, 275);
-    ctx.fillText(`Exiting: ${player.exiting}`, 10, 290);
-    ctx.fillText(`GameTime: ${this.gameTime.toFixed(1)}`, 10, 305);
-
-    // Восстанавливаем трансформацию
-    ctx.setTransform(originalTransform);
-  }
-
   render() {
     if (!this.initialized) {
       // Показываем загрузку
@@ -397,7 +347,7 @@ export class Main {
     }
 
     // Отрисовываем отладочную информацию
-    this.renderDebugInfo();
+    renderDebugInfo(gameState, input);
   }
 
   start() {

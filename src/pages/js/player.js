@@ -8,7 +8,7 @@ export class Player extends Entity {
     //Maybe these can be consolidated some way? We'll see once they're all in.
     super({
       pos: pos,
-      sprite: new Sprite('/player.png', [80, 32], [16, 16], 0),
+      sprite: new Sprite('/sprites/player.png', [80, 32], [16, 16], 0),
       hitbox: [0, 0, 16, 16],
     });
 
@@ -202,9 +202,9 @@ export class Player extends Entity {
 
     //which way are we facing?
     if (this.left) {
-      this.sprite.img = '/playerl.png';
+      this.sprite.img = '/sprites/playerl.png';
     } else {
-      this.sprite.img = '/player.png';
+      this.sprite.img = '/sprites/player.png';
     }
   }
 

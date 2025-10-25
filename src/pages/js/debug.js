@@ -3,6 +3,10 @@
  */
 
 export function renderDebugInfo(gameState, input) {
+  if (process.env.NODE_ENV === 'production') {
+    return;
+  }
+
   const ctx = gameState.ctx;
 
   // Сохраняем текущую трансформацию

@@ -5,23 +5,18 @@ import { Main, resources } from './js/main.js';
 const Homepage = () => {
   const canvasRef = useRef(null);
   const gameRef = useRef(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const init = async () => {
       try {
-        setLoading(true);
         await loadAllSprites();
         const canvas = canvasRef.current;
         const game = new Main(canvas, resources);
         gameRef.current = game;
         game.start();
-
-        setLoading(false);
       } catch (err) {
         setError(err.message);
-        setLoading(false);
       }
     };
 

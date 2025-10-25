@@ -39,17 +39,7 @@ gameState.sounds = {
   powerup: new Audio('sounds/powerup.wav'),
   stomp: new Audio('sounds/stomp.wav'),
 };
-// window.sounds = {
-//   powerup: { play: () => {} },
-//   pipe: { play: () => {} },
-//   smallJump: { play: () => {} },
-//   bigJump: { play: () => {} },
-// };
-// window.music = {
-//   overworld: { pause: () => {}, currentTime: 0 },
-//   underground: { pause: () => {} },
-//   death: { play: () => {} },
-// };
+
 // Экспортируем классы
 window.Mario.Sprite = Sprite;
 window.Mario.Entity = Entity;

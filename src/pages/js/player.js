@@ -109,13 +109,13 @@ export class Player extends Entity {
       this.canJump = false;
       this.standing = false;
       this.vel[1] = -6;
-      // if (this.power === 0) {
-      //   gameState.sounds.smallJump.currentTime = 0;
-      //   gameState.sounds.smallJump.play();
-      // } else {
-      //   gameState.sounds.bigJump.currentTime = 0;
-      //   gameState.sounds.bigJump.play();
-      // }
+      if (this.power === 0) {
+        gameState.sounds.smallJump.currentTime = 0;
+        gameState.sounds.smallJump.play();
+      } else {
+        gameState.sounds.bigJump.currentTime = 0;
+        gameState.sounds.bigJump.play();
+      }
     }
   }
 
@@ -292,7 +292,7 @@ export class Player extends Entity {
           window.player.noInput = false;
           window.level.loader();
           if (window.player.power !== 0) window.player.pos[1] -= 16;
-          window.music.overworld.currentTime = 0;
+          gameState.music.overworld.currentTime = 0;
         }, 5000);
       }
     }
@@ -421,10 +421,10 @@ export class Player extends Entity {
 
   die() {
     //TODO: rewrite the way sounds work to emulate the channels of an NES.
-    // gameState.music.overworld.pause();
-    // gameState.music.underground.pause();
-    // gameState.music.overworld.currentTime = 0;
-    // gameState.music.death.play();
+    gameState.music.overworld.pause();
+    gameState.music.underground.pause();
+    gameState.music.overworld.currentTime = 0;
+    gameState.music.death.play();
     this.noWalk();
     this.noRun();
     this.noJump();

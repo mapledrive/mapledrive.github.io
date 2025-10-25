@@ -43,14 +43,13 @@ const Homepage = () => {
       </SectionContent>
 
       <div style={{ margin: '0 auto', textAlign: 'center' }}>
-        {loading && <SectionContent>Loading game...</SectionContent>}
         {error && <SectionContent>Error: {error}</SectionContent>}
         <canvas
           ref={canvasRef}
           width={762}
           height={720}
           style={{
-            backgroundColor: '#000',
+            backgroundColor: '#7974FF',
             display: 'block',
             margin: '0 auto',
             width: '762px',

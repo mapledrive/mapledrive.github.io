@@ -27,7 +27,7 @@ export class Player extends Entity {
 
   run() {
     this.maxSpeed = 2.5;
-    if (this.power == 2 && !this.runheld) {
+    if (this.power === 2 && !this.runheld) {
       this.shoot();
     }
     this.runheld = true;
@@ -137,11 +137,11 @@ export class Player extends Entity {
       else index = Math.floor(this.starTime / 8) % 3;
 
       this.sprite.pos[1] = window.level.invincibility[index];
-      if (this.power == 0) {
+      if (this.power === 0) {
         this.sprite.pos[1] += 32;
       }
       this.starTime -= 1;
-      if (this.starTime == 0) {
+      if (this.starTime === 0) {
         switch (this.power) {
           case 0:
             this.sprite.pos[1] = 32;
@@ -152,6 +152,8 @@ export class Player extends Entity {
           case 2:
             this.sprite.pos[1] = 96;
             break;
+          default:
+            return;
         }
       }
     }
@@ -207,7 +209,7 @@ export class Player extends Entity {
   update(dt, vX) {
     if (this.powering.length !== 0) {
       var next = this.powering.shift();
-      if (next == 5) return;
+      if (next === 5) return;
       this.sprite.pos = this.powerSprites[next];
       this.sprite.size = this.powerSizes[next];
       this.pos[1] += this.shift[next];
@@ -357,7 +359,7 @@ export class Player extends Entity {
       this.shift = [0, 16, -16, 0, -16];
       this.power = 1;
       this.hitbox = [0, 0, 16, 32];
-    } else if (this.power == 1) {
+    } else if (this.power === 1) {
       var curx = this.sprite.pos[0];
       this.powerSprites = [
         [curx, 96],
@@ -457,6 +459,8 @@ export class Player extends Entity {
         this.vel = [0, -1];
         this.targetPos = [Math.round(this.pos[0]), Math.round(this.pos[1] - this.hitbox[3])];
         break;
+      default:
+        return;
     }
   }
 

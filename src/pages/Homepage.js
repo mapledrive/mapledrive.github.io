@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyledSection, SectionTitle, SectionContent } from 'style';
-import { Main, initializeGameGlobals } from './js/main.js';
+import { Main, initializeGameGlobals } from 'features/game/main.js';
 
 const Homepage = () => {
   const canvasRef = useRef(null);

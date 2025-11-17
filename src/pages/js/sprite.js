@@ -40,7 +40,7 @@ export class Sprite {
 
     x += frame * this.size[0];
     ctx.drawImage(
-      window.resources.get(this.img),
+      resources.get(this.img),
       x + 1 / 3,
       y + 1 / 3,
       this.size[0] - 2 / 3,

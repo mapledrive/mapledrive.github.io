@@ -1,4 +1,4 @@
-import { Floor } from '../floor';
+import { Floor } from './floor';
 
 export class Level {
   constructor(options) {
@@ -15,8 +15,10 @@ export class Level {
     this.items = []; // Предметы (монеты, power-ups)
     this.pipes = []; // Трубы с телепортацией
 
-    for (let i = 0; i < 15; i++) {
+    for (var i = 0; i < 15; i++) {
       this.statics[i] = [];
+      this.scenery[i] = [];
+      this.blocks[i] = [];
     }
   }
 

@@ -1,71 +1,85 @@
-import { InputHandler } from './input';
-import { ResourceLoader } from './resources';
+import './resources.js';
 import { Sprite } from './sprite.js';
 import { Entity } from './entity.js';
 import { Floor } from './floor.js';
 import { Player } from './player.js';
-import { Level } from './levels/level.js';
-import { oneone } from './levels/11.js';
-import { gameState } from './gameState.js';
-import { renderDebugInfo } from './debug.js';
+import { Level } from './level.js';
+import { oneone } from './11.js';
+import { QLearning } from './marioAI.js';
+import { renderPlayerInfo, renderKeyAndQLearningInfo, renderQTable } from './debug.js';
+import './input.jsx';
 
-window.Mario = {};
-let input = new InputHandler();
-window.input = input;
-export const resources = new ResourceLoader();
-window.resources = resources;
-
-// Глобальные переменные для обратной совместимости
-
+// Инициализируем глобальные переменные в window
+window.vX = 0;
+window.vY = 0;
+window.vWidth = 256;
+window.vHeight = 240;
 window.level = null;
+window.canvas = null;
+window.ctx = null;
+window.updateables = [];
+window.fireballs = [];
 window.player = null;
+window.gameTime = 0;
 
 // Экспортируем классы
+window.Mario = {};
 window.Mario.Sprite = Sprite;
 window.Mario.Entity = Entity;
 window.Mario.Floor = Floor;
 window.Mario.Player = Player;
 window.Mario.Level = Level;
-window.Mario.oneone = oneone;
+let input = window.input;
 
-// Делаем gameState доступным глобально для обратной совместимости
-window.gameState = gameState;
+let resources = window.resources;
 
-gameState.music = {
-  overworld: new Audio('sounds/aboveground_bgm.ogg'),
-  underground: new Audio('sounds/underground_bgm.ogg'),
-  clear: new Audio('sounds/stage_clear.wav'),
-  death: new Audio('sounds/mariodie.wav'),
-};
-gameState.sounds = {
-  smallJump: new Audio('sounds/jump-small.wav'),
-  bigJump: new Audio('sounds/jump-super.wav'),
-  breakBlock: new Audio('sounds/breakblock.wav'),
-  bump: new Audio('sounds/bump.wav'),
-  coin: new Audio('sounds/coin.wav'),
-  fireball: new Audio('sounds/fireball.wav'),
-  flagpole: new Audio('sounds/flagpole.wav'),
-  kick: new Audio('sounds/kick.wav'),
-  pipe: new Audio('sounds/pipe.wav'),
-  itemAppear: new Audio('sounds/itemAppear.wav'),
-  powerup: new Audio('sounds/powerup.wav'),
-  stomp: new Audio('sounds/stomp.wav'),
+export const initializeGameGlobals = () => {
+  if (!window.sounds) {
+    window.sounds = {
+      smallJump: new Audio('sounds/jump-small.wav'),
+      bigJump: new Audio('sounds/jump-super.wav'),
+      breakBlock: new Audio('sounds/breakblock.wav'),
+      bump: new Audio('sounds/bump.wav'),
+      coin: new Audio('sounds/coin.wav'),
+      fireball: new Audio('sounds/fireball.wav'),
+      flagpole: new Audio('sounds/flagpole.wav'),
+      kick: new Audio('sounds/kick.wav'),
+      pipe: new Audio('sounds/pipe.wav'),
+      itemAppear: new Audio('sounds/itemAppear.wav'),
+      powerup: new Audio('sounds/powerup.wav'),
+      stomp: new Audio('sounds/stomp.wav'),
+    };
+    // Замьютить все звуки по умолчанию
+    Object.values(window.sounds).forEach(sound => {
+      sound.muted = true;
+    });
+  }
+
+  if (!window.music) {
+    window.music = {
+      overworld: new Audio('sounds/aboveground_bgm.ogg'),
+      underground: new Audio('sounds/underground_bgm.ogg'),
+      clear: new Audio('sounds/stage_clear.wav'),
+      death: new Audio('sounds/mariodie.wav'),
+    };
+    // Замьютить всю музыку по умолчанию
+    Object.values(window.music).forEach(track => {
+      track.muted = true;
+    });
+  }
 };
 
 /**
  * Основной игровой класс Main
  */
 export class Main {
-  constructor(canvas, resources) {
+  constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    this.resources = resources;
 
-    // Устанавливаем размеры канваса как в оригинале
     this.canvas.width = 762;
     this.canvas.height = 720;
 
-    // Игровые переменные
     this.vX = 0;
     this.vY = 0;
     this.vWidth = 256;
@@ -74,10 +88,8 @@ export class Main {
     this.updateables = [];
     this.fireballs = [];
 
-    // Устанавливаем масштаб как в оригинале
     this.ctx.scale(3, 3);
 
-    // Инициализируем уровень и игрока
     this.initLevel();
 
     this.rafId = null;
@@ -86,19 +98,17 @@ export class Main {
   }
 
   initLevel() {
-    // Инициализируем gameState
-    gameState.canvas = this.canvas;
-    gameState.ctx = this.ctx;
-    gameState.updateables = this.updateables;
-    gameState.fireballs = this.fireballs;
-    gameState.vX = this.vX;
-    gameState.vY = this.vY;
-    gameState.gameTime = this.gameTime;
+    // Обновляем глобальные переменные
+    window.canvas = this.canvas;
+    window.ctx = this.ctx;
+    window.updateables = this.updateables;
+    window.fireballs = this.fireballs;
+    window.vX = this.vX;
+    window.vY = this.vY;
+    window.gameTime = this.gameTime;
 
-    // Создаем нового игрока на стартовой позиции уровня
-    this.player = new Player([56, 192]); // Используем стандартную позицию
+    this.player = new Player([56, 192]);
 
-    // ИНИЦИАЛИЗИРУЕМ ОТСУТСТВУЮЩИЕ СВОЙСТВА ИГРОКА
     this.player.maxSpeed = 1.5;
     this.player.moveAcc = 0.07;
     this.player.standing = true;
@@ -110,48 +120,40 @@ export class Main {
     this.player.starTime = 0;
     this.player.shooting = 0;
 
-    // Устанавливаем игрока в gameState
-    gameState.player = this.player;
+    window.player = this.player;
 
-    // Создаем уровень через oneone() - она теперь работает с gameState
     oneone();
 
-    // Получаем уровень из gameState
-    this.level = gameState.level;
+    this.level = window.level;
 
-    // Сбрасываем состояние игры
     this.vX = 0;
     this.vY = 0;
     this.gameTime = 0;
     this.updateables = [];
     this.fireballs = [];
 
-    // Обновляем gameState
-    gameState.vX = this.vX;
-    gameState.vY = this.vY;
-    gameState.gameTime = this.gameTime;
-    gameState.updateables = this.updateables;
-    gameState.fireballs = this.fireballs;
+    window.vX = this.vX;
+    window.vY = this.vY;
+    window.gameTime = this.gameTime;
+    window.updateables = this.updateables;
+    window.fireballs = this.fireballs;
+
+    if (!window.qLearning) {
+      window.qLearning = new QLearning();
+    } else {
+      window.qLearning.reset();
+    }
   }
 
   init() {
     if (this.initialized) return;
 
-    // Инициализируем глобальные переменные
     window.level = this.level;
     window.player = this.player;
 
-    window.music = {
-      death: new Audio('sounds/mariodie.wav'),
-      overworld: { pause: () => {}, currentTime: 0 },
-      underground: { pause: () => {} },
-    };
-
-    // Используем новую систему проверки готовности ресурсов
     if (resources.isReady()) {
       this.initialized = true;
     } else {
-      // Ждем пока все ресурсы загрузятся
       resources.onReady(() => {
         this.initialized = true;
       });
@@ -161,6 +163,7 @@ export class Main {
   handleInput(dt) {
     if (this.player.dying || this.player.piping || this.player.noInput) return;
 
+    // Всегда обрабатываем ручное управление независимо от режима training
     if (input.isDown('RUN')) {
       this.player.run();
     } else {
@@ -173,7 +176,6 @@ export class Main {
       this.player.noJump();
     }
 
-    // Добавляем обработку кнопки DOWN как в оригинале
     if (input.isDown('DOWN')) {
       this.player.crouch();
     } else {
@@ -192,11 +194,9 @@ export class Main {
   updateEntities(dt, gameTime) {
     this.player.update(dt, this.vX);
 
-    // Обновляем gameState
-    gameState.vX = this.vX;
-    gameState.gameTime = this.gameTime;
+    window.vX = this.vX;
+    window.gameTime = this.gameTime;
 
-    // Обновляем блоки
     for (let i = 0; i < 15; i++) {
       for (let j = 0; j < this.level.blocks[i]?.length || 0; j++) {
         if (this.level.blocks[i][j]) {
@@ -205,7 +205,6 @@ export class Main {
       }
     }
 
-    // ОБНОВЛЯЕМ ВРАГОВ ТОЛЬКО ЕСЛИ ИГРОК НЕ УМИРАЕТ
     if (!this.player.dying) {
       this.level.enemies.forEach((enemy, index) => {
         if (enemy) {
@@ -215,23 +214,20 @@ export class Main {
       });
     }
 
-    // Обновляем все обновляемые объекты
     this.updateables.forEach(ent => {
       ent.update(dt, gameTime);
     });
 
-    // Движение камеры - точная копия оригинала
     if (this.player.exiting) {
       if (this.player.pos[0] > this.vX + 96) {
         this.vX = this.player.pos[0] - 96;
-        gameState.vX = this.vX;
+        window.vX = this.vX;
       }
     } else if (this.level.scrolling && this.player.pos[0] > this.vX + 80) {
       this.vX = this.player.pos[0] - 80;
-      gameState.vX = this.vX;
+      window.vX = this.vX;
     }
 
-    // Обновляем остальные объекты уровня, если игрок не в особом состоянии
     if (this.player.powering?.length !== 0 || this.player.dying) {
       return;
     }
@@ -245,12 +241,10 @@ export class Main {
   }
 
   checkPlayerDeath() {
-    // Проверяем падение в яму (используем оригинальную логику из player.js)
     if (this.player.pos[1] > 240 && !this.player.dying) {
       this.player.die();
     }
 
-    // Перезагружаем уровень после завершения анимации смерти
     if (this.player.dying && this.player.dying <= 0) {
       this.resetLevel();
     }
@@ -260,20 +254,34 @@ export class Main {
     console.log('Перезагрузка уровня...');
     this.initLevel();
 
-    // Обновляем глобальные ссылки
     window.level = this.level;
     window.player = this.player;
 
     input.reset();
+    window.qLearning.reset();
   }
 
   update(dt) {
     if (!this.initialized) return;
 
     this.gameTime += dt;
+
+    // Q-learning управление - ВСЕГДА вызываем
+    if (window.qLearning) {
+      window.qLearning.step();
+    }
+
+    // Ручное управление - ВСЕГДА вызываем
     this.handleInput(dt);
+
     this.updateEntities(dt, this.gameTime);
     this.checkCollisions();
+
+    // Обновление Q-learning после физики
+    if (window.qLearning) {
+      window.qLearning.update();
+    }
+
     this.checkPlayerDeath();
   }
 
@@ -283,7 +291,6 @@ export class Main {
 
   render() {
     if (!this.initialized) {
-      // Показываем загрузку
       this.ctx.fillStyle = '#000';
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       this.ctx.fillStyle = '#fff';
@@ -294,60 +301,46 @@ export class Main {
 
     const ctx = this.ctx;
 
-    // Очищаем канвас
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // Фон уровня
     ctx.fillStyle = this.level.background;
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // Сбрасываем updateables как в оригинале
     this.updateables = [];
-    gameState.updateables = this.updateables;
+    window.updateables = this.updateables;
 
-    // Отрисовываем только видимую область
     for (let i = 0; i < 15; i++) {
-      // Рассчитываем видимый диапазон по X как в оригинале
       const startJ = Math.floor(this.vX / 16) - 1;
       const endJ = Math.floor(this.vX / 16) + 20;
 
       for (let j = startJ; j < endJ; j++) {
-        // Статические объекты (пол, земля)
         if (this.level.statics[i] && this.level.statics[i][j]) {
           this.renderEntity(this.level.statics[i][j]);
         }
 
-        // ДОБАВИТЬ: Отрисовка блоков
         if (this.level.blocks[i] && this.level.blocks[i][j]) {
           this.renderEntity(this.level.blocks[i][j]);
         }
       }
     }
 
-    // Отрисовываем врагов
     this.level.enemies.forEach(enemy => {
-      if (
-        enemy &&
-        enemy.pos[0] - this.vX > -32 &&
-        enemy.pos[0] - this.vX < 336
-      ) {
+      if (enemy && enemy.pos[0] - this.vX > -32 && enemy.pos[0] - this.vX < 336) {
         this.renderEntity(enemy);
       }
     });
 
-    // Отрисовываем игрока (во время смерти всегда показываем, без мерцания)
     if (!this.player.dying) {
-      // Обычный рендеринг с мерцанием при неуязвимости
       if (this.player.invincibility % 2 === 0) {
         this.renderEntity(this.player);
       }
     } else {
-      // Во время смерти всегда показываем игрока
       this.renderEntity(this.player);
     }
 
-    // Отрисовываем отладочную информацию
-    renderDebugInfo(gameState, input);
+    renderPlayerInfo();
+    renderKeyAndQLearningInfo();
+    renderQTable();
   }
 
   start() {
@@ -373,3 +366,26 @@ export class Main {
     }
   }
 }
+
+export const loadAllSprites = () => {
+  return new Promise(resolve => {
+    resources.load([
+      '/sprites/player.png',
+      '/sprites/enemy.png',
+      '/sprites/tiles.png',
+      '/sprites/playerl.png',
+      '/sprites/items.png',
+      '/sprites/enemyr.png',
+    ]);
+
+    const checkReady = () => {
+      if (resources.isReady()) {
+        resolve();
+      } else {
+        setTimeout(checkReady, 100);
+      }
+    };
+
+    checkReady();
+  });
+};

@@ -53,3 +53,5 @@ export class ResourceLoader {
     this.readyCallbacks.push(func);
   }
 }
+
+window.resources = new ResourceLoader();

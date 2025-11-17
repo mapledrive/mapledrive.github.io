@@ -21,8 +21,7 @@ export class Entity {
       this.vel[0] = Math.max(0, this.vel[0]);
       this.acc[0] = Math.max(0, this.acc[0]);
     } else {
-      this.pos[0] =
-        wall.pos[0] + wall.hitbox[0] - this.hitbox[2] - this.hitbox[0];
+      this.pos[0] = wall.pos[0] + wall.hitbox[0] - this.hitbox[2] - this.hitbox[0];
       this.vel[0] = Math.min(0, this.vel[0]);
       this.acc[0] = Math.min(0, this.acc[0]);
     }

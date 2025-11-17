@@ -34,11 +34,11 @@ export class Player extends Entity {
   }
 
   shoot() {
-    if (this.fireballs >= 2) return; //Projectile limit!
-    this.fireballs += 1;
-    var fb = new Fireball([this.pos[0] + 8, this.pos[1]]); //I hate you, Javascript.
-    fb.spawn(this.left);
-    this.shooting = 2;
+    // if (this.fireballs >= 2) return; //Projectile limit!
+    // this.fireballs += 1;
+    // var fb = new Fireball([this.pos[0] + 8, this.pos[1]]); //I hate you, Javascript.
+    // fb.spawn(this.left);
+    // this.shooting = 2;
   }
 
   noRun() {
@@ -109,11 +109,11 @@ export class Player extends Entity {
       this.standing = false;
       this.vel[1] = -6;
       if (this.power === 0) {
-        sounds.smallJump.currentTime = 0;
-        sounds.smallJump.play();
+        window.sounds.smallJump.currentTime = 0;
+        window.sounds.smallJump.play();
       } else {
-        sounds.bigJump.currentTime = 0;
-        sounds.bigJump.play();
+        window.sounds.bigJump.currentTime = 0;
+        window.sounds.bigJump.play();
       }
     }
   }
@@ -136,7 +136,7 @@ export class Player extends Entity {
       if (this.starTime > 60) index = Math.floor(this.starTime / 2) % 3;
       else index = Math.floor(this.starTime / 8) % 3;
 
-      this.sprite.pos[1] = level.invincibility[index];
+      this.sprite.pos[1] = window.level.invincibility[index];
       if (this.power == 0) {
         this.sprite.pos[1] += 32;
       }
@@ -212,7 +212,7 @@ export class Player extends Entity {
       this.sprite.size = this.powerSizes[next];
       this.pos[1] += this.shift[next];
       if (this.powering.length === 0) {
-        delete level.items[this.touchedItem];
+        delete window.level.items[this.touchedItem];
       }
       return;
     }
@@ -250,9 +250,9 @@ export class Player extends Entity {
       }
       this.dying -= 1 * dt;
       if (this.dying <= 0) {
-        player = new Player(level.playerPos);
-        level.loader.call();
-        input.reset();
+        window.player = new Player(window.level.playerPos);
+        window.level.loader.call();
+        window.input.reset();
       }
     } else {
       this.acc[1] = 0.25;
@@ -282,12 +282,12 @@ export class Player extends Entity {
         this.sprite.size = [0, 0];
         this.vel = [0, 0];
         window.setTimeout(function () {
-          player.sprite.size = player.power === 0 ? [16, 16] : [16, 32];
-          player.exiting = false;
-          player.noInput = false;
-          level.loader();
-          if (player.power !== 0) player.pos[1] -= 16;
-          music.overworld.currentTime = 0;
+          window.player.sprite.size = window.player.power === 0 ? [16, 16] : [16, 32];
+          window.player.exiting = false;
+          window.player.noInput = false;
+          window.level.loader();
+          if (window.player.power !== 0) window.player.pos[1] -= 16;
+          window.music.overworld.currentTime = 0;
         }, 5000);
       }
     }
@@ -322,18 +322,18 @@ export class Player extends Entity {
         if (baseY < 0) {
           i++;
         }
-        if (level.statics[baseY + i][baseX + j]) {
-          level.statics[baseY + i][baseX + j].isCollideWith(this);
+        if (window.level.statics[baseY + i][baseX + j]) {
+          window.level.statics[baseY + i][baseX + j].isCollideWith(this);
         }
-        if (level.blocks[baseY + i][baseX + j]) {
-          level.blocks[baseY + i][baseX + j].isCollideWith(this);
+        if (window.level.blocks[baseY + i][baseX + j]) {
+          window.level.blocks[baseY + i][baseX + j].isCollideWith(this);
         }
       }
     }
   }
 
   powerUp(idx) {
-    sounds.powerup.play();
+    window.sounds.powerup.play();
     this.powering = [0, 5, 2, 5, 1, 5, 2, 5, 1, 5, 2, 5, 3, 5, 1, 5, 2, 5, 3, 5, 1, 5, 4];
     this.touchedItem = idx;
 
@@ -361,17 +361,17 @@ export class Player extends Entity {
       var curx = this.sprite.pos[0];
       this.powerSprites = [
         [curx, 96],
-        [curx, level.invincibility[0]],
-        [curx, level.invincibility[1]],
-        [curx, level.invincibility[2]],
+        [curx, window.level.invincibility[0]],
+        [curx, window.level.invincibility[1]],
+        [curx, window.level.invincibility[2]],
         [curx, 96],
       ];
-      this.powerSizes[([16, 32], [16, 32], [16, 32], [16, 32], [16, 32])];
+      this.powerSizes = [([16, 32], [16, 32], [16, 32], [16, 32], [16, 32])];
       this.shift = [0, 0, 0, 0, 0];
       this.power = 2;
     } else {
       this.powering = [];
-      delete level.items[idx];
+      delete window.level.items[idx];
       //no animation, but we play the sound and you get 5000 points.
     }
   }
@@ -382,7 +382,7 @@ export class Player extends Entity {
       this.die();
     } else {
       //otherwise, you get turned into small mario
-      sounds.pipe.play();
+      window.sounds.pipe.play();
       this.powering = [0, 5, 1, 5, 2, 5, 1, 5, 2, 5, 1, 5, 2, 5, 1, 5, 2, 5, 1, 5, 2, 5, 3];
       this.shift = [0, 16, -16, 16];
       this.sprite.pos = [160, 0];
@@ -406,10 +406,10 @@ export class Player extends Entity {
 
   die() {
     //TODO: rewrite the way sounds work to emulate the channels of an NES.
-    music.overworld.pause();
-    music.underground.pause();
-    music.overworld.currentTime = 0;
-    music.death.play();
+    window.music.overworld.pause();
+    window.music.underground.pause();
+    window.music.overworld.currentTime = 0;
+    window.music.death.play();
     this.noWalk();
     this.noRun();
     this.noJump();
@@ -432,12 +432,12 @@ export class Player extends Entity {
   }
 
   star(idx) {
-    delete level.items[idx];
+    delete window.level.items[idx];
     this.starTime = 660;
   }
 
   pipe(direction, destination) {
-    sounds.pipe.play();
+    window.sounds.pipe.play();
     this.piping = true;
     this.pipeLoc = destination;
     switch (direction) {
@@ -469,7 +469,7 @@ export class Player extends Entity {
 
   exit() {
     this.pos[0] += 16;
-    this.targetPos[0] = level.exit * 16;
+    this.targetPos[0] = window.level.exit * 16;
     this.left = true;
     this.setAnimation();
     this.waiting = 1;

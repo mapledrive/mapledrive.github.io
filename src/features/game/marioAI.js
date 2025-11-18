@@ -319,4 +319,37 @@ export class QLearning {
     this.pendingJumpPenalty = null; // Сбрасываем ожидающий штраф
     this.episodeCompleted = false;
   }
+
+  getDangerousXCoords() {
+    //выделение опасных зон
+    const dangerousBlocks = new Set();
+
+    this.DANGEROUS_JUMP_ZONES.forEach(zoneData => {
+      const [start, end] = zoneData.dangerZone;
+      for (let x = start; x <= end; x++) {
+        dangerousBlocks.add(x);
+      }
+    });
+
+    return dangerousBlocks;
+  }
+
+  getHoleXCoords() {
+    //выделение опасных зон
+    const holeBlocks = new Set();
+
+    this.OBSTACLES.forEach(([start, end]) => {
+      // Включаем все блоки в промежутке (включая start и end)
+      for (let x = start; x <= end; x++) {
+        holeBlocks.add(x);
+      }
+    });
+
+    // Также можно добавить блоки *перед* ямой, куда шаг вперед ведет к падению.
+    // this.OBSTACLES.forEach(([start, end]) => {
+    //   holeBlocks.add(start - 1);
+    // });
+
+    return holeBlocks;
+  }
 }

@@ -10,6 +10,9 @@ export function oneone() {
     invincibility: [144, 192, 240],
     exit: 200,
     floorSprite: new Sprite('/sprites/tiles.png', [0, 0], [16, 16], 0),
+    dangerSprite: new Sprite('/sprites/tiles.png', [0, 32], [16, 16], 0), // выделение опасных зон
+    allDangerousX: window?.qLearning?.getDangerousXCoords(), // выделение опасных зон
+    holeX: window?.qLearning?.getHoleXCoords(), // выделение опасных зон
   });
 
   window.ground = [

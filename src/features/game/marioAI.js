@@ -6,28 +6,24 @@ export class QLearning {
 
     this.initializeQTable();
 
-    this.actions = ['FORWARD', 'JUMP'];
-    this.ACTION_INDICES = { FORWARD: 0, JUMP: 1 };
+    this.actions = ['FORWARD', 'JUMP']; // Список действий, которые агент может выполнить.
+    this.ACTION_INDICES = { FORWARD: 0, JUMP: 1 }; // Объект-сопоставление для быстрого доступа к Q-таблице.
 
-    this.currentState = null;
-    this.currentAction = null;
+    this.currentState = null; // Индекс состояния (X-блока), в котором агент находится в данный момент
+    this.currentAction = null; // Последнее выбранное и выполняемое действие.
 
-    this.totalReward = 0;
-    this.episodes = 0;
+    this.totalReward = 0; // Сумма наград, полученных агентом за текущий эпизод.
+    this.episodes = 0; // Общее число завершенных тренировочных попыток.
 
-    this.training = true;
-    this.steps = 0;
+    this.training = true; // Флаг, указывающий, находится ли агент в режиме обучения (использует ϵ-greedy).
+    this.steps = 0; // Количество обновлений состояния в текущем эпизоде.
 
-    // Флаг для предотвращения повторного вызова completeEpisode
-    this.episodeCompleted = false;
-
-    // Отслеживаем прыжки, которые могут привести к падению
-    this.pendingJumpPenalty = null;
+    this.episodeCompleted = false; // Флаг для предотвращения повторного вызова completeEpisode
+    this.pendingJumpPenalty = null; // Объект для отслеживания действия JUMP или FORWARD, за которое получит штраф на следующем шаге.
   }
 
   /**
-   * Инициализация Q-table на основе window.ground
-   * (Предполагается, что window.ground — это глобальный массив платформ).
+   * Создаем массив массивов Q-table на основе window.ground — глобальный массив платформ из 11.js
    */
   initializeQTable() {
     const ground = window.ground;
@@ -44,8 +40,8 @@ export class QLearning {
 
     this.TOTAL_STATES = this.ALL_STATES.length;
     this.MAX_X = maxX;
-    // Индекс состояния для самой правой точки уровня
-    this.GOAL_STATE = this.ALL_STATES.indexOf(this.MAX_X);
+
+    this.GOAL_STATE = this.ALL_STATES.indexOf(this.MAX_X); // Индекс состояния для самой правой точки уровня
 
     // Определяем препятствия (промежутки между платформами)
     this.OBSTACLES = [];
@@ -58,11 +54,9 @@ export class QLearning {
       }
     }
 
-    // Определяем опасные зоны для прыжков
-    this.DANGEROUS_JUMP_ZONES = this.calculateDangerousZones();
+    this.DANGEROUS_JUMP_ZONES = this.calculateDangerousZones(); // Определяем опасные зоны для прыжков
 
-    // Инициализируем Q-table, используя нумерацию от 0 до TOTAL_STATES-1
-    this.qTable = Array(this.TOTAL_STATES)
+    this.qTable = Array(this.TOTAL_STATES) // Инициализируем Q-table, используя нумерацию от 0 до TOTAL_STATES-1
       .fill()
       .map(() => [0.0, 0.0]); // [FORWARD, JUMP] - начальные значения
   }
@@ -73,8 +67,7 @@ export class QLearning {
 
     // Для каждой ямы определяем, с каких позиций прыжок приведет к падению
     this.OBSTACLES.forEach(([holeStart, holeEnd]) => {
-      // Предполагаем, что прыжок покрывает примерно 3-4 блока вперед
-      const jumpDistance = 4;
+      const jumpDistance = 4; // Предполагаем, что прыжок покрывает примерно 3-4 блока вперед
 
       // Определяем опасные стартовые позиции для прыжка
       const dangerZoneStart = Math.max(0, holeStart - jumpDistance);
@@ -93,6 +86,12 @@ export class QLearning {
   }
 
   // Проверяем, приведет ли прыжок из текущей позиции к падению
+  // Прыжок считается опасным, если текущая X-координата агента находится в диапазоне,
+  // который при совершении стандартного прыжка (предположительная дальность ≈4 блока)
+  // не позволит ему перепрыгнуть яму, а вместо этого приведет к приземлению внутри ямы.
+  // Как это работает: сначала находим все ямы (OBSTACLES).
+  // Для каждой ямы вычисляется "зона опасности" перед ямой, из которой прыжок недостаточен для достижения другой стороны.
+  // Если агент выбирает JUMP, находясь в этой dangerZone, действие помечается как опасное, и устанавливается pendingJumpPenalty.
   willJumpCauseFall(stateIndex, action) {
     if (action !== 'JUMP' || stateIndex === -1) return false;
 
@@ -115,14 +114,12 @@ export class QLearning {
 
   // Получить индекс состояния по X-координате
   getStateIndex(x) {
-    // Используем Map или прямое обращение, если ALL_STATES — это X-координаты по порядку
     return this.ALL_STATES.indexOf(x);
   }
 
   // Получить текущее состояние (индекс)
   getState() {
-    // Используем window.player, который должен быть глобально доступен
-    const playerX = Math.floor(window.player.pos[0] / 16);
+    const playerX = Math.floor(window.player.pos[0] / 16); // Используем глобально доступный window.player
     const stateIndex = this.getStateIndex(playerX);
 
     // Если X-координата не найдена в ALL_STATES (например, в яме),
@@ -145,7 +142,7 @@ export class QLearning {
       return Math.random() < 0.5 ? 'FORWARD' : 'JUMP';
     }
 
-    // Epsilon-Greedy: выбираем случайное действие (explore) или лучшее (exploit)
+    // выбираем случайное действие (explore) или лучшее (exploit)
     if (Math.random() < this.epsilon && this.training) {
       return this.actions[Math.floor(Math.random() * this.actions.length)];
     } else {
@@ -155,6 +152,11 @@ export class QLearning {
   }
 
   // Проверяем, приведет ли ходьба из текущей позиции к падению в яму
+  // Шаг считается опасным, если текущая X-координата агента находится непосредственно перед началом ямы.
+  // Как это работает: Агент проверяет все ямы (OBSTACLES).
+  // Если текущий X-блок равен holeStart−1 (то есть, это последний безопасный блок перед пропастью),
+  // то действие FORWARD приведет к падению на следующем кадре.
+  // Если агент выбирает FORWARD в этой позиции, действие помечается как опасное, и устанавливается pendingJumpPenalty.
   willWalkCauseFall(stateIndex, action) {
     if (action !== 'FORWARD' || stateIndex === -1) return false;
 
@@ -174,9 +176,12 @@ export class QLearning {
     return { willFall: false };
   }
 
-  // Выполнить действие (эмулирует нажатие window.input)
+  // Преобразует выбранное действие в управление игрой (window.input).
+  // Для JUMP: проверяет, может ли игрок прыгнуть, и устанавливает флаг JUMP в window.input.
+  // Важно: Перед выполнением действия проверяет, не является ли оно опасным, и, если да,
+  // устанавливает pendingJumpPenalty.
   executeAction(action) {
-    window.input.setKey('RIGHT', true);
+    window.input.setKey('RIGHT', true); // Всегда нажимает RIGHT
 
     const player = window.player;
 
@@ -192,9 +197,6 @@ export class QLearning {
           penaltyState: jumpCheck.penaltyState,
           hole: jumpCheck.hole,
         };
-        console.log(
-          `ОПАСНЫЙ ПРЫЖОК! С блока ${this.ALL_STATES[this.currentState]} в яму [${jumpCheck.hole[0]}-${jumpCheck.hole[1]}]`
-        );
       }
     } else if (action === 'FORWARD') {
       //шаг в яму
@@ -206,9 +208,6 @@ export class QLearning {
           penaltyState: walkCheck.penaltyState,
           hole: walkCheck.hole,
         };
-        console.log(
-          `ОПАСНАЯ ХОДЬБА! С блока ${this.ALL_STATES[this.currentState]} в яму [${walkCheck.hole[0]}-${walkCheck.hole[1]}]`
-        );
       }
     } else if (!player.standing || player.jumping > 0) {
       window.input.setKey('JUMP', true); // Удержание прыжка, если уже летит
@@ -225,14 +224,11 @@ export class QLearning {
 
     // Штраф за опасные действия (прыжки или шаг в яму)
     if (this.pendingJumpPenalty && this.pendingJumpPenalty.state === previousStateIndex) {
-      const actionType = this.pendingJumpPenalty.action === 'JUMP' ? 'прыжок' : 'ходьбу';
-      console.log(`ШТРАФ за опасную ${actionType} из позиции ${this.ALL_STATES[previousStateIndex]}`);
       this.pendingJumpPenalty = null;
       return -5;
     }
 
-    // Маленькая награда за любое движение
-    return 0.1;
+    return 0.1; // Маленькая награда за любое движение
   }
 
   // Обновить Q-таблицу
@@ -286,6 +282,8 @@ export class QLearning {
     this.checkPlayerDeath();
   }
 
+  // Проверяет, упал ли игрок ниже определенного уровня (window.player.pos[1] > 240),
+  // что сигнализирует о смерти/падении в яму. Вызывает completeEpisode().
   checkPlayerDeath() {
     if (!window.player || this.episodeCompleted) return;
 
@@ -296,10 +294,12 @@ export class QLearning {
     }
   }
 
-  // Завершение эпизода (вызывается только один раз)
+  // вызывается только один раз
+  // Вызывается при завершении эпизода (смерть или достижение цели - хотя достижение цели явной наградой не отмечено, только смерть
+  // Устанавливает episodeCompleted = true. Увеличивает счетчик episodes.
   completeEpisode() {
     if (this.episodeCompleted) return;
-    this.episodeCompleted = true; // Устанавливаем флаг ДО любой логики
+    this.episodeCompleted = true;
     this.episodes++;
 
     if (this.epsilon > 0) {
@@ -310,6 +310,7 @@ export class QLearning {
     this.pendingJumpPenalty = null;
   }
 
+  // Сбрасывает переменные состояния для начала нового эпизода.
   reset() {
     this.currentState = 0;
     this.currentAction = null;

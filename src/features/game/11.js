@@ -41,8 +41,7 @@ export function oneone() {
 }
 
 // console.log('Сгенерированные платформы:', window.ground);
-
-//window.ground = generateRandomGround();
+// window.ground = generateRandomGround();
 
 function generateRandomGround() {
   const totalLength = 200;
